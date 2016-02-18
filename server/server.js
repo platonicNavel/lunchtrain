@@ -4,6 +4,7 @@ var path = require('path');
 var app = express();
 
 app.use(express.static(path.join(__dirname, '../static')));
+app.use('/build', express.static(path.join(__dirname, '../build')));
 
 app.get('/', (req, res) => {
   res.render('index');
