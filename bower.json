@@ -18,6 +18,7 @@
   ],
   "dependencies": {
     "react": "^0.14.7",
-    "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/1.0.1/redux.js"
+    "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/1.0.1/redux.js",
+    "jquery": "^2.2.0"
   }
 }
