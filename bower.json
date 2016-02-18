@@ -1,0 +1,23 @@
+{
+  "name": "platonic-navel",
+  "description": "Greenfield Working Name: Lunch Train",
+  "main": "index.js",
+  "authors": [
+    "Griffin Michl <griffinmichl@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/jgliner/platonic-navel",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^0.14.7",
+    "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/1.0.1/redux.js"
+  }
+}

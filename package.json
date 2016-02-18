@@ -32,6 +32,7 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
+    "bower": "^1.7.7",
     "express": "^4.13.4"
   }
 }
