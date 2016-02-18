@@ -1,16 +1,21 @@
 
 const Sequelize = require('sequelize');
-sequelize = new Sequelize('lunchtrain');
-
-User = sequelize.define('User', {
-  slack_id: Sequelize.STRING,
+const sequelize = new Sequelize('lunchtrain', null, null, {
+  dialect: 'sqlite',
+  storage: './lunchtrain.sqlite',
 });
 
-Team = sequelize.define('Team', {
+const User = sequelize.define('User', {
+  slackId: Sequelize.STRING,
+  name: Sequelize.STRING
+});
+
+const Team = sequelize.define('Team', {
+  slackTeam: Sequelize.STRING,
   name: Sequelize.STRING,
 });
 
-Destination = sequelize.define('Destination', {
+const Destination = sequelize.define('Destionation', {
   google_id: Sequelize.STRING,
   name: Sequelize.STRING,
   lat: Sequelize.DOUBLE,
@@ -19,24 +24,51 @@ Destination = sequelize.define('Destination', {
   likes: Sequelize.INTEGER,
 });
 
-Train = sequelize.define('Train', {
+const Train = sequelize.define('Train', {
   conductorId: Sequelize.INTEGER,
   destinationId: Sequelize.INTEGER,
   timeDeparting: Sequelize.INTEGER,
-  timeDuration = Sequelize.INTEGER,
+  timeDuration: Sequelize.INTEGER,
 });
 
-User.belongsToMany(Team, {through: 'User_Team'});
-Team.belongsToMany(User, {through: 'User_Team'});
+User.belongsToMany(Team, {through: 'Users_Teams'});
+Team.belongsToMany(User, {through: 'Users_Teams'});
 
-User.belongsToMany(Train, {through: 'User_Train'});
-Train.belongsToMany(User, {through: 'User_Train'});
+User.belongsToMany(Train, {through: 'Users_Trains'});
+Train.belongsToMany(User, {through: 'Users_Trains'});
 
-Team.hasMany(Destination);
-Destination.belongsTo(Team);
+Team.belongsToMany(Destination, {through: 'Teams_Destinations'});
+Destination.belongsToMany(Team, {through: 'Teams_Destinations'});
 
 Team.hasMany(Train);
 Train.belongsTo(Team);
+
+//for testing
+// sequelize.sync({force: true}).then(() => {
+//   User.create({
+//     slackId: 1,
+//   }).then((user) => {
+//     Team.create({
+//       slackTeam: 1,
+//       name: 'Awesome',
+//     }).then((team) => {
+//       user.addTeam(team).then(() => {
+//         User.create({
+//           slackId: 43164
+//         }).then((user) => {
+//           Team.findOrCreate({where: {
+//             slackTeam: 1,
+//             name: 'Awesome',
+//           }}).spread((team, method) => {
+//             user.addTeam(team).then(() => {
+//               console.log('success!');
+//             })
+//           })
+//         })
+//       })
+//     })
+//   });
+// });
 
 module.exports = {
   User,
