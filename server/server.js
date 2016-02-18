@@ -1,7 +1,29 @@
-var express = require('express');
-var path = require('path');
+const express = require('express');
+const path = require('path');
+const partials = require('express-partials');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const passport = require('passport');
+const SlackStrategy = require('passport-slack').Strategy;
 
-var app = express();
+
+passport.serializeUser(function(user, done) {
+  console.log('serialized: ', user);
+  // Determine what user info to store in the session
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(userId, done) {
+  console.log('deserialize: ', userId);
+  // 
+
+});
+
+passport.use(new GitHubStrategy({
+
+}))
+
+const app = express();
 
 app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
