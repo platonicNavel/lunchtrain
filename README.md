@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/platonicNavel/platonic-navel.png?label=ready&title=Ready)](https://waffle.io/platonicNavel/platonic-navel)
 # Platonic Navel
 
 Greenfield
