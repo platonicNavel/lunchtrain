@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Roboto', sans-serif !important;
+  overflow: hidden;
 }
 
 button {
@@ -56,13 +57,36 @@ button {
 
 /*Right (Current Trains)*/
 
+  /*---TrainsList---*/
 .trainsList {
+  position: relative;
+  top: 3%;
   height: 50vh;
-  background-color: blue;
+  border: 1px dashed #222222;
+}
+
+  /*---TrainsListEntry---*/
+.trainContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .trainEntry {
   height: 20vh;
   background-color: red;
   margin: 10px;
+}
+.trainEntry:first-child {
+  margin-top: 50px;
+}
+
+.trainIcon {
+  position: relative;
+  top: 25%;
+  left: 40px;
+  height: 50%;
+  width: 25%;
+  background-color: white;
+  transform: translate(0%,-25%);
 }

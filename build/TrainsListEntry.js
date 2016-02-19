@@ -6,6 +6,10 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
   return React.createElement(
     "div",
     { className: "trainEntry" },
-    React.createElement("div", { className: "trainContainer" })
+    React.createElement(
+      "div",
+      { className: "trainContainer" },
+      React.createElement("div", { className: "trainIcon" })
+    )
   );
 };
