@@ -51,6 +51,7 @@ const app = express();
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
@@ -62,15 +63,11 @@ var ensureAuthenticated = function(req, res, next) {
   }
 };
 
-app.get('/', (req, res) => {
-  res.render('index');
-})
-
 app.get('/api/destinations', (req, res) => {
   //make database query
   const sqlData = [{
     id: 1,
-    google_id: 'geruihagubgi242t616',
+    googleId: 'geruihagubgi242t616',
     destinationName: 'Train Cafe',
     lat: 37.781208,
     long: -122.406514,
@@ -128,6 +125,10 @@ function(req, res) {
   res.render('index');
 });
 
+app.get('/login', (req, res) => {
+  res.render('login');
+})
+
 app.get('/trains', ensureAuthenticated,
 function(req, res) {
   res.render('trains');
@@ -152,34 +153,36 @@ app.get('/auth/slack/callback',
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
-  });
+  }
+);
 
-app.post('/trains', ensureAuthenticated,
-  // Find user
-  db.User.findOne()
-  function(req, res) {
-    // Create train entry for user
-      db.Train.create({
-      conductorId: conductorId,
-      destinationId: destinationId,
-      timeDeparting: timeDeparting,
-      timeDuration: timeDuration,
-    }).then((user) => {
-    }
-  });
 
-app.post('/destinations', ensureAuthenticated,
-  function(req, res) {
-    // Create destination table
-    db.Destination.create({
-      google_id: google_id,
-      name: name,
-      lat: lat,
-      long: long,
-      visits: visits,
-      likes: likes,
-    })
-  });
+// app.post('/trains', ensureAuthenticated,
+//   // Find user
+//   db.User.findOne()
+//   function(req, res) {
+//     // Create train entry for user
+//       db.Train.create({
+//       conductorId: conductorId,
+//       destinationId: destinationId,
+//       timeDeparting: timeDeparting,
+//       timeDuration: timeDuration,
+//     }).then((user) => {
+//     }
+//   });
+
+// app.post('/destinations', ensureAuthenticated,
+//   function(req, res) {
+//     // Create destination table
+//     db.Destination.create({
+//       google_id: google_id,
+//       name: name,
+//       lat: lat,
+//       long: long,
+//       visits: visits,
+//       likes: likes,
+//     })
+//   });
 
 console.log('Server is listening on port 8000');
 app.listen(8000);

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lunch Train</title>
+</head>
+<body>
+  <div>
+    <button id="login">Login with Slack</button>
+    
+  </div>
+
+  <script src="lib/es6-promise/es6-promise.min.js"></script>
+  <script src="lib/fetch-polyfill/fetch.js"></script>
+
+  <script>
+    document.getElementById('login').addEventListener('click', function() {
+      fetch('/auth/slack').then(function(res) {
+        return res.json();
+      }).then(function(data) {
+        console.log(data);
+      });
+    })
+  </script>
+
+</body>
+</html>
