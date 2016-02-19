@@ -74,7 +74,7 @@ app.get('/api/destinations', (req, res) => {
   //make database query
   const sqlData = [{
     id: 1,
-    google_id: 'geruihagubgi242t616',
+    googleId: 'geruihagubgi242t616',
     destinationName: 'Train Cafe',
     lat: 37.781208,
     long: -122.406514,
