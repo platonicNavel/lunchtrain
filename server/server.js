@@ -8,8 +8,8 @@ const SlackStrategy = require('passport-slack').Strategy;
 
 const db = require('./db/index');
 
-const CLIENT_ID = "--insert-client-id-here--"
-const CLIENT_SECRET = "--insert-client-secret-here--";
+const CLIENT_ID = "10589206992.22131652337"
+const CLIENT_SECRET = "63a441c7c9d19dcd6faa789d27a22d3a";
 
 
 passport.serializeUser(function(user, done) {
