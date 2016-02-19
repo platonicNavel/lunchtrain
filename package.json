@@ -4,7 +4,7 @@
   "description": "Greenfield Working Name: Lunch Train",
   "main": "index.js",
   "directories": {
-    "test": "server/spec"
+    "test": "test"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register",
