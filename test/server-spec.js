@@ -3,12 +3,32 @@ const expect = require('chai').expect;
 
 const newUser = {
   slackId: '53t5g3b',
-  name: 'Griffin'
+  name: 'Griffin',
 };
+
+const newUser1 = {
+  slackId: 'eha41t',
+  name: 'Jarrett',
+}
+
+const newUser2 = {
+  slackId: 't31gr54',
+  name: 'Anthony',
+}
 
 const newTeam = {
   slackTeam: 'g52gewg524',
   name: 'Awesome',
+};
+
+const newTeam1 = {
+  slackTeam: 'tgew535',
+  name: 'Amazing',
+};
+
+const newTeam2 = {
+  slackTeam: '95gh478',
+  name: 'Great',
 };
 
 const newDestination = {
@@ -18,6 +38,15 @@ const newDestination = {
   long: '-122.4523',
   visits: 0,
   likes: 1,
+};  
+
+const newDestination1 = {
+  googleId: 'geiubu342253',
+  name: 'Train Cafe',
+  lat: '37.35725',
+  long: '-122.1223',
+  visits: 0,
+  likes: 1,
 };      
 
 const newTrain = {
@@ -25,9 +54,14 @@ const newTrain = {
   timeDuration: 39600,
 };
 
+const newTrain1 = {
+  timeDeparting: 1455827500,
+  timeDuration: 39550,
+};
+
 describe('Database ORM', () => {
   beforeEach((done) => {
-    db.sequelize.sync({force:true}).then(() => done())
+    db.sequelize.sync({force:true}).then(() => done());
   });
 
   describe('Insertions and FindOnes', () => {
