@@ -7,10 +7,11 @@ body {
 /*Trains*/
 
 .leftThird {
-  background-color: blue;
+  background-color: black;
   height: 100vh;
 }
 .rightThird {
-  background-color: red;
+  background-color: black;
+  border-left: 1px solid blue;
   height: 100vh;
 }

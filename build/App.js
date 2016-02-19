@@ -23,7 +23,11 @@ var App = function (_React$Component) {
       return React.createElement(
         "div",
         null,
-        React.createElement("div", { className: "col-xs-4 leftThird" }),
+        React.createElement(
+          "div",
+          { className: "col-xs-4 leftThird" },
+          React.createElement(Forms, null)
+        ),
         React.createElement("div", { className: "col-xs-8 rightThird" })
       );
     }
