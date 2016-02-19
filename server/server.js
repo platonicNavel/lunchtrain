@@ -25,28 +25,27 @@ passport.deserializeUser(function(id, done) {
 passport.use(new SlackStrategy({
   clientID: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
-  callbackURL: '',
-  slackTeam: '',
+  callbackURL: '/auth/slack/callback',
+  scope: 'incoming-webhook users:read',
 },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    process.nextTick(function() {
-    db.User.findOrCreate({where: {slack_id: profile.id, name: profile.name}})
-    .spread(function(user, created) {
-      if (created) {
-        console.log('User existed: ', user);
-        db.Team.create(slackTeam).then(() => { //FIX THIS
-          return done(null, profile);
-        });
-      } else {
-        console.log('Created user: ', created);
-      }
-    });
-  })
-
+  //   process.nextTick(function() {
+  //   db.User.findOrCreate({where: {slack_id: profile.id, name: profile.name}})
+  //   .spread(function(user, created) {
+  //     if (created) {
+  //       console.log('User existed: ', user);
+  //       db.Team.create(slackTeam).then(() => { //FIX THIS
+  //         return done(null, profile);
+  //       });
+  //     } else {
+  //       console.log('Created user: ', created);
+  //     }
+  //   });
+  // })
 }));
 
-const app = express();
+const app = express()
 
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
@@ -146,11 +145,12 @@ function(req, res) {
 });
 
 app.get('/auth/slack',
-  passport.authenticate('slack'));
+  passport.authorize('slack'));
 
 app.get('/auth/slack/callback',
-  passport.authenticate('slack', {failureRedirect: '/login'}),
+  passport.authorize('slack', {failureRedirect: '/login'}),
   function(req, res) {
+    console.log('test');
     // Successful authentication, redirect home.
     res.redirect('/');
   }
