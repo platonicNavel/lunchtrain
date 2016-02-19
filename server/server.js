@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const partials = require('express-partials');
+// const partials = require('express-partials');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
@@ -8,8 +8,8 @@ const SlackStrategy = require('passport-slack').Strategy;
 
 const db = require('./db/index');
 
-var CLIENT_ID = "--insert-client-id-here--"
-var CLIENT_SECRET = "--insert-client-secret-here--";
+const CLIENT_ID = "--insert-client-id-here--"
+const CLIENT_SECRET = "--insert-client-secret-here--";
 
 
 passport.serializeUser(function(user, done) {
@@ -33,6 +33,7 @@ passport.use(new SlackStrategy({
   slackTeam: '',
 },
   function(accessToken, refreshToken, profile, done) {
+    console.log(profile);
     // Make asynchronous
     process.nextTick(function() {
     // Find user if it exists, create it if it doesn't
@@ -40,8 +41,8 @@ passport.use(new SlackStrategy({
     // Spread results from findOrCreate over arguments of function
     .spread(function(user, created) {
       if (created) { // If user was created for the first time
-        // Insert team
-        // 
+        // Create team table for user's team
+        // Create join table for user/team
         console.log('User existed: ', user);
         return done(null, profile);
       } else { // Else if user was already in the database
@@ -52,7 +53,7 @@ passport.use(new SlackStrategy({
   })
 }));
 
-var app = express();
+const app = express();
 
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
@@ -64,7 +65,7 @@ var ensureAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect('/auth/github');
+    res.redirect('/auth/slack');
   }
 };
 
@@ -128,14 +129,61 @@ app.get('/api/trains', (req, res) => {
   res.send(trains);
 });
 
+
+app.get('/', ensureAuthenticated,
+function(req, res) {
+  res.render('index');
+});
+
+app.get('/trains', ensureAuthenticated,
+function(req, res) {
+  res.render('trains');
+});
+
+app.get('/destinations', ensureAuthenticated,
+function(req, res) {
+  res.render('destinations');
+});
+
+app.get('/logout',
+function(req, res) {
+  req.logout();
+  res.redirect('/auth/slack');
+});
+
 app.get('/auth/slack',
   passport.authenticate('slack'));
 
 app.get('/auth/slack/callback',
-  passport.authenticate('slack', { failureRedirect: '/login' }),
+  passport.authenticate('slack', {failureRedirect: '/login'}),
   function(req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
+  });
+
+app.post('/trains', ensureAuthenticated,
+  function(req, res) {
+    // Create train table
+    db.Train.create({
+      conductorId: conductorId,
+      destinationId: destinationId,
+      timeDeparting: timeDeparting,
+      timeDuration: timeDuration,
+    })
+    // Create join table for train/user
+  });
+
+app.post('/destinations', ensureAuthenticated,
+  function(req, res) {
+    // Create destination table
+    db.Destination.create({
+      google_id: google_id,
+      name: name,
+      lat: lat,
+      long: long,
+      visits: visits,
+      likes: likes,
+    })
   });
 
 console.log('Server is listening on port 8000');
