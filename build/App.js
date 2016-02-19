@@ -28,7 +28,11 @@ var App = function (_React$Component) {
           { className: "col-xs-4 leftThird" },
           React.createElement(Forms, null)
         ),
-        React.createElement("div", { className: "col-xs-8 rightThird" })
+        React.createElement(
+          "div",
+          { className: "col-xs-8 rightThird" },
+          React.createElement(TrainsList, { trainsList: this.props.trainsList })
+        )
       );
     }
   }]);
