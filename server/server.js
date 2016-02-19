@@ -51,6 +51,7 @@ const app = express();
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
