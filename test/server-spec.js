@@ -173,26 +173,6 @@ describe('Database ORM', () => {
       });
     });
 
-    it('should have 1-m relationship between trains and teams', (done) => {
-      db.Train.create(newTrain).then((train) => {
-        db.Team.create(newTeam).then((team) => {
-          return team.addTrain(train);
-        }).then(() => {
-          db.Team.findOne({include: [db.Train]}).then((team) => {
-            expect(team.Trains[0].timeDeparting).to.equal(newTrain.timeDeparting);
-            expect(team.Trains[0].timeDuration).to.equal(newTrain.timeDuration);
-
-            expect(team.slackTeam).to.equal(newTeam.slackTeam);
-            expect(team.slackTeam).to.equal(newTeam.slackTeam);
-
-            done();
-          });
-        });
-      });
-    });
-
-
-
   });
 
 });
