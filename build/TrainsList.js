@@ -25,7 +25,7 @@ var TrainsList = function (_React$Component) {
       return React.createElement(
         "div",
         { className: "trainsList" },
-        this.props.trainsList ? this.trainsList.map(function (train) {
+        this.props.trains ? this.props.trains.map(function (train) {
           return React.createElement(TrainsListEntry, { key: train.trainId, train: train, handleTrainBoardingClick: _this2.props.handleTrainBoardingClick });
         }) : "Looks like there are no trains here!"
       );
