@@ -1,0 +1,16 @@
+/*Shared*/
+
+body {
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/*Trains*/
+
+.leftThird {
+  background-color: blue;
+  height: 100vh;
+}
+.rightThird {
+  background-color: red;
+  height: 100vh;
+}
