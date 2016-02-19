@@ -1,8 +1,9 @@
 
 const Sequelize = require('sequelize');
+const path = require('path');
 const sequelize = new Sequelize('lunchtrain', null, null, {
   dialect: 'sqlite',
-  storage: './lunchtrain.sqlite',
+  storage: path.join(__dirname,'lunchtrain.sqlite'),
 });
 
 const User = sequelize.define('User', {
@@ -16,10 +17,10 @@ const Team = sequelize.define('Team', {
 });
 
 const Destination = sequelize.define('Destionation', {
-  google_id: Sequelize.STRING,
+  googleId: Sequelize.STRING,
   name: Sequelize.STRING,
-  lat: Sequelize.DOUBLE,
-  long: Sequelize.DOUBLE,
+  lat: Sequelize.STRING,
+  long: Sequelize.STRING,
   visits: Sequelize.INTEGER,
   likes: Sequelize.INTEGER,
 });
@@ -43,38 +44,14 @@ Destination.belongsToMany(Team, {through: 'Teams_Destinations'});
 Team.hasMany(Train);
 Train.belongsTo(Team);
 
-//for testing
-// sequelize.sync({force: true}).then(() => {
-//   User.create({
-//     slackId: 1,
-//   }).then((user) => {
-//     Team.create({
-//       slackTeam: 1,
-//       name: 'Awesome',
-//     }).then((team) => {
-//       user.addTeam(team).then(() => {
-//         User.create({
-//           slackId: 43164
-//         }).then((user) => {
-//           Team.findOrCreate({where: {
-//             slackTeam: 1,
-//             name: 'Awesome',
-//           }}).spread((team, method) => {
-//             user.addTeam(team).then(() => {
-//               console.log('success!');
-//             })
-//           })
-//         })
-//       })
-//     })
-//   });
-// });
-
 module.exports = {
-  User,
-  Team,
-  Destination,
-  Train,
-};
+    User,
+    Team,
+    Destination,
+    Train,
+    sequelize,
+  };
+
+
 
 
