@@ -30,23 +30,20 @@ passport.use(new SlackStrategy({
 },
   function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    // Make asynchronous
     process.nextTick(function() {
-    // Find user if it exists, create it if it doesn't
     db.User.findOrCreate({where: {slack_id: profile.id, name: profile.name}})
-    // Spread results from findOrCreate over arguments of function
     .spread(function(user, created) {
-      if (created) { // If user was created for the first time
-        // Create team table for user's team
-        // Create join table for user/team
+      if (created) {
         console.log('User existed: ', user);
-        return done(null, profile);
-      } else { // Else if user was already in the database
+        db.Team.create(slackTeam).then(() => { //FIX THIS
+          return done(null, profile);
+        });
+      } else {
         console.log('Created user: ', created);
-        //return something?
       }
     });
   })
+
 }));
 
 const app = express();
@@ -158,15 +155,17 @@ app.get('/auth/slack/callback',
   });
 
 app.post('/trains', ensureAuthenticated,
+  // Find user
+  db.User.findOne()
   function(req, res) {
-    // Create train table
-    db.Train.create({
+    // Create train entry for user
+      db.Train.create({
       conductorId: conductorId,
       destinationId: destinationId,
       timeDeparting: timeDeparting,
       timeDuration: timeDuration,
-    })
-    // Create join table for train/user
+    }).then((user) => {
+    }
   });
 
 app.post('/destinations', ensureAuthenticated,
