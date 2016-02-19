@@ -43,6 +43,7 @@ app.get('/api/trains', (req, res) => {
   // 12:30 PM - 1:30 PM
   const trains = [{
     trainId: 1,
+    stationId: 1,
     conductor: {id: 3, name: 'Griffin'},
     destinationName: 'Train Cafe',
     passengers: [{id: 1, name: 'Bobby'}, {id: 2, name: 'Batman'}],
@@ -53,6 +54,7 @@ app.get('/api/trains', (req, res) => {
   // 1:30 PM - 2:30 PM
   {
     trainId: 2,
+    stationId: 1,
     conductor: {id: 1, name: 'Bobby'},
     destinationName: 'Coffee Cafe',
     passengers: [{id: 3, name: 'Griffin'}, {id: 2, name: 'Batman'}],
