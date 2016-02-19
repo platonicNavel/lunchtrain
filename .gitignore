@@ -1,3 +1,4 @@
 node_modules
 src/lib/
 npm-debug.log
+server/db/lunchtrain.sqlite

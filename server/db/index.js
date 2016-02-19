@@ -16,7 +16,7 @@ const Team = sequelize.define('Team', {
   name: Sequelize.STRING,
 });
 
-const Destination = sequelize.define('Destionation', {
+const Destination = sequelize.define('Destination', {
   googleId: Sequelize.STRING,
   name: Sequelize.STRING,
   lat: Sequelize.STRING,
@@ -26,8 +26,6 @@ const Destination = sequelize.define('Destionation', {
 });
 
 const Train = sequelize.define('Train', {
-  conductorId: Sequelize.INTEGER,
-  destinationId: Sequelize.INTEGER,
   timeDeparting: Sequelize.INTEGER,
   timeDuration: Sequelize.INTEGER,
 });
@@ -41,8 +39,9 @@ Train.belongsToMany(User, {through: 'Users_Trains'});
 Team.belongsToMany(Destination, {through: 'Teams_Destinations'});
 Destination.belongsToMany(Team, {through: 'Teams_Destinations'});
 
+Destination.hasMany(Train);
+Train.hasMany(User);
 Team.hasMany(Train);
-Train.belongsTo(Team);
 
 module.exports = {
     User,
@@ -51,7 +50,3 @@ module.exports = {
     Train,
     sequelize,
   };
-
-
-
-
