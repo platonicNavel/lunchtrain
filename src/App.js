@@ -1,4 +1,5 @@
 class App extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -10,6 +11,7 @@ class App extends React.Component {
           <Forms></Forms>
         </div>
         <div className="col-xs-8 rightThird">
+          <TrainsList trainsList={this.props.trainsList}></TrainsList>
         </div>
       </div>
     )
