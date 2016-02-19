@@ -13,13 +13,13 @@ const CLIENT_SECRET = "63a441c7c9d19dcd6faa789d27a22d3a";
 
 
 passport.serializeUser(function(user, done) {
-  console.log('serialized: ', user.name);
-  done(null, user.id);
+  console.log('serialized: ', user);
+  done(null, user);
 });
 
-passport.deserializeUser(function(id, done) {
-  console.log('deserialized: ', userId);
-  db.User.find({where: {id: id}}).success(function(user) {
+passport.deserializeUser(function(user, done) {
+  console.log('deserialized: ', user);
+  db.User.find({where: {id: user.id}}).success(function(user) {
     done(null, user);
   }).error(function(err) {
     done(err, null);
@@ -32,21 +32,27 @@ passport.use(new SlackStrategy({
   callbackURL: '/auth/slack/callback',
   scope: 'incoming-webhook users:read',
 },
-  function(accessToken, refreshToken, profile, done) {
-    console.log(profile);
-  //   process.nextTick(function() {
-  //   db.User.findOrCreate({where: {slack_id: profile.id, name: profile.name}})
-  //   .spread(function(user, created) {
-  //     if (created) {
-  //       console.log('User existed: ', user);
-  //       db.Team.create(slackTeam).then(() => { //FIX THIS
-  //         return done(null, profile);
-  //       });
-  //     } else {
-  //       console.log('Created user: ', created);
-  //     }
-  //   });
-  // })
+  (accessToken, refreshToken, profile, done) => {
+    const slackId = profile.id;
+    const firstName = profile._json.info.user.profile.first_name;
+    const lastName = profile._json.info.user.profile.last_name;
+    const slackTeam = profile._json.team_id;
+    const teamName = profile._json.team;
+
+    db.User.findOrCreate({where: {slackId, firstName, lastName}})
+      .spread((user, userCreated) => {
+        db.Team.findOrCreate({where: {slackTeam, teamName}}).spread((team, teamCreated) => {
+          if (!userCreated && !teamCreated) { //TODO: ADDRESS EDGE CASE
+            console.log('Team and user exist already');
+          } else {
+            console.log('User and team connected');
+            return user.addTeam(team);
+          }
+        }).then(() => {
+          console.log('Returning user info for serialization');
+          return done(null, user);
+        });
+      });
 }));
 
 const app = express()
@@ -54,6 +60,8 @@ const app = express()
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
