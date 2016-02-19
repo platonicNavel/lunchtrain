@@ -10,9 +10,9 @@ var Forms = function Forms(_ref) {
     React.createElement(
       "form",
       { className: "scheduler" },
-      React.createElement("input", { className: "dest", placeholder: "I want to go to..." }),
-      React.createElement("input", { className: "timeDepart", placeholder: "I want to leave at..." }),
-      React.createElement("input", { className: "timeReturn", placeholder: "I have to be back by..." }),
+      React.createElement("input", { className: "dest scheduleInput", placeholder: "I want to go to..." }),
+      React.createElement("input", { className: "timeDepart scheduleInput", placeholder: "I want to leave at..." }),
+      React.createElement("input", { className: "timeReturn scheduleInput", placeholder: "I have to be back by..." }),
       React.createElement(
         "button",
         { className: "scheduleTrain" },
