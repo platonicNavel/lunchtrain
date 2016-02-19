@@ -9,8 +9,8 @@ class TrainsList extends React.Component {
       <div className="trainsList">
         {this.props.trainsList ?
           this.trainsList.map( train =>
-            <TrainsListEntry key={train.etag} />) :
-          "Looks like there are no trains here!"
+            <TrainsListEntry key={train.trainId} train={train} handleTrainBoardingClick={this.props.handleTrainBoardingClick} />) :
+            "Looks like there are no trains here!"
         }
       </div>
     )

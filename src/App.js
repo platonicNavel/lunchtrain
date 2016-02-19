@@ -2,6 +2,26 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      trains: []
+    };
+  }
+
+  handleTrainBoardingClick(train) {
+    console.log(train, 'CHOO CHOOOOO!')
+  }
+
+  getTeamTrains(teamId) {
+    getCurrentTrains(teamId, (trains) => {
+      this.setState({
+        trains: trains
+      });
+    });
+  }
+
+  componentDidMount() {
+    this.getTeamTrains(1)
   }
 
   render() {
@@ -11,7 +31,7 @@ class App extends React.Component {
           <Forms></Forms>
         </div>
         <div className="col-xs-8 rightThird">
-          <TrainsList trainsList={this.props.trainsList}></TrainsList>
+          <TrainsList trains={this.state.trains}></TrainsList>
         </div>
       </div>
     )

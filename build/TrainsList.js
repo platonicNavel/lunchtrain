@@ -20,11 +20,13 @@ var TrainsList = function (_React$Component) {
   _createClass(TrainsList, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return React.createElement(
         "div",
         { className: "trainsList" },
         this.props.trainsList ? this.trainsList.map(function (train) {
-          return React.createElement(TrainsListEntry, { key: train.etag });
+          return React.createElement(TrainsListEntry, { key: train.trainId, train: train, handleTrainBoardingClick: _this2.props.handleTrainBoardingClick });
         }) : "Looks like there are no trains here!"
       );
     }

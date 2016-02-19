@@ -14,10 +14,36 @@ var App = function (_React$Component) {
   function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+
+    _this.state = {
+      trains: []
+    };
+    return _this;
   }
 
   _createClass(App, [{
+    key: "handleTrainBoardingClick",
+    value: function handleTrainBoardingClick(train) {
+      console.log(train, 'CHOO CHOOOOO!');
+    }
+  }, {
+    key: "getTeamTrains",
+    value: function getTeamTrains(teamId) {
+      var _this2 = this;
+
+      getCurrentTrains(teamId, function (trains) {
+        _this2.setState({
+          trains: trains
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.getTeamTrains(1);
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
@@ -31,7 +57,7 @@ var App = function (_React$Component) {
         React.createElement(
           "div",
           { className: "col-xs-8 rightThird" },
-          React.createElement(TrainsList, { trainsList: this.props.trainsList })
+          React.createElement(TrainsList, { trains: this.state.trains })
         )
       );
     }
