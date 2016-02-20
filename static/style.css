@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Roboto', sans-serif !important;
+  overflow: hidden;
 }
 
 button {
@@ -10,59 +11,124 @@ button {
 
 /*Structure*/
 
-.leftThird {
+.trainsView {
   background-color: black;
   height: 100vh;
 }
-.rightThird {
-  background-color: black;
-  border-left: 1px solid blue;
-  height: 100vh;
-}
 
-/*Left (Scheduler)*/
+/*Current Trains*/
 
-.scheduler {
-  padding-left: 30px;
-  padding-right: 30px;
-  height: 100vh;
-}
-.scheduleInput {
-  position: relative;
-  display: block;
-  top: 35%;
-  width: 100%;
-  margin-bottom: 4em;
-  font-size: 18px;
-  /*color*/
-  background-color: black;
-  border: none;
-  border-bottom: 1px solid white;
-  padding-bottom: 10px;
-}
-.scheduleInput:focus {
-  border: none;
-  outline: none;
-  border-bottom: 1px solid white !important;
-  color: white;
-}
-
-.scheduleTrain {
-  position: relative;
-  width: 50%;
-  top: 35%;
-  left: 26%;
-}
-
-/*Right (Current Trains)*/
-
+  /*---TrainsList---*/
 .trainsList {
+  position: relative;
+  top: 3%;
   height: 50vh;
-  background-color: blue;
+  border: 1px dashed #222222;
+}
+
+  /*---TrainsListEntry---*/
+.trainContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .trainEntry {
   height: 20vh;
   background-color: red;
   margin: 10px;
+}
+.trainEntry:first-child {
+  margin-top: 50px;
+}
+
+.trainIconTimeWrapper {
+  position: absolute;
+  top: 30%;
+  left: 40px;
+  height: 175px;
+  width: 25%;
+  background-color: grey;
+  transform: translate(0%,-25%);
+}
+.trainDetailsWrapper {
+  position: absolute;
+  top: 30%;
+  left: 33.33333%;
+  height: 175px;
+  width: 60%;
+  background-color: darkgrey;
+  transform: translate(0%,-25%);
+}
+
+.trainIcon {
+  position: relative;
+  top: 40%;
+  left: 50%;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  transform: translate(-50%,-50%);
+}
+
+.timeWrapper {
+  position: relative;
+  text-align: center;
+  top: 30%;
+  left: 50%;
+  font-size: 20px;
+  transform: translate(-50%,-50%);
+}
+
+.trainDest {
+  position: relative;
+  text-align: center;
+}
+
+.trainRatingsWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.likes, .price {
+  position: relative;
+  height: 25%;
+  font-size: 20px;
+}
+.likes div, .price div {
+  position: relative;
+  top: 15%;
+}
+.likes {
+  background-color: lightblue;
+  text-align: right;
+}
+.price {
+  background-color: #00bbff;
+  text-align: left;
+}
+
+.passengersWrapper {
+  position: relative;
+  top: 70%;
+  left: 33.33333%;
+  width: 60%;
+  height: 25%;
+  margin: 10px 0px;
+  background-color: grey;
+  transform: translate(0%,-25%);
+}
+.conductor, .passenger {
+  position: relative;
+  background-color: white;
+  float: left;
+  margin-right: 5px;
+  width: 50px;
+  height: 100%;
+}
+.slackPic {
+  position: relative;
+  background-color: black;
+  width: 50px;
+  height: 100%;
 }
