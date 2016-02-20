@@ -85,9 +85,18 @@ button {
   position: absolute;
   top: 30%;
   left: 40px;
-  height: 200px;
-  width: 150px;
+  height: 175px;
+  width: 25%;
   background-color: grey;
+  transform: translate(0%,-25%);
+}
+.trainDetailsWrapper {
+  position: absolute;
+  top: 30%;
+  left: 33.33333%;
+  height: 175px;
+  width: 60%;
+  background-color: darkgrey;
   transform: translate(0%,-25%);
 }
 
@@ -108,4 +117,9 @@ button {
   left: 50%;
   font-size: 20px;
   transform: translate(-50%,-50%);
+}
+
+.trainDest {
+  position: relative;
+  text-align: center;
 }
