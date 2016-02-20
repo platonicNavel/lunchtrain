@@ -23,8 +23,8 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: 'handleTrainBoardingClick',
-    value: function handleTrainBoardingClick(train) {
+    key: 'handleAccordionMap',
+    value: function handleAccordionMap(train) {
       console.log(train, 'CHOO CHOOOOO!');
     }
   }, {
@@ -52,7 +52,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap.bind(this) })
         )
       );
     }
