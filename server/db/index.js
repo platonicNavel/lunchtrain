@@ -44,6 +44,8 @@ Destination.hasMany(Train);
 Train.hasMany(User);
 Team.hasMany(Train);
 
+
+
 module.exports = {
     User,
     Team,
