@@ -1,4 +1,4 @@
-var Forms = ({form, formHandleSubmit}) => {
+const Forms = ({form, formHandleSubmit}) => {
   return (
     <div className="formsEntry">
       <form className="scheduler">
