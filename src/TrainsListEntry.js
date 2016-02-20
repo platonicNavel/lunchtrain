@@ -1,7 +1,7 @@
-const TrainsListEntry = ({train, handleTrainBoardingClick}) => 
+const TrainsListEntry = ({train, handleAccordionMap}) => 
 {
   return (
-    <div className="trainEntry">
+    <div className="trainEntry" onClick={() => handleAccordionMap(train)}>
       <div className="trainContainer">
         <div className="trainIconTimeWrapper">
           <div className="trainIcon"></div>
