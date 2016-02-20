@@ -2,11 +2,13 @@
 
 var TrainsListEntry = function TrainsListEntry(_ref) {
   var train = _ref.train;
-  var handleTrainBoardingClick = _ref.handleTrainBoardingClick;
+  var handleAccordionMap = _ref.handleAccordionMap;
 
   return React.createElement(
     "div",
-    { className: "trainEntry" },
+    { className: "trainEntry", onClick: function onClick() {
+        return handleAccordionMap(train);
+      } },
     React.createElement(
       "div",
       { className: "trainContainer" },

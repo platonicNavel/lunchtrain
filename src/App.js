@@ -8,7 +8,7 @@ class App extends React.Component {
     };
   }
 
-  handleTrainBoardingClick(train) {
+  handleAccordionMap(train) {
     console.log(train, 'CHOO CHOOOOO!')
   }
 
@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap.bind(this)}></TrainsList>
         </div>
       </div>
     )
