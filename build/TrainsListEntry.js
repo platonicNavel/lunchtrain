@@ -36,7 +36,7 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
         ),
         React.createElement(
           "div",
-          { className: "trainRatingsWrapper col-xs-12" },
+          { className: "trainRatingsWrapper" },
           React.createElement(
             "div",
             { className: "likes col-xs-6" },

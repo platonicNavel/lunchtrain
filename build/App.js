@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23,12 +23,12 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: "handleTrainBoardingClick",
+    key: 'handleTrainBoardingClick',
     value: function handleTrainBoardingClick(train) {
       console.log(train, 'CHOO CHOOOOO!');
     }
   }, {
-    key: "getTeamTrains",
+    key: 'getTeamTrains',
     value: function getTeamTrains(teamId) {
       var _this2 = this;
 
@@ -39,24 +39,19 @@ var App = function (_React$Component) {
       });
     }
   }, {
-    key: "componentDidMount",
+    key: 'componentDidMount',
     value: function componentDidMount() {
       this.getTeamTrains(1);
     }
   }, {
-    key: "render",
+    key: 'render',
     value: function render() {
       return React.createElement(
-        "div",
+        'div',
         null,
         React.createElement(
-          "div",
-          { className: "col-xs-4 leftThird" },
-          React.createElement(Forms, null)
-        ),
-        React.createElement(
-          "div",
-          { className: "col-xs-8 rightThird" },
+          'div',
+          { className: 'trainsView container-fluid' },
           React.createElement(TrainsList, { trains: this.state.trains })
         )
       );

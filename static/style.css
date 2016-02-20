@@ -11,51 +11,12 @@ button {
 
 /*Structure*/
 
-.leftThird {
+.trainsView {
   background-color: black;
   height: 100vh;
 }
-.rightThird {
-  background-color: black;
-  border-left: 1px solid blue;
-  height: 100vh;
-}
 
-/*Left (Scheduler)*/
-
-.scheduler {
-  padding-left: 30px;
-  padding-right: 30px;
-  height: 100vh;
-}
-.scheduleInput {
-  position: relative;
-  display: block;
-  top: 35%;
-  width: 100%;
-  margin-bottom: 4em;
-  font-size: 18px;
-  /*color*/
-  background-color: black;
-  border: none;
-  border-bottom: 1px solid white;
-  padding-bottom: 10px;
-}
-.scheduleInput:focus {
-  border: none;
-  outline: none;
-  border-bottom: 1px solid white !important;
-  color: white;
-}
-
-.scheduleTrain {
-  position: relative;
-  width: 50%;
-  top: 35%;
-  left: 26%;
-}
-
-/*Right (Current Trains)*/
+/*Current Trains*/
 
   /*---TrainsList---*/
 .trainsList {
