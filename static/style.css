@@ -139,10 +139,35 @@ button {
   top: 15%;
 }
 .likes {
-  background-color: pink;
+  background-color: lightblue;
   text-align: right;
 }
 .price {
   background-color: #00bbff;
   text-align: left;
+}
+
+.passengersWrapper {
+  position: relative;
+  top: 70%;
+  left: 33.33333%;
+  width: 60%;
+  height: 25%;
+  margin: 10px 0px;
+  background-color: grey;
+  transform: translate(0%,-25%);
+}
+.conductor, .passenger {
+  position: relative;
+  background-color: white;
+  float: left;
+  margin-right: 5px;
+  width: 50px;
+  height: 100%;
+}
+.slackPic {
+  position: relative;
+  background-color: black;
+  width: 50px;
+  height: 100%;
 }

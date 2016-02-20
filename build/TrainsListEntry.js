@@ -56,6 +56,22 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
             )
           )
         )
+      ),
+      React.createElement(
+        "div",
+        { className: "passengersWrapper" },
+        React.createElement(
+          "div",
+          { className: "conductor passenger" },
+          React.createElement("div", { className: "slackPic" })
+        ),
+        train.passengers.map(function (passenger) {
+          return React.createElement(
+            "div",
+            { className: "passenger" },
+            React.createElement("div", { className: "slackPic" })
+          );
+        })
       )
     )
   );
