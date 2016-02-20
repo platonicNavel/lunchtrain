@@ -13,11 +13,11 @@ passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(user, done) {
+passport.deserializeUser((user, done) => {
   console.log('deserialized: ', user);
-  db.User.find({where: {id: user.id}}).success(function(user) {
+  db.User.find({where: {id: user.id}}).success((user) => {
     done(null, user);
-  }).error(function(err) {
+  }).error((err) => {
     done(err, null);
   });
 });
@@ -32,16 +32,18 @@ passport.use(new SlackStrategy({
     const slackId = profile.id;
     const firstName = profile._json.info.user.profile.first_name;
     const lastName = profile._json.info.user.profile.last_name;
-    const slackTeam = profile._json.team_id;
+    const slackTeamId = profile._json.team_id;
     const teamName = profile._json.team;
 
     db.User.findOrCreate({where: {slackId, firstName, lastName}})
       .spread((user, userCreated) => {
-        db.Team.findOrCreate({where: {slackTeam, teamName}}).spread((team, teamCreated) => {
+        db.Team.findOrCreate({where: {slackTeamId, teamName}}).spread((team, teamCreated) => {
+          console.log('userCreated: ', userCreated);
+          console.log('teamCreated: ', teamCreated);
           if (!userCreated && !teamCreated) { //TODO: ADDRESS EDGE CASE
             console.log('Team and user exist already');
           } else {
-            console.log('User and team connected');
+            console.log('User and team created');
             return user.addTeam(team);
           }
         }).then(() => {
@@ -51,7 +53,7 @@ passport.use(new SlackStrategy({
       });
 }));
 
-const app = express()
+const app = express();
 
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
@@ -62,7 +64,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
-var ensureAuthenticated = function(req, res, next) {
+const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
@@ -127,8 +129,7 @@ app.get('/api/trains', (req, res) => {
 });
 
 
-app.get('/', ensureAuthenticated,
-function(req, res) {
+app.get('/', ensureAuthenticated, (req, res) => {
   res.render('index');
 });
 
@@ -136,18 +137,15 @@ app.get('/login', (req, res) => {
   res.render('login');
 })
 
-app.get('/trains', ensureAuthenticated,
-function(req, res) {
+app.get('/trains', ensureAuthenticated, (req, res) => {
   res.render('trains');
 });
 
-app.get('/destinations', ensureAuthenticated,
-function(req, res) {
+app.get('/destinations', ensureAuthenticated, (req, res) => {
   res.render('destinations');
 });
 
-app.get('/logout',
-function(req, res) {
+app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/auth/slack');
 });
@@ -156,9 +154,7 @@ app.get('/auth/slack',
   passport.authorize('slack'));
 
 app.get('/auth/slack/callback',
-  passport.authorize('slack', {failureRedirect: '/login'}),
-  function(req, res) {
-    console.log('test');
+  passport.authorize('slack', {failureRedirect: '/login'}), (req, res) => {
     // Successful authentication, redirect home.
     res.redirect('/');
   }
@@ -192,5 +188,8 @@ app.get('/auth/slack/callback',
 //     })
 //   });
 
-console.log('Server is listening on port 8000');
-app.listen(8000);
+//force should be false/ommitted in production code
+db.sequelize.sync({force: true}).then(() => {
+  console.log('Server is listening on port 8000');
+  app.listen(8000);
+});
