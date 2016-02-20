@@ -123,3 +123,26 @@ button {
   position: relative;
   text-align: center;
 }
+
+.trainRatingsWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.likes, .price {
+  position: relative;
+  height: 25%;
+  font-size: 20px;
+}
+.likes div, .price div {
+  position: relative;
+  top: 15%;
+}
+.likes {
+  background-color: pink;
+  text-align: right;
+}
+.price {
+  background-color: #00bbff;
+  text-align: left;
+}

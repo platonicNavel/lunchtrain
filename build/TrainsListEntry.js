@@ -33,6 +33,28 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
           "h2",
           { className: "trainDest" },
           train.destinationName
+        ),
+        React.createElement(
+          "div",
+          { className: "trainRatingsWrapper col-xs-12" },
+          React.createElement(
+            "div",
+            { className: "likes col-xs-6" },
+            React.createElement(
+              "div",
+              null,
+              "♥3"
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "price col-xs-6" },
+            React.createElement(
+              "div",
+              null,
+              "$$"
+            )
+          )
         )
       )
     )
