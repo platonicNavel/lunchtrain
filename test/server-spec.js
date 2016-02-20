@@ -3,32 +3,32 @@ const expect = require('chai').expect;
 
 const newUser = {
   slackId: '53t5g3b',
-  name: 'Griffin',
+  firstName: 'Griffin',
 };
 
 const newUser1 = {
   slackId: 'eha41t',
-  name: 'Jarrett',
+  firstName: 'Jarrett',
 }
 
 const newUser2 = {
   slackId: 't31gr54',
-  name: 'Anthony',
+  firstName: 'Anthony',
 }
 
 const newTeam = {
-  slackTeam: 'g52gewg524',
-  name: 'Awesome',
+  slackTeamId: 'g52gewg524',
+  teamName: 'Awesome',
 };
 
 const newTeam1 = {
-  slackTeam: 'tgew535',
-  name: 'Amazing',
+  slackTeamId: 'tgew535',
+  teamName: 'Amazing',
 };
 
 const newTeam2 = {
-  slackTeam: '95gh478',
-  name: 'Great',
+  slackTeamId: '95gh478',
+  teamName: 'Great',
 };
 
 const newDestination = {
@@ -70,17 +70,17 @@ describe('Database ORM', () => {
         return db.User.findOne({where: {slackId: newUser.slackId}});
       }).then((user) => {
           expect(user.slackId).to.equal(newUser.slackId);
-          expect(user.name).to.equal(newUser.name);
+          expect(user.firstName).to.equal(newUser.firstName);
           done();
       });
     });
 
     it('should insert a team into the database', (done) => {
       db.Team.create(newTeam).then(() => {
-        return db.Team.findOne({where: {slackTeam: newTeam.slackTeam}});
+        return db.Team.findOne({where: {slackTeamId: newTeam.slackTeamId}});
       }).then((team) => {
-        expect(team.slackTeam).to.equal(newTeam.slackTeam);
-        expect(team.name).to.equal(newTeam.name);
+        expect(team.slackTeamId).to.equal(newTeam.slackTeamId);
+        expect(team.teamName).to.equal(newTeam.teamName);
         done();
       });
     });
@@ -118,9 +118,9 @@ describe('Database ORM', () => {
         }).then(() => {
           db.User.findOne({include: [db.Team]}).then((user) => {
             expect(user.slackId).to.equal(newUser.slackId);
-            expect(user.name).to.equal(newUser.name);
-            expect(user.Teams[0].slackTeam).to.equal(newTeam.slackTeam);
-            expect(user.Teams[0].name).to.equal(newTeam.name);
+            expect(user.firstNmw).to.equal(newUser.firstNmw);
+            expect(user.Teams[0].slackTeamId).to.equal(newTeam.slackTeamId);
+            expect(user.Teams[0].teamName).to.equal(newTeam.teamName);
             done();
           });
         });
@@ -133,8 +133,8 @@ describe('Database ORM', () => {
           return dest.addTeam(team);
         }).then(() => {
           db.Team.findOne({include: [db.Destination]}).then((team) => {
-            expect(team.slackTeam).to.equal(newTeam.slackTeam);
-            expect(team.name).to.equal(newTeam.name);
+            expect(team.slackTeamId).to.equal(newTeam.slackTeamId);
+            expect(team.teamName).to.equal(newTeam.teamName);
 
             expect(team.Destinations[0].googleId).to.equal(newDestination.googleId);
             expect(team.Destinations[0].name).to.equal(newDestination.name);
@@ -156,7 +156,7 @@ describe('Database ORM', () => {
         }).then(() => {
           db.User.findOne({include: [db.Train]}).then((user) => {
             expect(user.slackId).to.equal(newUser.slackId);
-            expect(user.name).to.equal(newUser.name);
+            expect(user.firstName).to.equal(newUser.firstName);
 
             expect(user.Trains[0].timeDeparting).to.equal(newTrain.timeDeparting);
             expect(user.Trains[0].timeDuration).to.equal(newTrain.timeDuration);
@@ -198,8 +198,8 @@ describe('Database ORM', () => {
             expect(team.Trains[0].timeDeparting).to.equal(newTrain.timeDeparting);
             expect(team.Trains[0].timeDuration).to.equal(newTrain.timeDuration);
 
-            expect(team.slackTeam).to.equal(newTeam.slackTeam);
-            expect(team.slackTeam).to.equal(newTeam.slackTeam);
+            expect(team.slackTeamId).to.equal(newTeam.slackTeamId);
+            expect(team.teamName).to.equal(newTeam.teamName);
 
             done();
           });
