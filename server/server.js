@@ -64,7 +64,7 @@ passport.use(new SlackStrategy({
 }));
 
 
-// app.use(express.static(path.join(__dirname, '../static')));
+app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const ensureAuthenticated = (req, res, next) => {
@@ -133,11 +133,11 @@ app.get('/api/trains', (req, res) => {
 
 
 app.get('/', ensureAuthenticated, (req, res) => {
-  res.sendFile(path.join(__dirname, '../static/index.html'));
+  res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../static/login.html'));
+  res.sendFile(path.join(__dirname, '../views/login.html'));
 })
 
 app.get('/api/destinations', ensureAuthenticated, (req, res) => {
