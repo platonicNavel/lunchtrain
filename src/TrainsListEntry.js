@@ -16,6 +16,16 @@ const TrainsListEntry = ({train, handleTrainBoardingClick}) =>
             <div className="price col-xs-6"><div>$$</div></div>
           </div>
         </div>
+        <div className="passengersWrapper">
+            <div className="conductor passenger">
+              <div className="slackPic"></div>
+            </div>
+            {train.passengers.map( passenger =>
+            <div className="passenger">
+              <div className="slackPic"></div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
