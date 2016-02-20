@@ -8,12 +8,13 @@ const sequelize = new Sequelize('lunchtrain', null, null, {
 
 const User = sequelize.define('User', {
   slackId: Sequelize.STRING,
-  name: Sequelize.STRING
+  firstName: Sequelize.STRING,
+  lastName: Sequelize.STRING,
 });
 
 const Team = sequelize.define('Team', {
-  slackTeam: Sequelize.STRING,
-  name: Sequelize.STRING,
+  slackTeamId: Sequelize.STRING,
+  teamName: Sequelize.STRING,
 });
 
 const Destination = sequelize.define('Destination', {
@@ -42,6 +43,8 @@ Destination.belongsToMany(Team, {through: 'Teams_Destinations'});
 Destination.hasMany(Train);
 Train.hasMany(User);
 Team.hasMany(Train);
+
+
 
 module.exports = {
     User,
