@@ -11,14 +11,19 @@ const db = require('./db/index');
 const CLIENT_ID = "10589206992.22131652337"
 const CLIENT_SECRET = "63a441c7c9d19dcd6faa789d27a22d3a";
 
+const app = express();
+
+app.use(session({secret:'asdfqwertty'}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 passport.serializeUser((user, done) => {
-  console.log('serialized: ', user);
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserialized: ', user);
   db.User.find({where: {id: user.id}}).success((user) => {
     done(null, user);
   }).error((err) => {
@@ -57,22 +62,15 @@ passport.use(new SlackStrategy({
       });
 }));
 
-const app = express();
 
-app.use(session({secret:'asdfqwertty'}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static(path.join(__dirname, '../static')));
+// app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const ensureAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect('/auth/slack');
+    res.redirect('/login');
   }
 };
 
@@ -134,19 +132,29 @@ app.get('/api/trains', (req, res) => {
 
 
 app.get('/', ensureAuthenticated, (req, res) => {
-  res.render('index');
+  console.log('user: ', req.user);
+  console.log('session: ', req.session);
+  res.sendFile(path.join(__dirname, '../static/index.html'));
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.sendFile(path.join(__dirname, '../static/login.html'));
 })
 
-app.get('/trains', ensureAuthenticated, (req, res) => {
-  res.render('trains');
+app.get('/api/destinations', ensureAuthenticated, (req, res) => {
+
+});
+
+app.get('/api/trains', ensureAuthenticated, (req, res) => {
+
 });
 
 app.get('/destinations', ensureAuthenticated, (req, res) => {
   res.render('destinations');
+});
+
+app.get('/trains', ensureAuthenticated, (req, res) => {
+  res.render('trains');
 });
 
 app.get('/logout', (req, res) => {
@@ -155,32 +163,18 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/auth/slack',
-  passport.authorize('slack'));
+  passport.authenticate('slack'));
 
 app.get('/auth/slack/callback',
-  passport.authorize('slack', {failureRedirect: '/login'}), (req, res) => {
+  passport.authenticate('slack', {failureRedirect: '/login'}), (req, res) => {
     // Successful authentication, redirect home.
+    console.log(req.isAuthenticated());
     res.redirect('/');
   }
 );
 
-
-// app.post('/trains', ensureAuthenticated,
-//   // Find user
-//   db.User.findOne()
-//   function(req, res) {
-//     // Create train entry for user
-//       db.Train.create({
-//       conductorId: conductorId,
-//       destinationId: destinationId,
-//       timeDeparting: timeDeparting,
-//       timeDuration: timeDuration,
-//     }).then((user) => {
-//     }
-//   });
-
 // app.post('/destinations', ensureAuthenticated,
-//   function(req, res) {
+//   (req, res) => {
 //     // Create destination table
 //     db.Destination.create({
 //       google_id: google_id,
@@ -190,6 +184,20 @@ app.get('/auth/slack/callback',
 //       visits: visits,
 //       likes: likes,
 //     })
+//   });
+
+// app.post('/trains', ensureAuthenticated,
+//   // Find user
+//   db.User.findOne()
+//   (req, res) => {
+//     // Create train entry for user
+//       db.Train.create({
+//       conductorId: conductorId,
+//       destinationId: destinationId,
+//       timeDeparting: timeDeparting,
+//       timeDuration: timeDuration,
+//     }).then((user) => {
+//     }
 //   });
 
 //force should be false/ommitted in production code
