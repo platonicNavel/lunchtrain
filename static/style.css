@@ -81,18 +81,31 @@ button {
   margin-top: 50px;
 }
 
+.trainIconTimeWrapper {
+  position: absolute;
+  top: 30%;
+  left: 40px;
+  height: 200px;
+  width: 150px;
+  background-color: grey;
+  transform: translate(0%,-25%);
+}
+
 .trainIcon {
   position: relative;
-  top: 30%;
-  left: 60px;
+  top: 40%;
+  left: 50%;
   height: 100px;
   width: 100px;
   background-color: white;
-  transform: translate(0%,-25%);
+  transform: translate(-50%,-50%);
 }
 
 .timeWrapper {
   position: relative;
-  top: 25%;
+  text-align: center;
+  top: 30%;
+  left: 50%;
   font-size: 20px;
+  transform: translate(-50%,-50%);
 }

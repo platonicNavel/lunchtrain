@@ -10,16 +10,20 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
     React.createElement(
       "div",
       { className: "trainContainer" },
-      React.createElement("div", { className: "trainIcon" }),
       React.createElement(
         "div",
-        { className: "timeWrapper" },
+        { className: "trainIconTimeWrapper" },
+        React.createElement("div", { className: "trainIcon" }),
         React.createElement(
           "div",
-          { className: "time" },
-          train.timeDeparting,
-          "---",
-          train.timeBack
+          { className: "timeWrapper" },
+          React.createElement(
+            "div",
+            { className: "time" },
+            train.timeDeparting,
+            "---",
+            train.timeBack
+          )
         )
       )
     )
