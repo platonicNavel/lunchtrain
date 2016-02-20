@@ -11,6 +11,10 @@ const TrainsListEntry = ({train, handleTrainBoardingClick}) =>
         </div>
         <div className="trainDetailsWrapper">
           <h2 className="trainDest">{train.destinationName}</h2>
+          <div className="trainRatingsWrapper col-xs-12">
+            <div className="likes col-xs-6"><div>♥3</div></div>
+            <div className="price col-xs-6"><div>$$</div></div>
+          </div>
         </div>
       </div>
     </div>
