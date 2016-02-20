@@ -27,10 +27,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="col-xs-4 leftThird">
-          <Forms></Forms>
-        </div>
-        <div className="col-xs-8 rightThird">
+        <div className="trainsView container-fluid">
           <TrainsList trains={this.state.trains}></TrainsList>
         </div>
       </div>
