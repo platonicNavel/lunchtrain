@@ -25,6 +25,15 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
             train.timeBack
           )
         )
+      ),
+      React.createElement(
+        "div",
+        { className: "trainDetailsWrapper" },
+        React.createElement(
+          "h2",
+          { className: "trainDest" },
+          train.destinationName
+        )
       )
     )
   );
