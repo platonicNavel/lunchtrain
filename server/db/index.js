@@ -20,12 +20,13 @@ const Team = sequelize.define('Team', {
 const Destination = sequelize.define('Destination', {
   googleId: Sequelize.STRING,
   name: Sequelize.STRING,
-  lat: Sequelize.STRING,
-  long: Sequelize.STRING,
+  lat: Sequelize.STRING, //should these be #s
+  long: Sequelize.STRING, //should these be #s
   visits: Sequelize.INTEGER,
   likes: Sequelize.INTEGER,
 });
 
+//todo: add 'dateDeparting' functionality
 const Train = sequelize.define('Train', {
   timeDeparting: Sequelize.INTEGER,
   timeDuration: Sequelize.INTEGER,
