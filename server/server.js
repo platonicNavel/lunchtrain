@@ -44,7 +44,6 @@ passport.use(new SlackStrategy({
     db.User.findOrCreate({where: {slackId, firstName, lastName}})
       .spread((user, userCreated) => {
         db.Team.findOrCreate({where: {slackTeamId, teamName}}).spread((team, teamCreated) => {
-          console.log('team: ', team);
           if (!userCreated && !teamCreated) { //TODO: ADDRESS EDGE CASE
             console.log('Team and user exist already');
           } else {
@@ -130,6 +129,7 @@ app.get('/api/trains', (req, res) => {
 
 
 app.get('/', ensureAuthenticated, (req, res) => {
+  console.log(req.user);
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
@@ -191,25 +191,33 @@ app.get('/auth/slack/callback',
 );
 
 app.post('/destinations', (req, res) => {
-  console.log(req);
+  const user = req.user;
   const data = req.body;
-  db.Train.create({
-    timeDeparting: data.timeDeparting,
-    timeDuration: data.timeDuration,
-  }).then((train) => {
-    db.Destination.findOrCreate({
-      googleId: data.googleId,
-      name: data.name,
-      lat: data.lat,
-      long: data.long,
-      visits: data.visits,
-      likes: data.likes,
-    }).spread((destination, created) => {
-      return destination.addTrain(train);
-    }).then(() => {
-      res.send(200, "Train created");
+
+  //todo: modularize, refactor
+  db.findOne({where: {id: user.id}}).then((user) => {
+    db.Train.create({
+      timeDeparting: data.timeDeparting,
+      timeDuration: data.timeDuration,
+    }).then((train) => {
+      train.addConductor(user).then(() => {
+        db.Destination.findOrCreate({
+          googleId: data.googleId,
+          name: data.name,
+          lat: data.lat,
+          long: data.long,
+          visits: data.visits,
+          likes: data.likes,
+        }).spread((destination, created) => {
+          return destination.addTrain(train);
+        }).then(() => {
+          res.send(200, "Train created");
+        });
+      });
     });
   });
+
+
 });
 
 app.post('/trains', (req, res) => {
