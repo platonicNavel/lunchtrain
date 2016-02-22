@@ -240,7 +240,9 @@ app.post('/trains', (req, res) => {
 });
 
 //force should be false/ommitted in production code
-db.sequelize.sync({force: true}).then(() => {
+const init = require('./db/dummyData');
+
+init().then(() => {
   console.log('Server is listening on port 8000');
   app.listen(8000);
 });

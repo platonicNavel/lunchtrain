@@ -1,4 +1,5 @@
 const db = require('./index.js');
+const Sequelize = require('sequelize');
 
 const user1 = {
   slackId: 't353h4h',
@@ -36,6 +37,15 @@ const user6 = {
   lastName: 'Tables',
 };
 
+const allUsers = [
+  user1,
+  user2,
+  user3,
+  user4,
+  user5,
+  user6
+];
+
 const team1 = {
   slackTeamId: '35t24h4h',
   teamName: 'Awesome',
@@ -45,6 +55,11 @@ const team2 = {
   slackTeamId: '549424h4h',
   teamName: 'Cool',
 };
+
+const allTeams = [
+  team1,
+  team2
+];
 
 const destination1 = {
   googleId: '3bfsdh5g3earge',
@@ -73,6 +88,12 @@ const destination3 = {
   likes: 15,
 };
 
+const allDestinations = [
+  destination1,
+  destination2,
+  destination3
+];
+
 const train1 = {
   timeDeparting: 56324636,
   timeDuration: 5425,
@@ -83,22 +104,82 @@ const train2 = {
   timeDuration: 4025,
 };
 
-let team;
-db.User.create(user1).then((user) => {
-  return db.Team.create(team1).then((team) => {
-    return user.addTeam(team);
-  });
-}).then(() => {
-  db.User.cre
-});
+const train3 = {
+  timeDeparting: 54762472,
+  timeDuration: 4363,
+}
 
+const allTrains = [
+  train1,
+  train2,
+  train3
+];
 
+//create arrays of each db entry for dummy data
+let createdUsers;
+let createdTeams;
+let createdDestinations;
+let createdTrains;
 
+function initializeData() {
+  return db.sequelize.sync({force: true})
+    .then(() => {
+      return Sequelize.Promise.map(allUsers, (user) => {
+        return db.User.create(user);
+      });
+    }).then((users) => {
+      createdUsers = users;
+      return Sequelize.Promise.map(allTeams, (team) => {
+        return db.Team.create(team);
+      });
+    }).then((teams) => {
+      createdTeams = teams;
+      return Sequelize.Promise.map(allDestinations, (dest) => {
+        return db.Destination.create(dest);
+      });
+    }).then((dests) => {
+      createdDestinations = dests;
+      return Sequelize.Promise.map(allTrains, (train) => {
+        return db.Train.create(train);
+      });
+    }).then((trains) => {
+      createdTrains = trains;
+      /*
+        At this point all promises have resolved, and
+        we have 4 arrays with all our ORM dummy data.
+        Next, we need to create associations. This will
+        be hard coded for time's sake.
 
+        This can and should be cleaned up to use the
+        procedure defined near the end of
+        http://docs.sequelizejs.com/en/latest/docs/associations/
+      */
+      return Sequelize.Promise.all([
+        createdUsers[0].addTeam(createdTeams[0]),
+        createdUsers[1].addTeam(createdTeams[0]),
+        createdUsers[2].addTeam(createdTeams[0]),
+        createdUsers[3].addTeam(createdTeams[1]),
+        createdUsers[4].addTeam(createdTeams[1]),
+        createdUsers[5].addTeam(createdTeams[1]),
+        createdTeams[0].addDestination(createdDestinations[0]),
+        createdTeams[0].addDestination(createdDestinations[1]),
+        createdTeams[1].addDestination(createdDestinations[2]),
+        createdTeams[0].addTrain(createdTrains[0]),
+        createdTeams[0].addTrain(createdTrains[1]),
+        createdTeams[1].addTrain(createdTrains[2]),
+        createdDestinations[0].addTrain(createdTrains[0]),
+        createdDestinations[1].addTrain(createdTrains[1]),
+        createdDestinations[1].addTrain(createdTrains[2]),
+        createdTrains[0].addUser(createdUsers[0]),
+        createdTrains[0].addUser(createdUsers[1]),
+        createdTrains[0].setConductor(createdUsers[2]),
+        createdTrains[1].addUser(createdUsers[1]),
+        createdTrains[1].setConductor(createdUsers[0]),
+        createdTrains[2].setConductor(createdUsers[3]),
+        createdTrains[2].addUser(createdUsers[4]),
+        createdTrains[2].addUser(createdUsers[5])
+      ]);
+    });
+}
 
-
-
-
-
-
-
+module.exports = initializeData;

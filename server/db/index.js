@@ -1,11 +1,9 @@
-
 const Sequelize = require('sequelize');
 const path = require('path');
 const sequelize = new Sequelize('lunchtrain', null, null, {
   dialect: 'sqlite',
   storage: path.join(__dirname,'lunchtrain.sqlite'),
 });
-
 const User = sequelize.define('User', {
   slackId: Sequelize.STRING,
   firstName: Sequelize.STRING,
@@ -35,15 +33,18 @@ const Train = sequelize.define('Train', {
 User.belongsToMany(Team, {through: 'Users_Teams'});
 Team.belongsToMany(User, {through: 'Users_Teams'});
 
+//todo: alias user as passenger for n-m relation
 User.belongsToMany(Train, {through: 'Users_Trains'});
 Train.belongsToMany(User, {through: 'Users_Trains'});
 
 Team.belongsToMany(Destination, {through: 'Teams_Destinations'});
 Destination.belongsToMany(Team, {through: 'Teams_Destinations'});
 
+//still a bit sharky on these associations
+//may be worth going into further
 Destination.hasMany(Train);
 Team.hasMany(Train);
-Train.belongsTo(User, {as: 'Conductor'});
+Train.belongsTo(User, {as: 'Conductor'}); 
 
 
 
