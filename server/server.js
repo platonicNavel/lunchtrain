@@ -10,6 +10,8 @@ const db = require('./db/index');
 
 const app = express();
 
+const devMode = true;
+
 app.use(session({secret:'asdfqwertty'}));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,7 +66,7 @@ app.use(express.static(path.join(__dirname, '../static')));
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const ensureAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() || devMode) {
     return next();
   } else {
     res.redirect('/login');
