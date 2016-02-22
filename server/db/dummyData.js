@@ -83,6 +83,14 @@ const train2 = {
   timeDuration: 4025,
 };
 
+let team;
+db.User.create(user1).then((user) => {
+  return db.Team.create(team1).then((team) => {
+    return user.addTeam(team);
+  });
+}).then(() => {
+  db.User.cre
+});
 
 
 
