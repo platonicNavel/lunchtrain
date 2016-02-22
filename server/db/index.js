@@ -41,8 +41,8 @@ Team.belongsToMany(Destination, {through: 'Teams_Destinations'});
 Destination.belongsToMany(Team, {through: 'Teams_Destinations'});
 
 Destination.hasMany(Train);
-Train.hasMany(User);
 Team.hasMany(Train);
+Train.belongsTo(User, {as: 'Conductor'});
 
 
 
