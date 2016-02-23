@@ -100,7 +100,7 @@ var TrainsListEntry = function (_React$Component) {
             })
           )
         ),
-        React.createElement(TrainsListEntryDropdown, { train: train, className: this.state.accordionClass })
+        React.createElement(TrainsListEntryDropdown, { train: train, open: this.state.open, accordionClass: this.state.accordionClass })
       );
     }
   }]);

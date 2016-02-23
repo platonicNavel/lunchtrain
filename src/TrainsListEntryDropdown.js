@@ -1,6 +1,6 @@
-const TrainsListEntryDropdown = ({train}) => {
+const TrainsListEntryDropdown = ({train, open, accordionClass}) => {
   return (
-    <div className="trainEntryDropdown">
+    <div className={accordionClass}>
       <div className="trainEntryDropdownWrapper"></div>
     </div>
   )

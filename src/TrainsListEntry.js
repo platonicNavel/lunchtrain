@@ -41,7 +41,7 @@ class TrainsListEntry extends React.Component {
             )}
           </div>
         </div>
-        <TrainsListEntryDropdown train={train} className={this.state.accordionClass}></TrainsListEntryDropdown>
+        <TrainsListEntryDropdown train={train} open={this.state.open} accordionClass={this.state.accordionClass}></TrainsListEntryDropdown>
       </div>
     )
   }
