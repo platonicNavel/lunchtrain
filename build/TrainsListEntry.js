@@ -17,8 +17,8 @@ var TrainsListEntry = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TrainsListEntry).call(this, props));
 
     _this.state = {
-      accordionClass: 'hidden',
-      open: false
+      open: false,
+      accordionClass: 'details'
     };
     return _this;
   }

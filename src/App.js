@@ -9,7 +9,20 @@ class App extends React.Component {
   }
 
   handleAccordionMap(train) {
-    console.log(train, 'CHOO CHOOOOO!')
+    console.log(train, 'CHOO CHOOOOO!', this);
+
+    if(train.state.open) {
+      train.setState({
+        open: false,
+        accordionClass: "details"
+      });
+    }
+    else{
+      train.setState({
+        open: true,
+        accordionClass: "details open"
+      });
+    }
   }
 
   getTeamTrains(teamId) {
