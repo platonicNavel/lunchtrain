@@ -4,8 +4,8 @@ class TrainsListEntry extends React.Component {
     super(props);
 
     this.state = {
-      accordionClass: 'hidden',
-      open: false
+      open: false,
+      accordionClass: 'details'
     };
   }
 

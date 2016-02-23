@@ -135,7 +135,14 @@ button {
 
   /*---TrainsListEntryDropdown---*/
 
-.trainEntryDropdownWrapper {
+.details.open .trainEntryDropdownWrapper {
   height: 10em;
+  background-color: blue;
+}
+
+.trainEntryDropdownWrapper {
+  height: 0;
+  overflow: hidden;
+  transition: all .2s ease-in;
   background-color: blue;
 }
