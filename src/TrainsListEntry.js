@@ -39,6 +39,9 @@ class TrainsListEntry extends React.Component {
                 <div className="slackPic"></div>
               </div>
             )}
+            <div className="joinWrapper">
+              <div className="joinArrow">»</div>
+            </div>
           </div>
         </div>
         <TrainsListEntryDropdown train={train} open={this.state.open} accordionClass={this.state.accordionClass}></TrainsListEntryDropdown>

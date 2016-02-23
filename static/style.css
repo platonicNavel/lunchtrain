@@ -133,6 +133,20 @@ button {
   height: 100%;
 }
 
+.joinWrapper {
+  border: 1px solid black;
+  width: 50px;
+  height: 55px;
+  float: right;
+  background-color: #808080;
+}
+.joinArrow {
+  position: relative;
+  margin-top: -20px;
+  text-align: center;
+  font-size: 60px !important;
+}
+
   /*---TrainsListEntryDropdown---*/
 
 .details.open .trainEntryDropdownWrapper {
