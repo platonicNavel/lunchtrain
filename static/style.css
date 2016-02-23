@@ -34,7 +34,7 @@ button {
 }
 
 .trainEntry {
-  height: 20vh;
+  height: 15.8em;
   background-color: red;
   margin: 10px;
 }
@@ -131,4 +131,11 @@ button {
   background-color: black;
   width: 50px;
   height: 100%;
+}
+
+  /*---TrainsListEntryDropdown---*/
+
+.trainEntryDropdownWrapper {
+  height: 10em;
+  background-color: blue;
 }

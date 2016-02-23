@@ -75,6 +75,7 @@ var TrainsListEntry = function TrainsListEntry(_ref) {
           );
         })
       )
-    )
+    ),
+    React.createElement(TrainsListEntryDropdown, { train: train })
   );
 };

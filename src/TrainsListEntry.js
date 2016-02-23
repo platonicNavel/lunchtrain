@@ -27,6 +27,7 @@ const TrainsListEntry = ({train, handleAccordionMap}) =>
           )}
         </div>
       </div>
+      <TrainsListEntryDropdown train={train}></TrainsListEntryDropdown>
     </div>
   )
 }
