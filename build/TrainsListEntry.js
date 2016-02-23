@@ -97,7 +97,16 @@ var TrainsListEntry = function (_React$Component) {
                 { className: "passenger" },
                 React.createElement("div", { className: "slackPic" })
               );
-            })
+            }),
+            React.createElement(
+              'div',
+              { className: 'joinWrapper' },
+              React.createElement(
+                'div',
+                { className: 'joinArrow' },
+                '»'
+              )
+            )
           )
         ),
         React.createElement(TrainsListEntryDropdown, { train: train, open: this.state.open, accordionClass: this.state.accordionClass })
