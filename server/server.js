@@ -34,7 +34,7 @@ passport.use(new SlackStrategy({
   clientID: CLIENT_ID,
   clientSecret: CLIENT_SECRET,
   callbackURL: '/auth/slack/callback',
-  scope: 'incoming-webhook users:read',
+  scope: 'users:read channels:write chat:write:bot',
 },
   (accessToken, refreshToken, profile, done) => {
     const slackId = profile.id;
@@ -131,7 +131,6 @@ app.get('/api/trains', (req, res) => {
 
 
 app.get('/', ensureAuthenticated, (req, res) => {
-  console.log(req.user);
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
