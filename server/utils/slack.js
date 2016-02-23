@@ -1,9 +1,5 @@
 const request = require('request');
 
-/*
-  slackbot emoji - :bullettrain_side:
-*/
-
 //todo: alert the user that this channel has/will be created
 function createChannel(token) {
   request({
@@ -15,9 +11,13 @@ function createChannel(token) {
 }
 
 //can probably make these request more robust relative to the posting channel
-function trainScheduled(conductor, destination, departure, token) {
-  const str = `${conductor} has scheduled a train to ${destination} at ${departure}`;
-  const queryStr = str.replace(' ', '%20')
+function trainAlert(conductor, destination, timeDeparting, token, scheduled) {
+  if (scheduled) {
+    const str = `${conductor} has scheduled a train to ${destination} at ${timeDeparting}`;
+  } else {
+    const str = `Train to ${destination} departing in 10 minutes`
+  }
+  const queryStr = str.replace(' ', '%20');
   request({
     uri: `https://slack.com/api/chat.postMessage?token=${token}&channel=%23lunchtrain&text=${queryStr}&username=lunchtrain&icon_emoji=:bullettrain_side:`,
     method: 'POST'
@@ -27,12 +27,7 @@ function trainScheduled(conductor, destination, departure, token) {
   });
 }
 
-function trainDeparting(conductor, destination, departure) {
-
-}
-
 module.exports = {
   createChannel,
-  trainScheduled,
-  trainDeparting,
+  trainAlert,
 }
