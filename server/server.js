@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 const SlackStrategy = require('passport-slack').Strategy;
+const slackUtils = require('./utils/slack');
 
 const db = require('./db/index');
 
@@ -22,8 +23,17 @@ passport.serializeUser((user, done) => {
   done(null, user);
 });
 
+//not sure if this is the way to do it with attaching variables
+//to user, but it works for now. I think we may be serializing
+//too much data though
 passport.deserializeUser((user, done) => {
+  const accessToken = user.accessToken;
+  const slackTeamId = user.slackTeamId;
+  const teamName = user.slackTeamId;
   db.User.findOne({where: {id: user.id}}).then((user) => {
+    user.accessToken = accessToken;
+    user.slackTeamId = slackTeamId;
+    user.teamName = teamName;
     done(null, user);
   }).catch((err) => {
     done(err, null);
@@ -54,8 +64,11 @@ passport.use(new SlackStrategy({
           }
         }).then(() => {
           console.log('Returning user info for serialization');
-          user.teamName = teamName;
-          user.slackTeamId = slackTeamId;
+          //should this info be stored in a db?
+          //note that these will not be retained as is
+          user.dataValues.teamName = teamName;
+          user.dataValues.slackTeamId = slackTeamId;
+          user.dataValues.accessToken = accessToken;
           return done(null, user);
         });
       });
