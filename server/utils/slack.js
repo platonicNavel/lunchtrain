@@ -14,10 +14,21 @@ function createChannel(token) {
   });
 }
 
-function trainScheduled() {
+//can probably make these request more robust relative to the posting channel
+function trainScheduled(conductor, destination, departure, token) {
+  const str = `${conductor} has scheduled a train to ${destination} at ${departure}`;
+  const queryStr = str.replace(' ', '%20')
+  request({
+    uri: `https://slack.com/api/chat.postMessage?token=${token}&channel=%23lunchtrain&text=${queryStr}&username=lunchtrain&icon_emoji=:bullettrain_side:`,
+    method: 'POST'
+  }, (err, res, body) => {
+    //todo: record status code
+    console.log('Message posted');
+  });
 }
 
-function trainDeparting() {
+function trainDeparting(conductor, destination, departure) {
+
 }
 
 module.exports = {
