@@ -72,6 +72,7 @@ passport.use(new SlackStrategy({
           user.dataValues.teamName = teamName;
           user.dataValues.slackTeamId = slackTeamId;
           user.dataValues.accessToken = accessToken;
+          slackUtils.createChannel(accessToken);
           return done(null, user);
         });
       });
