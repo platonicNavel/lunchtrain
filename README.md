@@ -37,6 +37,10 @@ From within the root directory:
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
+## Future Features
+
+- Allow users to swith between teams or see data from all teams in app
+- Integrate slash commands into the app (show trains, schedule train, etc)
 
 ## Contributing
 
