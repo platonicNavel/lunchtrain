@@ -1,4 +1,4 @@
-const getCurrentTrains = (stationId, cb) => {
+const getCurrentTrains = (cb) => {
   $.ajax({
     url: '/api/trains',
     type: 'GET',

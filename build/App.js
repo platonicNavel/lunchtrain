@@ -41,10 +41,10 @@ var App = function (_React$Component) {
     }
   }, {
     key: "getTeamTrains",
-    value: function getTeamTrains(teamId) {
+    value: function getTeamTrains() {
       var _this2 = this;
 
-      getCurrentTrains(teamId, function (trains) {
+      getCurrentTrains(function (trains) {
         _this2.setState({
           trains: trains
         });
@@ -53,7 +53,7 @@ var App = function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.getTeamTrains(1);
+      this.getTeamTrains();
     }
   }, {
     key: "render",

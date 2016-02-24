@@ -1,6 +1,6 @@
 'use strict';
 
-var getCurrentTrains = function getCurrentTrains(stationId, cb) {
+var getCurrentTrains = function getCurrentTrains(cb) {
   $.ajax({
     url: '/api/trains',
     type: 'GET',
