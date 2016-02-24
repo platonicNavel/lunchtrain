@@ -140,6 +140,13 @@ button {
   height: 55px;
   float: right;
   background-color: #808080;
+  cursor: pointer !important;
+}
+.joinWrapper:hover {
+  background-color: #0059f2;
+}
+.joinWrapper:active>.joinArrow {
+  color: white !important;
 }
 .joinArrow {
   position: relative;
