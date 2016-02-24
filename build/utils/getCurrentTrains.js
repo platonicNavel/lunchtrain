@@ -7,10 +7,13 @@ var getCurrentTrains = function getCurrentTrains(cb) {
     dataType: 'json',
     success: function success(data) {
       _.each(data, function (train) {
+        // calculate return time
         train.timeBack = train.timeDeparting + train.timeDuration;
+        // departing
         var td = new Date(train.timeDeparting * 1000);
         var tdHrs = convertHours(td.getHours());
         train.timeDeparting = tdHrs.hours + ':' + td.getMinutes() + ' ' + tdHrs.ap;
+        // returning
         var tb = new Date(train.timeBack * 1000);
         var tbHrs = convertHours(tb.getHours());
         train.timeBack = tbHrs.hours + ':' + tb.getMinutes() + ' ' + tbHrs.ap;

@@ -40,6 +40,11 @@ var App = function (_React$Component) {
       }
     }
   }, {
+    key: "joinTrain",
+    value: function joinTrain(train) {
+      console.log('join train');
+    }
+  }, {
     key: "getTeamTrains",
     value: function getTeamTrains() {
       var _this2 = this;
@@ -64,7 +69,7 @@ var App = function (_React$Component) {
         React.createElement(
           "div",
           { className: "trainsView container-fluid" },
-          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap.bind(this) })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap.bind(this), joinTrain: this.joinTrain.bind(this) })
         )
       );
     }

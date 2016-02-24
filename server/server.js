@@ -218,6 +218,7 @@ app.post('/destinations', (req, res) => {
 });
 
 app.post('/trains', (req, res) => {
+  console.log(req.body, req.user);
   const data = req.body;
   const user = req.user;
   db.User.findOne({
