@@ -14,7 +14,7 @@ const CLIENT_SECRET = '63a441c7c9d19dcd6faa789d27a22d3a';
 
 const app = express();
 
-const devMode = false;
+const devMode = true;
 
 app.use(session({ secret: 'asdfqwertty' }));
 app.use(passport.initialize());
