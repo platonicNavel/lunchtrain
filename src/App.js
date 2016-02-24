@@ -25,8 +25,8 @@ class App extends React.Component {
     }
   }
 
-  getTeamTrains(teamId) {
-    getCurrentTrains(teamId, (trains) => {
+  getTeamTrains() {
+    getCurrentTrains((trains) => {
       this.setState({
         trains: trains
       });
@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getTeamTrains(1)
+    this.getTeamTrains()
   }
 
   render() {
