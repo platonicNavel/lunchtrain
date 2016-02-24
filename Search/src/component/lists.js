@@ -5,7 +5,6 @@ const Lists = (props) => {
   return (
     <div className=".col-xs-6">
       <ul>
-        React
         <FoodListEntry />
       </ul>
     </div>
