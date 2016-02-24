@@ -84,6 +84,16 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const ensureAuthenticated = (req, res, next) => {
   let retVal;
+  if (devMode) {
+    req.user = { 
+      dataValues: { 
+        firstName: 'Griffin',
+        lastName: 'Michl'
+      },
+      slackTeamId: 'T0AHB62V6',
+      teamName: 'T0AHB62V6'
+    };
+  }
   if (req.isAuthenticated() || devMode) {
     retVal = next();
   } else {
