@@ -48,7 +48,7 @@ var TrainsListEntry = function (_React$Component) {
                 'div',
                 { className: 'time' },
                 train.timeDeparting,
-                '---',
+                ' --- ',
                 train.timeBack
               )
             )
@@ -90,13 +90,21 @@ var TrainsListEntry = function (_React$Component) {
             React.createElement(
               'div',
               { className: 'conductor passenger' },
-              React.createElement('div', { className: 'slackPic' })
+              React.createElement(
+                'div',
+                { className: 'slackPic' },
+                train.conductor.firstName
+              )
             ),
             train.users.map(function (passenger) {
               return React.createElement(
                 'div',
                 { className: 'passenger' },
-                React.createElement('div', { className: 'slackPic' })
+                React.createElement(
+                  'div',
+                  { className: 'slackPic' },
+                  passenger.firstName
+                )
               );
             }),
             React.createElement(

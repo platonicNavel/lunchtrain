@@ -21,7 +21,7 @@ class TrainsListEntry extends React.Component {
           <div className="trainIconTimeWrapper">
             <div className="trainIcon"></div>
             <div className="timeWrapper">
-              <div className="time">{train.timeDeparting}---{train.timeBack}</div>
+              <div className="time">{train.timeDeparting} --- {train.timeBack}</div>
             </div>
           </div>
           <div className="trainDetailsWrapper">
@@ -33,11 +33,11 @@ class TrainsListEntry extends React.Component {
           </div>
           <div className="passengersWrapper">
             <div className="conductor passenger">
-              <div className="slackPic"></div>
+              <div className="slackPic">{train.conductor.firstName}</div>
             </div>
             {train.users.map( passenger =>
               <div className="passenger">
-                <div className="slackPic"></div>
+                <div className="slackPic">{passenger.firstName}</div>
               </div>
             )}
             <div className="joinWrapper">
