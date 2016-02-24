@@ -47,8 +47,8 @@ const allUsers = [
 ];
 
 const team1 = {
-  slackTeamId: '35t24h4h',
-  teamName: 'Awesome',
+  slackTeamId: 'T0AHB62V6',
+  teamName: 'Hack Reactor 38',
 };
 
 const team2 = {
