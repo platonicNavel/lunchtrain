@@ -155,13 +155,12 @@ app.get('/api/trains', ensureAuthenticated, (req, res) => {
     },
     ],
   }).then((trains) => {
-    console.log("THIS IS WHAT TRAINS LOOK LIKE", trains);
     const formattedTrains = trains.map((train) => {
       const formattedTrain = {
         id: train.dataValues.id,
         timeDeparting: train.dataValues.timeDeparting,
         timeDuration: train.dataValues.timeDuration,
-        // Use forEach for users, conductor and destination?
+        // Use forEach for users, conductor and 
         users: train.dataValues.Users,
         conductor: train.dataValues.Conductor,
         destination: train.dataValues.Destination,
