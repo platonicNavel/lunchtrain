@@ -11,7 +11,7 @@ const db = require('./db/index');
 
 const app = express();
 
-const devMode = true;
+const devMode = false;
 
 app.use(session({ secret: 'asdfqwertty' }));
 app.use(passport.initialize());
@@ -111,6 +111,8 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/api/destinations', ensureAuthenticated, (req, res) => {
+  // Rather than sending entire train's ORM, send flat rather than nested - array of objects
+  // Use map - destinations.map(destionation) => {destination.get(name, lat, lon)}
   const slackTeamId = req.user.slackTeamId;
   db.Destination.findAll({
     include: [{
@@ -119,11 +121,14 @@ app.get('/api/destinations', ensureAuthenticated, (req, res) => {
     },
     ],
   }).then((destinations) => {
-    res.send(destinations);
+    console.log(destinations);
+    const formattedDestinations = destinations.map(destination => destination.get());
+    res.send(formattedDestinations);
   });
 });
 
 app.get('/api/trains', ensureAuthenticated, (req, res) => {
+  // grab users and destination
   const slackTeamId = req.user.slackTeamId;
   db.Train.findAll({
     include: [{
