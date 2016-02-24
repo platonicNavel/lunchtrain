@@ -11,7 +11,7 @@ const db = require('./db/index');
 
 const app = express();
 
-const devMode = true;
+const devMode = false;
 
 app.use(session({ secret: 'asdfqwertty' }));
 app.use(passport.initialize());
@@ -119,14 +119,24 @@ app.get('/api/destinations', ensureAuthenticated, (req, res) => {
     },
     ],
   }).then((destinations) => {
-    res.send(destinations);
+    const formattedDestinations = destinations.map((destination) => {
+      const formattedDestination = {
+      name: destination.dataValues.name,
+      lat: destination.dataValues.lat,
+      long: destination.dataValues.long,
+      };
+      return formattedDestination;
+    });
+    res.send(formattedDestinations);
   });
 });
 
 app.get('/api/trains', ensureAuthenticated, (req, res) => {
+  // 
   const slackTeamId = req.user.slackTeamId;
   db.Train.findAll({
-    include: [{
+    include: [
+    {
       model: db.Team,
       where: { slackTeamId },
     },
@@ -134,11 +144,27 @@ app.get('/api/trains', ensureAuthenticated, (req, res) => {
       model: db.User,
     },
     {
+      model: db.User,
+      as: 'Conductor',
+    },
+    {
       model: db.Destination,
     },
     ],
   }).then((trains) => {
-    res.send(trains);
+    const formattedTrains = trains.map((train) => {
+      const formattedTrain = {
+        id: train.dataValues.id,
+        timeDeparting: train.dataValues.timeDeparting,
+        timeDuration: train.dataValues.timeDuration,
+        // Use forEach for users, conductor and 
+        users: train.dataValues.Users,
+        conductor: train.dataValues.Conductor,
+        destination: train.dataValues.Destination,
+      };
+      return formattedTrain;
+    });
+    res.send(formattedTrains);
   });
 });
 
