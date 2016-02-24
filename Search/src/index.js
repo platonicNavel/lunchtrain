@@ -1,5 +1,12 @@
 //google api in html head we need to put this 
 //<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4&libraries=places"></script>
+// <style>
+//     #map {
+//       width: 500px;
+//       height: 500px;
+//     }
+//   </style>
+// should do style to set width and height otherwise can't see the map
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
@@ -51,8 +58,13 @@ class App extends Component {
         for (var i = 0; i < results.length; i++) {
           createMarker(results[i]);
         }
+        this.setState({
+          list: results
+        })
+        console.log('after ', this.state.list)
       }
     }
+
 
     const createMarker = (place) => {
       var placeLoc = place.geometry.location;
@@ -72,8 +84,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Map onMapShow={this.getPlace}/>
-        <Lists />
+        <Map onMapShow={this.getPlace.bind(this)}/>
+        <Lists list={this.state.list}/>
       </div>
     )
   }
