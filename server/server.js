@@ -120,12 +120,12 @@ app.get('/api/destinations', ensureAuthenticated, (req, res) => {
     ],
   }).then((destinations) => {
     const formattedDestinations = destinations.map((destination) => {
-      const formattedObject = {
+      const formattedDestination = {
       name: destination.dataValues.name,
-      lat: destination.dataValues.name,
-      long: destination.dataValues.name,
+      lat: destination.dataValues.lat,
+      long: destination.dataValues.long,
       };
-      return formattedObject;
+      return formattedDestination;
     });
     res.send(formattedDestinations);
   });
@@ -135,7 +135,8 @@ app.get('/api/trains', ensureAuthenticated, (req, res) => {
   // 
   const slackTeamId = req.user.slackTeamId;
   db.Train.findAll({
-    include: [{
+    include: [
+    {
       model: db.Team,
       where: { slackTeamId },
     },
@@ -151,7 +152,20 @@ app.get('/api/trains', ensureAuthenticated, (req, res) => {
     },
     ],
   }).then((trains) => {
-    res.send(trains);
+    console.log("THIS IS WHAT TRAINS LOOK LIKE", trains);
+    const formattedTrains = trains.map((train) => {
+      const formattedTrain = {
+        id: train.dataValues.id,
+        timeDeparting: train.dataValues.timeDeparting,
+        timeDuration: train.dataValues.timeDuration,
+        // Use forEach for users, conductor and destination?
+        users: train.dataValues.Users,
+        conductor: train.dataValues.Conductor,
+        destination: train.dataValues.Destination,
+      };
+      return formattedTrain;
+    });
+    res.send(formattedTrains);
   });
 });
 
