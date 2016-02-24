@@ -9,7 +9,7 @@ class TrainsList extends React.Component {
       <div className="trainsList">
         {this.props.trains ?
           this.props.trains.map( train =>
-            <TrainsListEntry key={train.trainId} train={train} handleAccordionMap={this.props.handleAccordionMap} />) :
+            <TrainsListEntry key={train.trainId} train={train} handleAccordionMap={this.props.handleAccordionMap} joinTrain={this.props.joinTrain} />) :
             "Looks like there are no trains here!"
         }
       </div>

@@ -12,8 +12,14 @@ class TrainsListEntry extends React.Component {
   render() {
     let train = this.props.train;
     let handleAccordionMap = function(train) {
-      console.log('asdfadfsadfs', this.state)
+      console.log(this.state)
       this.props.handleAccordionMap(this);
+    }
+    let joinTrain = function(train) {
+      $(this.refs.train).on('click', (e) => {
+        e.stopPropagation()
+        this.props.joinTrain(this);
+      });
     }
     return (
       <div className="trainEntry" onClick={handleAccordionMap.bind(this, this.props.train)}>
@@ -40,7 +46,7 @@ class TrainsListEntry extends React.Component {
                 <div className="slackPic">{passenger.firstName}</div>
               </div>
             )}
-            <div className="joinWrapper">
+            <div className="joinWrapper" onClick={joinTrain.bind(this, this.props.train)} ref="train">
               <div className="joinArrow">»</div>
             </div>
           </div>

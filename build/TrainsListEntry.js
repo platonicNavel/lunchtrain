@@ -28,8 +28,16 @@ var TrainsListEntry = function (_React$Component) {
     value: function render() {
       var train = this.props.train;
       var handleAccordionMap = function handleAccordionMap(train) {
-        console.log('asdfadfsadfs', this.state);
+        console.log(this.state);
         this.props.handleAccordionMap(this);
+      };
+      var joinTrain = function joinTrain(train) {
+        var _this2 = this;
+
+        $(this.refs.train).on('click', function (e) {
+          e.stopPropagation();
+          _this2.props.joinTrain(_this2);
+        });
       };
       return React.createElement(
         'div',
@@ -109,7 +117,7 @@ var TrainsListEntry = function (_React$Component) {
             }),
             React.createElement(
               'div',
-              { className: 'joinWrapper' },
+              { className: 'joinWrapper', onClick: joinTrain.bind(this, this.props.train), ref: 'train' },
               React.createElement(
                 'div',
                 { className: 'joinArrow' },
