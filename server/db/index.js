@@ -42,8 +42,13 @@ Destination.belongsToMany(Team, { through: 'Teams_Destinations' });
 
 // still a bit sharky on these associations
 // may be worth going into further
+Train.belongsTo(Destination);
 Destination.hasMany(Train);
+
+
+Train.belongsTo(Team);
 Team.hasMany(Train);
+
 Train.belongsTo(User, { as: 'Conductor' });
 
 module.exports = {
