@@ -11,7 +11,7 @@ const db = require('./db/index');
 
 const app = express();
 
-const devMode = false;
+const devMode = true;
 
 app.use(session({ secret: 'asdfqwertty' }));
 app.use(passport.initialize());

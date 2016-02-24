@@ -5,6 +5,7 @@ const getCurrentTrains = (stationId, cb) => {
     dataType: 'json',
     success: (data) => {
       _.each(data, function(train) {
+        train.timeBack = train.timeDeparting+train.timeDuration;
         let td = new Date(train.timeDeparting*1000);
         train.timeDeparting = `${td.getHours()}:${td.getMinutes()}`
         let tb = new Date(train.timeBack*1000);

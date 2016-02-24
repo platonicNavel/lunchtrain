@@ -12,7 +12,8 @@ class TrainsListEntry extends React.Component {
   render() {
     let train = this.props.train;
     let handleAccordionMap = function(train) {
-      this.props.handleAccordionMap(train);
+      console.log('asdfadfsadfs', this.state)
+      this.props.handleAccordionMap(this);
     }
     return (
       <div className="trainEntry" onClick={handleAccordionMap.bind(this, this.props.train)}>
@@ -24,17 +25,17 @@ class TrainsListEntry extends React.Component {
             </div>
           </div>
           <div className="trainDetailsWrapper">
-            <h2 className="trainDest">{train.destinationName}</h2>
+            <h2 className="trainDest">{train.destination.name}</h2>
             <div className="trainRatingsWrapper">
               <div className="likes col-xs-6"><div>♥3</div></div>
               <div className="price col-xs-6"><div>$$</div></div>
             </div>
           </div>
           <div className="passengersWrapper">
-              <div className="conductor passenger">
-                <div className="slackPic"></div>
-              </div>
-              {train.passengers.map( passenger =>
+            <div className="conductor passenger">
+              <div className="slackPic"></div>
+            </div>
+            {train.users.map( passenger =>
               <div className="passenger">
                 <div className="slackPic"></div>
               </div>
