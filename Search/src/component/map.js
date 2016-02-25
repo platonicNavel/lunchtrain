@@ -7,7 +7,6 @@ const Map = (props) => {
   }
   return (
     <div id="map">
-    please
       {mapMarkers()}
     </div>
   )

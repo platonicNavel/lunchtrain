@@ -6,7 +6,7 @@ const localFoodListEntry = ({item}) => {
   return (
     <li>
       <button type="button" className="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-        {name};
+        {name}
       </button>
     </li>
   )
