@@ -26,7 +26,15 @@ class App extends React.Component {
   }
 
   joinTrain(train) {
-    console.log('join train')
+    console.log('join train, id = ', train.props.train.id);
+    $.ajax({
+      url: '/trains',
+      type: 'POST',
+      data: {'id': train.props.train.id},
+      success: (data) => {
+        console.log('POST successful')
+      }
+    })
   }
 
   getTeamTrains() {
