@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -24,13 +24,25 @@ var TrainsListEntry = function (_React$Component) {
   }
 
   _createClass(TrainsListEntry, [{
-    key: 'render',
+    key: "handleAccordionMap",
+    value: function handleAccordionMap(e) {
+      console.log(this.state);
+      if (this.state.open) {
+        this.setState({
+          open: false,
+          accordionClass: "details"
+        });
+      } else {
+        this.setState({
+          open: true,
+          accordionClass: "details open"
+        });
+      }
+    }
+  }, {
+    key: "render",
     value: function render() {
       var train = this.props.train;
-      var handleAccordionMap = function handleAccordionMap(train) {
-        console.log(this.state);
-        this.props.handleAccordionMap(this);
-      };
       var joinTrain = function joinTrain(train) {
         var _this2 = this;
 
@@ -40,88 +52,88 @@ var TrainsListEntry = function (_React$Component) {
         });
       };
       return React.createElement(
-        'div',
-        { className: 'trainEntry', onClick: handleAccordionMap.bind(this, this.props.train) },
+        "div",
+        { className: "trainEntry", onClick: this.handleAccordionMap.bind(this) },
         React.createElement(
-          'div',
-          { className: 'trainContainer' },
+          "div",
+          { className: "trainContainer" },
           React.createElement(
-            'div',
-            { className: 'trainIconTimeWrapper' },
-            React.createElement('div', { className: 'trainIcon' }),
+            "div",
+            { className: "trainIconTimeWrapper" },
+            React.createElement("div", { className: "trainIcon" }),
             React.createElement(
-              'div',
-              { className: 'timeWrapper' },
+              "div",
+              { className: "timeWrapper" },
               React.createElement(
-                'div',
-                { className: 'time' },
+                "div",
+                { className: "time" },
                 train.timeDeparting,
-                ' --- ',
+                " --- ",
                 train.timeBack
               )
             )
           ),
           React.createElement(
-            'div',
-            { className: 'trainDetailsWrapper' },
+            "div",
+            { className: "trainDetailsWrapper" },
             React.createElement(
-              'h2',
-              { className: 'trainDest' },
+              "h2",
+              { className: "trainDest" },
               train.destination.name
             ),
             React.createElement(
-              'div',
-              { className: 'trainRatingsWrapper' },
+              "div",
+              { className: "trainRatingsWrapper" },
               React.createElement(
-                'div',
-                { className: 'likes col-xs-6' },
+                "div",
+                { className: "likes col-xs-6" },
                 React.createElement(
-                  'div',
+                  "div",
                   null,
-                  '♥3'
+                  "♥3"
                 )
               ),
               React.createElement(
-                'div',
-                { className: 'price col-xs-6' },
+                "div",
+                { className: "price col-xs-6" },
                 React.createElement(
-                  'div',
+                  "div",
                   null,
-                  '$$'
+                  "$$"
                 )
               )
             )
           ),
           React.createElement(
-            'div',
-            { className: 'passengersWrapper' },
+            "div",
+            { className: "passengersWrapper" },
             React.createElement(
-              'div',
-              { className: 'conductor passenger' },
+              "div",
+              { className: "conductor passenger" },
               React.createElement(
-                'div',
-                { className: 'slackPic' },
+                "div",
+                { className: "slackPic" },
                 train.conductor.firstName
               )
             ),
             train.users.map(function (passenger) {
               return React.createElement(
-                'div',
-                { className: 'passenger' },
+                "div",
+                { className: "passenger" },
                 React.createElement(
-                  'div',
-                  { className: 'slackPic' },
+                  "div",
+                  { className: "slackPic" },
                   passenger.firstName
                 )
               );
             }),
             React.createElement(
-              'div',
-              { className: 'joinWrapper', onClick: joinTrain.bind(this, this.props.train), ref: 'train' },
+              "div",
+              { className: "joinWrapper", onClick: joinTrain.bind(this), ref: "train" },
               React.createElement(
-                'div',
-                { className: 'joinArrow' },
-                '»'
+                "div",
+                { className: "joinArrow" },
+                "»"
               )
             )
           )
