@@ -1,6 +1,6 @@
-iimport React from 'react';
+import React from 'react';
 
-const FoodListEntry = ({item}) => {
+const localFoodListEntry = ({item}) => {
   const name = item.name;
   
   return (
@@ -12,5 +12,5 @@ const FoodListEntry = ({item}) => {
   )
 }
 
-export default FoodListEntry
+export default localFoodListEntry
 
