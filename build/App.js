@@ -42,7 +42,15 @@ var App = function (_React$Component) {
   }, {
     key: "joinTrain",
     value: function joinTrain(train) {
-      console.log('join train');
+      console.log('join train, id = ', train.props.train.id);
+      $.ajax({
+        url: '/trains',
+        type: 'POST',
+        data: { 'id': train.props.train.id },
+        success: function success(data) {
+          console.log('POST successful');
+        }
+      });
     }
   }, {
     key: "getTeamTrains",
