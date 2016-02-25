@@ -14,7 +14,7 @@ const CLIENT_SECRET = '63a441c7c9d19dcd6faa789d27a22d3a';
 
 const app = express();
 
-const devMode = true;
+const devMode = false;
 
 app.use(session({ secret: 'asdfqwertty' }));
 app.use(passport.initialize());
@@ -221,14 +221,15 @@ app.post('/destinations', (req, res) => {
 });
 
 app.post('/trains', (req, res) => {
-  console.log(req.body, req.user);
   const data = req.body;
   const user = req.user;
+  console.log(data, user.slackId);
   db.User.findOne({
-    slackId: user.slackId,
+    where: { slackId: user.slackId },
   }).then((dbUser) => {
+    console.log(dbUser);
     db.Train.findOne({
-      id: data.id,
+      where: { id: data.id },
     }).then(train => dbUser.addTrain(train)).then(() => {
       res.send(200, 'Passenger added to train');
     });
