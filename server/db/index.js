@@ -32,6 +32,7 @@ const User = sequelize.define('User', {
   slackId: Sequelize.STRING,
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
+  token: Sequelize.STRING,
 });
 
 const Team = sequelize.define('Team', {
@@ -52,6 +53,11 @@ const Destination = sequelize.define('Destination', {
 const Train = sequelize.define('Train', {
   timeDeparting: Sequelize.INTEGER,
   timeDuration: Sequelize.INTEGER,
+  alerted: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  }
 });
 
 User.belongsToMany(Team, { through: 'Users_Teams' });
