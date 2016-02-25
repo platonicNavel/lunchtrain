@@ -1,11 +1,27 @@
-// need to refactor the map. I didn't put anything on return.
-// this will be show the 20 markers in google map
-
 import React from 'react';
+//import ReactDOM from 'react-dom';
+
+// class Map extends Component {
+//   constructor(props) {
+//     super(props)
+//   }
+
+//   mapMarkers() {
+//     this.props.onMapShow()
+//   }
+
+//   render(){
+//     return (
+//       <div id="map">
+//         { this.mapMarkers() }
+//       </div>
+//     )
+//   }
+// }
 
 
 const Map = (props) => {
-  const mapMarkers = () => {
+ const mapMarkers = () => {
     props.onMapShow()
   }
   return (
@@ -13,8 +29,7 @@ const Map = (props) => {
       {mapMarkers()}
     </div>
   )
-
 }
 
-export default Map
 
+export default Map
