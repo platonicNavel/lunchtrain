@@ -27,12 +27,7 @@ class TrainsListEntry extends React.Component {
 
   render() {
     let train = this.props.train;
-    let joinTrain = function(train) {
-      $(this.refs.train).on('click', (e) => {
-        e.stopPropagation()
-        this.props.joinTrain(this);
-      });
-    }
+    let joinTrain = this.props.joinTrain;
     return (
       <div className="trainEntry" onClick={this.handleAccordionMap.bind(this)}>
         <div className="trainContainer">
@@ -58,7 +53,7 @@ class TrainsListEntry extends React.Component {
                 <div className="slackPic">{passenger.firstName}</div>
               </div>
             )}
-            <div className="joinWrapper" onClick={joinTrain.bind(this)} ref="train">
+            <div className="joinWrapper" onClick={(e) => joinTrain(e, train)} ref="train">
               <div className="joinArrow">»</div>
             </div>
           </div>

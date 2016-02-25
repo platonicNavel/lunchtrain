@@ -24,12 +24,13 @@ var App = function (_React$Component) {
 
   _createClass(App, [{
     key: 'joinTrain',
-    value: function joinTrain(train) {
-      console.log('join train, id = ', train.props.train.id);
+    value: function joinTrain(e, train) {
+      e.stopPropagation();
+      console.log('join train, id = ', train.id);
       $.ajax({
         url: '/trains',
         type: 'POST',
-        data: { 'id': train.props.train.id },
+        data: { 'id': train.id },
         success: function success(data) {
           console.log('POST successful');
         }
