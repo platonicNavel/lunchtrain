@@ -2,34 +2,13 @@ class TrainsListEntry extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      open: false,
-      accordionClass: 'details'
-    };
-  }
-
-  handleAccordionMap(e) {
-    console.log(this.state)
-    if(this.state.open) {
-      this.setState({
-        open: false,
-        accordionClass: "details"
-      });
-    }
-    else{
-      this.setState({
-        open: true,
-        accordionClass: "details open"
-      });
-    }
   }
 
   render() {
     let train = this.props.train;
     let joinTrain = this.props.joinTrain;
     return (
-      <div className="trainEntry" onClick={this.handleAccordionMap.bind(this)}>
+      <div className="trainEntry">
         <div className="trainContainer">
           <div className="trainIconTimeWrapper">
             <div className="trainIcon"></div>
@@ -58,7 +37,6 @@ class TrainsListEntry extends React.Component {
             </div>
           </div>
         </div>
-        <TrainsListEntryDropdown train={train} open={this.state.open} accordionClass={this.state.accordionClass}></TrainsListEntryDropdown>
       </div>
     )
   }

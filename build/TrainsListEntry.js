@@ -14,39 +14,17 @@ var TrainsListEntry = function (_React$Component) {
   function TrainsListEntry(props) {
     _classCallCheck(this, TrainsListEntry);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TrainsListEntry).call(this, props));
-
-    _this.state = {
-      open: false,
-      accordionClass: 'details'
-    };
-    return _this;
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(TrainsListEntry).call(this, props));
   }
 
   _createClass(TrainsListEntry, [{
-    key: "handleAccordionMap",
-    value: function handleAccordionMap(e) {
-      console.log(this.state);
-      if (this.state.open) {
-        this.setState({
-          open: false,
-          accordionClass: "details"
-        });
-      } else {
-        this.setState({
-          open: true,
-          accordionClass: "details open"
-        });
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       var train = this.props.train;
       var joinTrain = this.props.joinTrain;
       return React.createElement(
         "div",
-        { className: "trainEntry", onClick: this.handleAccordionMap.bind(this) },
+        { className: "trainEntry" },
         React.createElement(
           "div",
           { className: "trainContainer" },
@@ -132,8 +110,7 @@ var TrainsListEntry = function (_React$Component) {
               )
             )
           )
-        ),
-        React.createElement(TrainsListEntryDropdown, { train: train, open: this.state.open, accordionClass: this.state.accordionClass })
+        )
       );
     }
   }]);
