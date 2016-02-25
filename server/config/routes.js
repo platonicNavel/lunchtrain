@@ -21,9 +21,9 @@ module.exports = function (app, express) {
 
   app.get('/auth/slack/callback', auth.slackAuthCallback, utils.indexRedirect);
 
-  app.post('/destinations', utils.addDestination);
+  app.post('/destinations', utils.createTrain);
 
-  app.post('/trains', utils.addTrain);
+  app.post('/trains', utils.boardTrain);
 
   app.get('/*', utils.serveNotFound);
 

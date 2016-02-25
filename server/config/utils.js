@@ -1,6 +1,7 @@
 const path = require('path');
 const db = require('../db/index');
 const _ = require('underscore');
+const slackUtils = require('./slack');
 
 function serveIndex (req, res) {
   res.sendFile(path.join(__dirname, '../../views/index.html'));
@@ -86,7 +87,7 @@ function indexRedirect (req, res) {
   res.redirect('/');
 }
 
-function addDestination (req, res) {
+function createTrain (req, res) {
   const user = req.user;
   const data = req.body;
 
@@ -105,6 +106,7 @@ function addDestination (req, res) {
           visits: data.visits,
           likes: data.likes,
         }).spread(destination => destination.addTrain(train)).then(() => {
+          slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting)
           res.send(200, 'Train created');
         });
       });
@@ -112,7 +114,7 @@ function addDestination (req, res) {
   });
 }
 
-function addTrain (req, res) {
+function boardTrain (req, res) {
   const data = req.body;
   const user = req.user;
   db.User.findOne({
@@ -139,7 +141,7 @@ module.exports = {
   serveTrains,
   serveLogout,
   indexRedirect,
-  addDestination,
-  addTrain,
+  createTrain,
+  boardTrain,
   serveNotFound,
 };

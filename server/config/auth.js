@@ -39,8 +39,10 @@ passport.use(new SlackStrategy({
     const slackTeamId = profile._json.team_id;
     const teamName = profile._json.team;
 
-    db.User.findOrCreate({ where: { slackId, firstName, lastName } })
-      .spread((user, userCreated) => {
+    db.User.findOrCreate({
+      where: { slackId, firstName, lastName },
+      defaults: { token: accessToken },
+    }).spread((user, userCreated) => {
         const userToSerialize = user;
         db.Team.findOrCreate({ where: { slackTeamId, teamName } }).spread((team, teamCreated) => {
           // TODO: ADDRESS EDGE CASE
