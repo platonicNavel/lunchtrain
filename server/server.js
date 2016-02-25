@@ -220,11 +220,13 @@ app.post('/destinations', (req, res) => {
 app.post('/trains', (req, res) => {
   const data = req.body;
   const user = req.user;
+  console.log(data, user.slackId);
   db.User.findOne({
-    slackId: user.slackId,
+    where: { slackId: user.slackId },
   }).then((dbUser) => {
+    console.log(dbUser);
     db.Train.findOne({
-      id: data.id,
+      where: { id: data.id },
     }).then(train => dbUser.addTrain(train)).then(() => {
       res.send(200, 'Passenger added to train');
     });

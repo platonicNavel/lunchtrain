@@ -9,11 +9,36 @@ class App extends React.Component {
   }
 
   handleAccordionMap(train) {
-    console.log(train, 'CHOO CHOOOOO!')
+    console.log(train, 'CHOO CHOOOOO!', this);
+
+    if(train.state.open) {
+      train.setState({
+        open: false,
+        accordionClass: "details"
+      });
+    }
+    else{
+      train.setState({
+        open: true,
+        accordionClass: "details open"
+      });
+    }
   }
 
-  getTeamTrains(teamId) {
-    getCurrentTrains(teamId, (trains) => {
+  joinTrain(train) {
+    console.log('join train, id = ', train.props.train.id);
+    $.ajax({
+      url: '/trains',
+      type: 'POST',
+      data: {'id': train.props.train.id},
+      success: (data) => {
+        console.log('POST successful')
+      }
+    })
+  }
+
+  getTeamTrains() {
+    getCurrentTrains((trains) => {
       this.setState({
         trains: trains
       });
@@ -21,14 +46,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getTeamTrains(1)
+    this.getTeamTrains();
   }
 
   render() {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap.bind(this)}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap.bind(this)} joinTrain={this.joinTrain.bind(this)}></TrainsList>
         </div>
       </div>
     )

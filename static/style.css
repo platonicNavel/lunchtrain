@@ -34,7 +34,7 @@ button {
 }
 
 .trainEntry {
-  height: 20vh;
+  height: 15.8em;
   background-color: red;
   margin: 10px;
 }
@@ -131,4 +131,40 @@ button {
   background-color: black;
   width: 50px;
   height: 100%;
+  color: white;
+}
+
+.joinWrapper {
+  border: 1px solid black;
+  width: 50px;
+  height: 55px;
+  float: right;
+  background-color: #808080;
+  cursor: pointer !important;
+}
+.joinWrapper:hover {
+  background-color: #0059f2;
+}
+.joinWrapper:active>.joinArrow {
+  color: white !important;
+}
+.joinArrow {
+  position: relative;
+  margin-top: -20px;
+  text-align: center;
+  font-size: 60px !important;
+}
+
+  /*---TrainsListEntryDropdown---*/
+
+.details.open .trainEntryDropdownWrapper {
+  height: 10em;
+  background-color: blue;
+}
+
+.trainEntryDropdownWrapper {
+  height: 0;
+  overflow: hidden;
+  transition: all .2s ease-in;
+  background-color: blue;
 }

@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -23,36 +23,61 @@ var App = function (_React$Component) {
   }
 
   _createClass(App, [{
-    key: 'handleAccordionMap',
+    key: "handleAccordionMap",
     value: function handleAccordionMap(train) {
-      console.log(train, 'CHOO CHOOOOO!');
+      console.log(train, 'CHOO CHOOOOO!', this);
+
+      if (train.state.open) {
+        train.setState({
+          open: false,
+          accordionClass: "details"
+        });
+      } else {
+        train.setState({
+          open: true,
+          accordionClass: "details open"
+        });
+      }
     }
   }, {
-    key: 'getTeamTrains',
-    value: function getTeamTrains(teamId) {
+    key: "joinTrain",
+    value: function joinTrain(train) {
+      console.log('join train, id = ', train.props.train.id);
+      $.ajax({
+        url: '/trains',
+        type: 'POST',
+        data: { 'id': train.props.train.id },
+        success: function success(data) {
+          console.log('POST successful');
+        }
+      });
+    }
+  }, {
+    key: "getTeamTrains",
+    value: function getTeamTrains() {
       var _this2 = this;
 
-      getCurrentTrains(teamId, function (trains) {
+      getCurrentTrains(function (trains) {
         _this2.setState({
           trains: trains
         });
       });
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
-      this.getTeamTrains(1);
+      this.getTeamTrains();
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       return React.createElement(
-        'div',
+        "div",
         null,
         React.createElement(
-          'div',
-          { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap.bind(this) })
+          "div",
+          { className: "trainsView container-fluid" },
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap.bind(this), joinTrain: this.joinTrain.bind(this) })
         )
       );
     }
