@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
     },
     eslint: {
-      src: ['server/**/*.js', 'src/**/*.js'],
+      target: ['server/**/*.js', 'src/**/*.js'],
     },
     shell: {
       local: {
@@ -38,21 +38,55 @@ module.exports = function(grunt) {
       },
     },
     clean: {
-      build: ['dist/build.js'],
+      build: ['build/'],
       deploy: [],
     },
     babel: {
-      options
-    }
+      options: {
+        presets: ['es2015', 'react'],
+      },
+      dist: {
+        files: [
+          {
+            expand: true,
+            cwd: 'src/',
+            src: ['**/*.js'],
+            dest: 'build/'
+          },
+        ]
+      },
+    },
   });
 
+  // TODO: minify css
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-eslint');
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-babel');
 
+
+  grunt.registerTask('test', [
+    'eslint',
+    'mochaTest',
+  ]);
+
+  // TODO: deal with combining modules
+  grunt.registerTask('build', [
+    'clean:build',
+    'babel',
+  ]);
+
+
+  grunt.registerTask('deploy', [
+    'test',
+    'build',
+    'upload',
+  ]);
+
+
 };
+
