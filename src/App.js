@@ -8,29 +8,13 @@ class App extends React.Component {
     };
   }
 
-  handleAccordionMap(train) {
-    console.log(train, 'CHOO CHOOOOO!', this);
-
-    if(train.state.open) {
-      train.setState({
-        open: false,
-        accordionClass: "details"
-      });
-    }
-    else{
-      train.setState({
-        open: true,
-        accordionClass: "details open"
-      });
-    }
-  }
-
-  joinTrain(train) {
-    console.log('join train, id = ', train.props.train.id);
+  joinTrain(e, train) {
+    e.stopPropagation();
+    console.log('join train, id = ', train.id);
     $.ajax({
       url: '/trains',
       type: 'POST',
-      data: {'id': train.props.train.id},
+      data: {'id': train.id},
       success: (data) => {
         console.log('POST successful')
       }
@@ -53,7 +37,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap.bind(this)} joinTrain={this.joinTrain.bind(this)}></TrainsList>
+          <TrainsList trains={this.state.trains} joinTrain={this.joinTrain.bind(this)}></TrainsList>
         </div>
       </div>
     )
