@@ -12,6 +12,9 @@ import ReactDOM from 'react-dom';
 
 import Map from './component/map';
 import Lists from './component/lists';
+import localMap from './component/localMap';
+import localLists from './component/localLists';
+
 
 let lat, lng;
 let map;
@@ -21,20 +24,38 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      list: []
-    }
-    //this.getPlace();
+      list: [],
+      recommend: false
+    } 
+    console.log('before , ', this.state.list)
+    console.log('before , ', this.state.recommend)
+    this.navi();
   }
   // set the default HR lat lng, otherwise, users locationcheck
   // resultLocation is google place API default is restaurant and half mile radius
-  getPlace() {
+  navi() {
     navigator.geolocation.getCurrentPosition(function(position) {
       lat = position.coords.latitude
       lng = position.coords.longitude;
     });
-    if( lat === undefined ) { lat = 37.783756 }
-    if( lng === undefined ) { lng = -122.40921549999999 }
+  } 
+
+  onClick() {
+    this.setState({
+      recommend: true
+    })
+  }
+
+  onRevese() {
+    this.setState({
+      recommend: false
+    })
+  }
+
+  getPlace() {
     const initMap = () => {
+      if( lat === undefined ) { lat = 37.783756 }
+      if( lng === undefined ) { lng = -122.40921549999999 }
       let city = {lat: lat, lng: lng};
 
       map = new google.maps.Map(document.getElementById("map"), {
@@ -51,8 +72,7 @@ class App extends Component {
         types: ['restaurant','cafe']
       }, callback);
     }
-
-
+    
     const callback = (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         for (var i = 0; i < results.length; i++) {
@@ -64,7 +84,6 @@ class App extends Component {
         console.log('after ', this.state.list)
       }
     }
-
 
     const createMarker = (place) => {
       var placeLoc = place.geometry.location;
@@ -80,14 +99,79 @@ class App extends Component {
     }
     google.maps.event.addDomListener(window, 'load', initMap);
   }
+  
+  locatGetPlace() {
+    $.ajax({
+      url: '/api/trains',
+      type: 'GET',
+      datatype: 'json',
+      success: function(data) {
+        this.setState({
+          list: data
+        })
+        this.locations();
+        console.log('after local ', this.state.list);
+      },
+      error: function(data) {
+        console.error(data);
+      }
+    })
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: new google.maps.LatLng(-33.92, 151.25),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    const locations = () => {
+      const lists = this.state.list;
+      for(var i = 0 ; i < lists.length; i ++ ) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
+          map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(lists[i]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+    }
+  }
 
   render() {
-    return (
-      <div>
-        <Map onMapShow={this.getPlace.bind(this)}/>
-        <Lists list={this.state.list}/>
-      </div>
-    )
+    if( !this.state.recommend ) {
+      return(
+        <div>
+          <div>
+            <button onClick={this.onRevese.bind(this)}>Google</button>
+            <button onClick={this.onClick.bind(this)}>Recommendation</button>
+          </div>
+          <div>
+            <Map onMapShow={this.getPlace.bind(this)}/>
+            <Lists list={this.state.list}/>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div>
+            <button onClick={this.onRevese.bind(this)}>Google</button>
+            <button onClick={this.onClick.bind(this)}>Recommendation</button>
+          </div>
+          <div>
+            <localMap onMapShow={this.locatGetPlace.bind(this)}/>
+            <localLists list={this.state.list}/>
+          </div>
+        </div>
+      )
+    }
   }
 }
 
