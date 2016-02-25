@@ -141,7 +141,7 @@ module.exports = {
   serveTrains,
   serveLogout,
   indexRedirect,
-  addDestination,
-  addTrain,
+  createTrain,
+  boardTrain,
   serveNotFound,
 };
