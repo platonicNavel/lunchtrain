@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SlackStrategy = require('passport-slack').Strategy;
 const slackUtils = require('./utils/slack');
+const _ = require('underscore');
 
 const db = require('./db/index');
 
@@ -157,10 +158,12 @@ app.get('/api/trains', ensureAuthenticated, (req, res) => {
         id: train.dataValues.id,
         timeDeparting: train.dataValues.timeDeparting,
         timeDuration: train.dataValues.timeDuration,
-        // Use forEach for users, conductor and 
-        users: train.dataValues.Users,
+        // Use forEach for users, conductor and destination
+        users: train.dataValues.Users.map((user) => {
+          return _.pick(user, 'id', 'slackId', 'firstName', 'lastName');
+        }),
         conductor: train.dataValues.Conductor,
-        destination: train.dataValues.Destination,
+        destination: _.omit(train.dataValues.Destination.dataValues, 'createdAt', 'updatedAt'),
       };
       return formattedTrain;
     });
@@ -231,6 +234,10 @@ app.post('/trains', (req, res) => {
       res.send(200, 'Passenger added to train');
     });
   });
+});
+
+app.get('/*', (req, res) => {
+  res.send(404, "Page does not exist!");
 });
 
 // force should be false/ommitted in production code

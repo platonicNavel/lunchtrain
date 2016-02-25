@@ -48,6 +48,7 @@
     "passport-slack": "0.0.4",
     "request": "^2.69.0",
     "sequelize": "^3.19.3",
-    "sqlite3": "^3.1.1"
+    "sqlite3": "^3.1.1",
+    "underscore": "^1.8.3"
   }
 }
