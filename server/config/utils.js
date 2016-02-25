@@ -70,11 +70,11 @@ function getTrains (req, res) {
 }
 
 function serveDestinations (req, res) {
-  res.render('destinations');
+  res.sendFile(path.join(__dirname, '../../views/destinations.html'));
 }
 
 function serveTrains (req, res) {
-  res.render('trains');
+  res.sendFile(path.join(__dirname, '../../views/trains.html'));
 }
 
 function serveLogout (req, res) {
