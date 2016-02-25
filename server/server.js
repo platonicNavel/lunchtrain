@@ -6,7 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SlackStrategy = require('passport-slack').Strategy;
 const slackUtils = require('./utils/slack');
-const underscore = require('underscore');
+const _ = require('underscore');
 
 const db = require('./db/index');
 
@@ -166,9 +166,7 @@ app.get('/api/trains', ensureAuthenticated, (req, res) => {
           return _.pick(user, 'id', 'slackId', 'firstName', 'lastName');
         }),
         conductor: train.dataValues.Conductor,
-        destination: train.dataValues.Destination.map((destination) => {
-          return _.omit(destination, 'createdAt', 'updatedAt');
-        }),
+        destination: _.omit(train.dataValues.Destination.dataValues, 'createdAt', 'updatedAt'),
       };
       return formattedTrain;
     });
