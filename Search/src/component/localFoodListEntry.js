@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FoodListEntry = ({item}) => {
+const localFoodListEntry = ({item}) => {
   const name = item.name;
   
   return (
@@ -12,7 +12,5 @@ const FoodListEntry = ({item}) => {
   )
 }
 
-export default FoodListEntry
-// <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-//   {destinationName};
-// </button>
+export default localFoodListEntry
+

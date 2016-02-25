@@ -88,22 +88,39 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 const ensureAuthenticated = (req, res, next) => {
   let retVal;
+<<<<<<< HEAD
   if (devMode) {
     req.user = { 
       dataValues: { 
         firstName: 'Griffin',
         lastName: 'Michl'
       },
+=======
+  console.log('req.user', req.user);
+  if (devMode) {
+    req.user = { 
+      dataValues: { 
+        id: 7,
+        slackId: 'U0DMN4P9V',
+        firstName: 'Griffin',
+        lastName: 'Michl'
+      },
+      accessToken: 'xoxp-10589206992-13736159335-22437879906-aee58013cd',
+>>>>>>> 87f32d625a3da69b835f1f019c8d551265c0660c
       slackTeamId: 'T0AHB62V6',
       teamName: 'T0AHB62V6'
     };
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 87f32d625a3da69b835f1f019c8d551265c0660c
   if (req.isAuthenticated() || devMode) {
     retVal = next();
   } else {
     retVal = res.redirect('/login');
   }
-  return retVal;
+  return retVal; // is this even necessary?
 };
 
 app.get('/', ensureAuthenticated, (req, res) => {

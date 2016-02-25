@@ -1,8 +1,7 @@
 import React from 'react';
 
-
-const Map = (props) => {
-  const mapMarkers = () => {
+const localMap = (props) => {
+ const mapMarkers = () => {
     props.onMapShow()
   }
   return (
@@ -10,7 +9,7 @@ const Map = (props) => {
       {mapMarkers()}
     </div>
   )
-
 }
 
-export default Map
+
+export default localMap
