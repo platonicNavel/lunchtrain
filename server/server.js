@@ -6,6 +6,7 @@ const session = require('express-session');
 const passport = require('passport');
 const SlackStrategy = require('passport-slack').Strategy;
 const slackUtils = require('./utils/slack');
+const underscore = require('underscore');
 
 const db = require('./db/index');
 
