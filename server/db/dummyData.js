@@ -64,8 +64,8 @@ const allTeams = [
 const destination1 = {
   googleId: '3bfsdh5g3earge',
   name: 'Flying Falafel',
-  lat: '64.546363',
-  long: '54.556543',
+  lat: '37.774929',
+  long: '-122.419416',
   visits: 5,
   likes: 2,
 };
@@ -73,8 +73,8 @@ const destination1 = {
 const destination2 = {
   googleId: '594h88gh3984',
   name: 'Saigon Sammy',
-  lat: '64.65363',
-  long: '54.226543',
+  lat: '37.783697',
+  long: '-122.408966',
   visits: 2,
   likes: 1,
 };
