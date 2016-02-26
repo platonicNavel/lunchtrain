@@ -24,12 +24,26 @@ var TrainsListEntryDropdown = function (_React$Component) {
   }
 
   _createClass(TrainsListEntryDropdown, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var train = this.props.train;
+      var map = this.props.renderMap(train.destination.lat, train.destination.long, train.id);
+    }
+  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         { className: this.state.accordionClass, ref: "dropdown" },
-        React.createElement("div", { className: "trainEntryDropdownWrapper" })
+        React.createElement(
+          "div",
+          { className: "trainEntryDropdownWrapper" },
+          React.createElement(
+            "div",
+            { id: 'map' + this.props.train.id, className: "gmap" },
+            this.map
+          )
+        )
       );
     }
   }]);

@@ -30,7 +30,7 @@ var TrainsList = function (_React$Component) {
             "div",
             { "class": "trainAndDropdown", onClick: _this2.props.handleAccordionMap.bind(_this2, train.id) },
             React.createElement(TrainsListEntry, { key: train.id, train: train, joinTrain: _this2.props.joinTrain }),
-            React.createElement(TrainsListEntryDropdown, { train: train, ref: 'dropdown' + train.id })
+            React.createElement(TrainsListEntryDropdown, { train: train, ref: 'dropdown' + train.id, renderMap: _this2.props.renderMap })
           );
         }) : "Looks like there are no trains here!"
       );
