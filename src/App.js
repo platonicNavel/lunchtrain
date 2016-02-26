@@ -46,6 +46,14 @@ class App extends React.Component {
     });
   }
 
+  renderMap(lat, lon, id) {
+    console.log(lat, lon)
+    return new google.maps.Map(document.getElementById(`map${id}`), {
+      center: {lat: +lat, lng: +lon},
+      zoom: 15
+    });
+  }
+
   componentDidMount() {
     this.getTeamTrains();
   }
@@ -54,7 +62,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)}></TrainsList>
         </div>
       </div>
     )
