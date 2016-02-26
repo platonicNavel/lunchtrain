@@ -59,7 +59,7 @@ function getTrains (req, res) {
         timeDuration: train.dataValues.timeDuration,
         // Use forEach for users, conductor and destination
         users: train.dataValues.Users.map((user) => {
-          return _.pick(user, 'id', 'slackId', 'firstName', 'lastName');
+          return _.pick(user, 'id', 'slackId', 'firstName', 'lastName', 'gravatar');
         }),
         conductor: train.dataValues.Conductor,
         destination: _.omit(train.dataValues.Destination.dataValues, 'createdAt', 'updatedAt'),

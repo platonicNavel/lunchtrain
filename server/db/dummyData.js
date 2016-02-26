@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 const user1 = {
   slackId: 't353h4h',
   firstName: 'Sally',
-  lastName: "Mae"
+  lastName: "Mae",
 };
 
 const user2 = {
