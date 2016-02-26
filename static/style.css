@@ -178,3 +178,7 @@ button {
   top: -23px;
   z-index: 1;
 }
+
+.gmap {
+  height: 500px;
+}

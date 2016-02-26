@@ -11,7 +11,7 @@ class TrainsList extends React.Component {
           this.props.trains.map( train =>
             <div class="trainAndDropdown" onClick={this.props.handleAccordionMap.bind(this, train.id)}>
               <TrainsListEntry key={train.id} train={train} joinTrain={this.props.joinTrain}/>
-              <TrainsListEntryDropdown train={train} ref={'dropdown'+train.id}/>
+              <TrainsListEntryDropdown train={train} ref={'dropdown'+train.id} renderMap={this.props.renderMap}/>
             </div>
             ) :
           "Looks like there are no trains here!"
