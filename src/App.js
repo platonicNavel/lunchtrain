@@ -21,6 +21,23 @@ class App extends React.Component {
     })
   }
 
+  handleAccordionMap(id) {
+    console.log(this.refs['dropdown'+id])
+    let clickedTrain = this.refs['dropdown'+id];
+    if(clickedTrain.state.open) {
+      clickedTrain.setState({
+        open: false,
+        accordionClass: "details"
+      });
+    }
+    else{
+      clickedTrain.setState({
+        open: true,
+        accordionClass: "details open"
+      });
+    }
+  }
+
   getTeamTrains() {
     getCurrentTrains((trains) => {
       this.setState({
@@ -37,7 +54,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} joinTrain={this.joinTrain.bind(this)}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)}></TrainsList>
         </div>
       </div>
     )
