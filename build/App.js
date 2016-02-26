@@ -17,12 +17,27 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
 
     _this.state = {
-      trains: []
+      trains: [],
+      currLat: null,
+      currLon: null
     };
     return _this;
   }
 
   _createClass(App, [{
+    key: 'getCurrentLocation',
+    value: function getCurrentLocation() {
+      var _this2 = this;
+
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        _this2.setState({
+          currLat: +pos.coords.latitude,
+          currLon: +pos.coords.longitude
+        });
+        console.log(_this2.state);
+      });
+    }
+  }, {
     key: 'joinTrain',
     value: function joinTrain(e, train) {
       e.stopPropagation();
@@ -56,10 +71,10 @@ var App = function (_React$Component) {
   }, {
     key: 'getTeamTrains',
     value: function getTeamTrains() {
-      var _this2 = this;
+      var _this3 = this;
 
       getCurrentTrains(function (trains) {
-        _this2.setState({
+        _this3.setState({
           trains: trains
         });
       });
@@ -77,6 +92,7 @@ var App = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.getTeamTrains();
+      this.getCurrentLocation();
     }
   }, {
     key: 'render',
