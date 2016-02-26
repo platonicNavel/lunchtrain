@@ -2,23 +2,19 @@ class TrainsList extends React.Component {
   
   constructor(props) {
     super(props);
-
-    this.state = {
-      open: false,
-      accordionClass: 'details'
-    };
   }
 
-  handleAccordionMap(e) {
-    console.log(this.state)
-    if(this.state.open) {
-      this.setState({
+  handleAccordionMap(id) {
+    console.log(this.refs['dropdown'+id])
+    let clickedTrain = this.refs['dropdown'+id];
+    if(clickedTrain.state.open) {
+      clickedTrain.setState({
         open: false,
         accordionClass: "details"
       });
     }
     else{
-      this.setState({
+      clickedTrain.setState({
         open: true,
         accordionClass: "details open"
       });
@@ -30,12 +26,12 @@ class TrainsList extends React.Component {
       <div className="trainsList">
         {this.props.trains ?
           this.props.trains.map( train =>
-            <div class="trainAndDropdown" onClick={this.handleAccordionMap.bind(this)}>
-              <TrainsListEntry key={train.trainId} train={train} handleAccordionMap={this.props.handleAccordionMap} joinTrain={this.props.joinTrain} />
-              <TrainsListEntryDropdown train={train} open={this.state.open} accordionClass={this.state.accordionClass} />
+            <div class="trainAndDropdown" onClick={this.handleAccordionMap.bind(this, train.id)}>
+              <TrainsListEntry key={train.id} train={train} joinTrain={this.props.joinTrain}/>
+              <TrainsListEntryDropdown train={train} ref={'dropdown'+train.id}/>
             </div>
             ) :
-            "Looks like there are no trains here!"
+          "Looks like there are no trains here!"
         }
       </div>
     )
