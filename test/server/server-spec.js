@@ -9,7 +9,11 @@ it('Signup logs in a new user', () => {
 
 });
 
-it('Logs in existing users', () => {
+it('Signin logs in existing unauthenticated users', () => {
+
+});
+
+it('Logs in authenticated users automatically', () => {
 
 });
 
@@ -30,5 +34,9 @@ it('Returns all of the destinations to display on the destinations page', () => 
 });
 
 it('New destinations create a database entry', () => {
+
+});
+
+it('New trains create a database entry', () => {
 
 });
