@@ -37,6 +37,23 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'handleAccordionMap',
+    value: function handleAccordionMap(id) {
+      console.log(this.refs['dropdown' + id]);
+      var clickedTrain = this.refs['dropdown' + id];
+      if (clickedTrain.state.open) {
+        clickedTrain.setState({
+          open: false,
+          accordionClass: "details"
+        });
+      } else {
+        clickedTrain.setState({
+          open: true,
+          accordionClass: "details open"
+        });
+      }
+    }
+  }, {
     key: 'getTeamTrains',
     value: function getTeamTrains() {
       var _this2 = this;
@@ -61,7 +78,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains, joinTrain: this.joinTrain.bind(this) })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this) })
         )
       );
     }
