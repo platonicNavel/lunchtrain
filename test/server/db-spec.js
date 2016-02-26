@@ -194,7 +194,7 @@ describe('Database ORM', () => {
         db.Team.create(newTeam).then((team) => {
           return team.addTrain(train);
         }).then(() => {
-          db.Team.findOne({include: [db.Train]}).then((team) => {
+          db.Team.findOne({ include: [db.Train] }).then((team) => {
             expect(team.Trains[0].timeDeparting).to.equal(newTrain.timeDeparting);
             expect(team.Trains[0].timeDuration).to.equal(newTrain.timeDuration);
 
@@ -205,6 +205,22 @@ describe('Database ORM', () => {
           });
         });
       });
+    });
+
+    it('should have 1-m relationship between conductor and trains', (done) => {
+      db.User.create(newUser).then((user) => {
+        db.Train.create(newTrain).then((train) => {
+          return train.setConductor(user);
+        }).then(() => {
+          db.Train.findOne({ include: [{ model: db.User, as: 'Conductor' }]}).then((train) => {
+            expect(train.timeDeparting).to.equal(newTrain.timeDeparting);
+            expect(train.timeDuration).to.equal(newTrain.timeDuration);
+
+            expect(train.Conductor.slackId).to.equal(newUser.slackId);
+            done();
+          });
+        });
+      })
     });
   });
 });
