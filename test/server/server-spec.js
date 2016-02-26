@@ -1,8 +1,8 @@
 const expect = require('chai').expect;
 var request = require('request');
 
-const server = require('../server/server.js');
-const db = require('../server/db/index.js');
+const server = require('../../server/server.js');
+const db = require('../../server/db/index.js');
 
 
 it('Signup logs in a new user', () => {
