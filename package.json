@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "mocha --compilers js:babel-core/register --recursive",
     "babel-node": "./node_modules/.bin/babel-node",
     "compile": "./node_modules/.bin/babel src --watch --out-dir build",
     "start": "nodemon --exec npm run babel-node server/server.js"
