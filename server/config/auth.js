@@ -38,10 +38,11 @@ passport.use(new SlackStrategy({
     const lastName = profile._json.info.user.profile.last_name;
     const slackTeamId = profile._json.team_id;
     const teamName = profile._json.team;
+    const gravatar = profile._json.info.user.profile.image_192;
 
     db.User.findOrCreate({
       where: { slackId, firstName, lastName },
-      defaults: { token: accessToken },
+      defaults: { gravatar, token: accessToken },
     }).spread((user, userCreated) => {
         const userToSerialize = user;
         db.Team.findOrCreate({ where: { slackTeamId, teamName } }).spread((team, teamCreated) => {

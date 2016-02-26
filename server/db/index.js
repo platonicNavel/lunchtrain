@@ -33,6 +33,11 @@ const User = sequelize.define('User', {
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
   token: Sequelize.STRING,
+  gravatar: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    defaultValue: 'http://www.gravatar.com/avatar',
+  }
 });
 
 const Team = sequelize.define('Team', {
