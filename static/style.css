@@ -2,7 +2,8 @@
 
 body {
   font-family: 'Roboto', sans-serif !important;
-  overflow: hidden;
+  overflow-x: hidden;
+  background-color: black !important;
 }
 
 button {
@@ -13,7 +14,7 @@ button {
 
 .trainsView {
   background-color: black;
-  height: 100vh;
+  height: 100em;
 }
 
 /*Current Trains*/
@@ -34,11 +35,15 @@ button {
 }
 
 .trainEntry {
+  position: relative;
   height: 15.8em;
   background-color: red;
   margin: 10px;
+  margin-bottom: 20px;
+  z-index: 2;
+  box-shadow: 0px 2px 15px 0px #ff0000;
 }
-.trainEntry:first-child {
+.trainsList:first-child {
   margin-top: 50px;
 }
 
@@ -158,13 +163,18 @@ button {
   /*---TrainsListEntryDropdown---*/
 
 .details.open .trainEntryDropdownWrapper {
-  height: 10em;
+  height: 35em;
   background-color: blue;
 }
 
 .trainEntryDropdownWrapper {
+  position: relative;
   height: 0;
   overflow: hidden;
   transition: all .2s ease-in;
   background-color: blue;
+  margin-bottom: 20px;
+  margin: 0px 10px;
+  top: -23px;
+  z-index: 1;
 }
