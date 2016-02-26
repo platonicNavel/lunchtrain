@@ -4,8 +4,20 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      trains: []
+      trains: [],
+      currLat: null,
+      currLon: null,
     };
+  }
+
+  getCurrentLocation() {
+    navigator.geolocation.getCurrentPosition( (pos) => {
+      this.setState({
+        currLat: +pos.coords.latitude,
+        currLon: +pos.coords.longitude,
+      });
+      console.log(this.state)
+    });
   }
 
   joinTrain(e, train) {
@@ -56,6 +68,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getTeamTrains();
+    this.getCurrentLocation();
   }
 
   render() {
