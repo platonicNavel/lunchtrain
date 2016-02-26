@@ -115,6 +115,8 @@ function createTrain (req, res) {
 }
 
 function boardTrain (req, res) {
+  console.log("req#@$(*@&#($@&#(*$&@*(#$&(@*#&$(*@#&$: ", req);
+  console.log("res@#$U@#)($U@#)($U)(#U$)(@U$)(@#U$@: ", res);
   const data = req.body;
   const user = req.user;
   db.User.findOne({
