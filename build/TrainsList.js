@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -18,34 +18,17 @@ var TrainsList = function (_React$Component) {
   }
 
   _createClass(TrainsList, [{
-    key: 'handleAccordionMap',
-    value: function handleAccordionMap(id) {
-      console.log(this.refs['dropdown' + id]);
-      var clickedTrain = this.refs['dropdown' + id];
-      if (clickedTrain.state.open) {
-        clickedTrain.setState({
-          open: false,
-          accordionClass: "details"
-        });
-      } else {
-        clickedTrain.setState({
-          open: true,
-          accordionClass: "details open"
-        });
-      }
-    }
-  }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       return React.createElement(
-        'div',
-        { className: 'trainsList' },
+        "div",
+        { className: "trainsList" },
         this.props.trains ? this.props.trains.map(function (train) {
           return React.createElement(
-            'div',
-            { 'class': 'trainAndDropdown', onClick: _this2.handleAccordionMap.bind(_this2, train.id) },
+            "div",
+            { "class": "trainAndDropdown", onClick: _this2.props.handleAccordionMap.bind(_this2, train.id) },
             React.createElement(TrainsListEntry, { key: train.id, train: train, joinTrain: _this2.props.joinTrain }),
             React.createElement(TrainsListEntryDropdown, { train: train, ref: 'dropdown' + train.id })
           );
