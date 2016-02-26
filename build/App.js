@@ -65,6 +65,15 @@ var App = function (_React$Component) {
       });
     }
   }, {
+    key: 'renderMap',
+    value: function renderMap(lat, lon, id) {
+      console.log(lat, lon);
+      return new google.maps.Map(document.getElementById('map' + id), {
+        center: { lat: +lat, lng: +lon },
+        zoom: 15
+      });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.getTeamTrains();
@@ -78,7 +87,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this) })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: this.renderMap.bind(this) })
         )
       );
     }
