@@ -11,4 +11,4 @@ module.exports = (app, express) => {
   app.use('/build', express.static(path.join(__dirname, '../../build')));
   app.use(passport.initialize());
   app.use(passport.session());
-}
+};
