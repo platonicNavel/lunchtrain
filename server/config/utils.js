@@ -3,15 +3,15 @@ const db = require('../db/index');
 const _ = require('underscore');
 const slackUtils = require('./slack');
 
-function serveIndex (req, res) {
+function serveIndex(req, res) {
   res.sendFile(path.join(__dirname, '../../views/index.html'));
 }
 
-function serveLogin (req, res) {
+function serveLogin(req, res) {
   res.sendFile(path.join(__dirname, '../../views/login.html'));
 }
 
-function getDestinations (req, res) {
+function getDestinations(req, res) {
   const slackTeamId = req.user.slackTeamId;
   db.Destination.findAll({
     include: [{
@@ -22,9 +22,9 @@ function getDestinations (req, res) {
   }).then((destinations) => {
     const formattedDestinations = destinations.map((destination) => {
       const formattedDestination = {
-      name: destination.dataValues.name,
-      lat: destination.dataValues.lat,
-      long: destination.dataValues.long,
+        name: destination.dataValues.name,
+        lat: destination.dataValues.lat,
+        long: destination.dataValues.long,
       };
       return formattedDestination;
     });
@@ -32,24 +32,24 @@ function getDestinations (req, res) {
   });
 }
 
-function getTrains (req, res) {
+function getTrains(req, res) {
   const slackTeamId = req.user.slackTeamId;
   db.Train.findAll({
     include: [
-    {
-      model: db.Team,
-      where: { slackTeamId },
-    },
-    {
-      model: db.User,
-    },
-    {
-      model: db.User,
-      as: 'Conductor',
-    },
-    {
-      model: db.Destination,
-    },
+      {
+        model: db.Team,
+        where: { slackTeamId },
+      },
+      {
+        model: db.User,
+      },
+      {
+        model: db.User,
+        as: 'Conductor',
+      },
+      {
+        model: db.Destination,
+      },
     ],
   }).then((trains) => {
     const formattedTrains = trains.map((train) => {
@@ -70,24 +70,24 @@ function getTrains (req, res) {
   });
 }
 
-function serveDestinations (req, res) {
+function serveDestinations(req, res) {
   res.sendFile(path.join(__dirname, '../../views/destinations.html'));
 }
 
-function serveTrains (req, res) {
+function serveTrains(req, res) {
   res.sendFile(path.join(__dirname, '../../views/trains.html'));
 }
 
-function serveLogout (req, res) {
+function serveLogout(req, res) {
   req.logout();
   res.redirect('/auth/slack');
 }
 
-function indexRedirect (req, res) {
+function indexRedirect(req, res) {
   res.redirect('/');
 }
 
-function createTrain (req, res) {
+function createTrain(req, res) {
   const user = req.user;
   const data = req.body;
 
@@ -106,7 +106,7 @@ function createTrain (req, res) {
           visits: data.visits,
           likes: data.likes,
         }).spread(destination => destination.addTrain(train)).then(() => {
-          slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting)
+          slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting);
           res.send(200, 'Train created');
         });
       });
@@ -114,7 +114,7 @@ function createTrain (req, res) {
   });
 }
 
-function boardTrain (req, res) {
+function boardTrain(req, res) {
   const data = req.body;
   const user = req.user;
   db.User.findOne({
@@ -128,8 +128,8 @@ function boardTrain (req, res) {
   });
 }
 
-function serveNotFound (req, res) {
-  res.send(404, "Page does not exist!");
+function serveNotFound(req, res) {
+  res.send(404, 'Page does not exist!');
 }
 
 module.exports = {

@@ -1,6 +1,6 @@
 /*
 This project uses a sqlite db with sequelize orm (http://docs.sequelizejs.com/en/latest/).
-The database schema is depicted in sql-schema.png. 
+The database schema is depicted in sql-schema.png.
 
 There are four primary tables:
 * users: people who have previously authenticated with slack
@@ -9,7 +9,7 @@ There are four primary tables:
 * trains: scheduled events
 
 Teams are central to the app and are associated with all other tables. All data displayed to
-a logged in user is specific to the team they logged in with. Slack allows users to have 
+a logged in user is specific to the team they logged in with. Slack allows users to have
 multiple teams, and this app is designed to display primarily team-centric data, rather than
 user-centric data. The same user who authenticates with a different team will see different
 trains, different destinations, and different teammates by design.
@@ -37,7 +37,7 @@ const User = sequelize.define('User', {
     type: Sequelize.STRING,
     allowNull: false,
     defaultValue: 'http://www.gravatar.com/avatar',
-  }
+  },
 });
 
 const Team = sequelize.define('Team', {
@@ -62,7 +62,7 @@ const Train = sequelize.define('Train', {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false,
-  }
+  },
 });
 
 User.belongsToMany(Team, { through: 'Users_Teams' });
