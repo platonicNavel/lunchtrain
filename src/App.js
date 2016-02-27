@@ -58,11 +58,31 @@ class App extends React.Component {
     });
   }
 
-  renderMap(lat, lon, id) {
-    console.log(lat, lon)
-    return new google.maps.Map(document.getElementById(`map${id}`), {
+  renderMap(lat, lon, id, cb) {
+    console.log('dest', lat, lon, id);
+
+    let map = new google.maps.Map(document.getElementById(`map${id}`), {
       center: {lat: +lat, lng: +lon},
       zoom: 15
+    });
+
+    let directionsDisp = new google.maps.DirectionsRenderer({
+      map: map
+    });
+
+    let req = {
+      destination: {lat: +lat, lng: +lon},
+      origin: {lat: +this.state.currLat, lng: +this.state.currLon},
+      travelMode: google.maps.TravelMode.WALKING
+    }
+
+    let directionsService = new google.maps.DirectionsService();
+    
+    directionsService.route(req, (res, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        directionsDisp.setDirections(res);
+        cb(map)
+      }
     });
   }
 
@@ -75,7 +95,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={_.debounce(this.renderMap.bind(this), 500)}></TrainsList>
         </div>
       </div>
     )
