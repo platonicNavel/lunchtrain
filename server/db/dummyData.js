@@ -4,31 +4,31 @@ const Sequelize = require('sequelize');
 const user1 = {
   slackId: 't353h4h',
   firstName: 'Sally',
-  lastName: "Mae",
+  lastName: 'Mae',
 };
 
 const user2 = {
   slackId: 't35ge3h4h',
   firstName: 'Mary',
-  lastName: "Sue",
+  lastName: 'Sue',
 };
 
 const user3 = {
   slackId: 't353h4g53h',
   firstName: 'John',
-  lastName: "Doe",
+  lastName: 'Doe',
 };
 
 const user4 = {
   slackId: 't353g3a3h4h',
   firstName: 'Jane',
-  lastName: "Doe",
+  lastName: 'Doe',
 };
 
 const user5 = {
   slackId: 't353g3a3h4h',
   firstName: 'Max',
-  lastName: "Power",
+  lastName: 'Power',
 };
 
 const user6 = {
@@ -43,7 +43,7 @@ const allUsers = [
   user3,
   user4,
   user5,
-  user6
+  user6,
 ];
 
 const team1 = {
@@ -58,7 +58,7 @@ const team2 = {
 
 const allTeams = [
   team1,
-  team2
+  team2,
 ];
 
 const destination1 = {
@@ -91,7 +91,7 @@ const destination3 = {
 const allDestinations = [
   destination1,
   destination2,
-  destination3
+  destination3,
 ];
 
 const train1 = {
@@ -107,12 +107,12 @@ const train2 = {
 const train3 = {
   timeDeparting: 54762472,
   timeDuration: 4363,
-}
+};
 
 const allTrains = [
   train1,
   train2,
-  train3
+  train3,
 ];
 
 //create arrays of each db entry for dummy data
@@ -122,7 +122,7 @@ let createdDestinations;
 let createdTrains;
 
 function initializeData() {
-  return db.sequelize.sync({force: true})
+  return db.sequelize.sync({ force: true })
     .then(() => {
       return Sequelize.Promise.map(allUsers, (user) => {
         return db.User.create(user);
@@ -177,7 +177,7 @@ function initializeData() {
         createdTrains[1].setConductor(createdUsers[0]),
         createdTrains[2].setConductor(createdUsers[3]),
         createdTrains[2].addUser(createdUsers[4]),
-        createdTrains[2].addUser(createdUsers[5])
+        createdTrains[2].addUser(createdUsers[5]),
       ]);
     });
 }
