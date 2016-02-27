@@ -81,11 +81,31 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'renderMap',
-    value: function renderMap(lat, lon, id) {
-      console.log(lat, lon);
-      return new google.maps.Map(document.getElementById('map' + id), {
+    value: function renderMap(lat, lon, id, cb) {
+      console.log('dest', lat, lon, id);
+
+      var map = new google.maps.Map(document.getElementById('map' + id), {
         center: { lat: +lat, lng: +lon },
         zoom: 15
+      });
+
+      var directionsDisp = new google.maps.DirectionsRenderer({
+        map: map
+      });
+
+      var req = {
+        destination: { lat: +lat, lng: +lon },
+        origin: { lat: +this.state.currLat, lng: +this.state.currLon },
+        travelMode: google.maps.TravelMode.WALKING
+      };
+
+      var directionsService = new google.maps.DirectionsService();
+
+      directionsService.route(req, function (res, status) {
+        if (status === google.maps.DirectionsStatus.OK) {
+          directionsDisp.setDirections(res);
+          cb(map);
+        }
       });
     }
   }, {
@@ -103,7 +123,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: this.renderMap.bind(this) })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: _.debounce(this.renderMap.bind(this), 500) })
         )
       );
     }

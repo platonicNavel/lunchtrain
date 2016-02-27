@@ -18,20 +18,22 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
     _this.state = {
       open: false,
-      accordionClass: 'details'
+      accordionClass: 'details',
+      map: null
     };
     return _this;
   }
 
   _createClass(TrainsListEntryDropdown, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var train = this.props.train;
-      var map = this.props.renderMap(train.destination.lat, train.destination.long, train.id);
-    }
-  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
+      var train = this.props.train;
+      this.props.renderMap(train.destination.lat, train.destination.long, train.id, function (map) {
+        _this2.setState({ map: map });
+      });
+      console.log(this.state.map);
       return React.createElement(
         "div",
         { className: this.state.accordionClass, ref: "dropdown" },
@@ -41,7 +43,7 @@ var TrainsListEntryDropdown = function (_React$Component) {
           React.createElement(
             "div",
             { id: 'map' + this.props.train.id, className: "gmap" },
-            this.map
+            this.state.map
           )
         )
       );
