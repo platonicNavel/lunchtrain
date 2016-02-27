@@ -2,7 +2,7 @@ const passport = require('passport');
 const SlackStrategy = require('passport-slack').Strategy;
 const config = require('./config.js');
 const db = require('../db/index');
-const slackUtils =require('./slack');
+const slackUtils = require('./slack');
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -44,38 +44,36 @@ passport.use(new SlackStrategy({
       where: { slackId, firstName, lastName },
       defaults: { gravatar, token: accessToken },
     }).spread((user, userCreated) => {
-        const userToSerialize = user;
-        db.Team.findOrCreate({ where: { slackTeamId, teamName } }).spread((team, teamCreated) => {
-          // TODO: ADDRESS EDGE CASE
-          let retVal;
-          if (userCreated || teamCreated) {
-            console.log('User or team created');
-            retVal = user.addTeam(team);
-          }
-          return retVal;
-        }).then(() => {
-          console.log('Returning user info for serialization');
-          /* should this info be stored in a db?
-          note that these will not be retained as is */
-          userToSerialize.dataValues.teamName = teamName;
-          userToSerialize.dataValues.slackTeamId = slackTeamId;
-          userToSerialize.dataValues.accessToken = accessToken;
-          slackUtils.createChannel(accessToken);
-          return done(null, userToSerialize);
-        });
+      const userToSerialize = user;
+      db.Team.findOrCreate({ where: { slackTeamId, teamName } }).spread((team, teamCreated) => {
+        // TODO: ADDRESS EDGE CASE
+        let retVal;
+        if (userCreated || teamCreated) {
+          retVal = user.addTeam(team);
+        }
+        return retVal;
+      }).then(() => {
+        /* should this info be stored in a db?
+        note that these will not be retained as is */
+        userToSerialize.dataValues.teamName = teamName;
+        userToSerialize.dataValues.slackTeamId = slackTeamId;
+        userToSerialize.dataValues.accessToken = accessToken;
+        slackUtils.createChannel(accessToken);
+        return done(null, userToSerialize);
       });
+    });
   }));
 
 exports.ensureAuthenticated = (req, res, next) => {
   let retVal;
   if (config.devMode) {
-    req.user = { 
-      dataValues: { 
+    req.user = {
+      dataValues: {
         firstName: 'Griffin',
-        lastName: 'Michl'
+        lastName: 'Michl',
       },
       slackTeamId: 'T0AHB62V6',
-      teamName: 'T0AHB62V6'
+      teamName: 'T0AHB62V6',
     };
   }
   if (req.isAuthenticated() || config.devMode) {
