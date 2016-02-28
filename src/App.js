@@ -33,9 +33,10 @@ class App extends React.Component {
       type: 'POST',
       data: {'id': train.id},
       success: (data) => {
-        console.log('POST successful')
+        console.log('POST successful');
       }
     })
+    this.getTeamTrains()
   }
 
   handleAccordionMap(id, lat, lon) {
@@ -69,7 +70,7 @@ class App extends React.Component {
 
     let map = new google.maps.Map(document.getElementById(`map${id}`), {
       center: {lat: +lat, lng: +lon},
-      zoom: 15
+      zoom: 15,
     });
 
     let directionsDisp = new google.maps.DirectionsRenderer({
@@ -83,16 +84,19 @@ class App extends React.Component {
       let req = {
         destination: {lat: +lat, lng: +lon},
         origin: {lat: currLat, lng: currLon},
-        travelMode: google.maps.TravelMode.WALKING
+        travelMode: google.maps.TravelMode.WALKING,
+        provideRouteAlternatives: true,
       }
-
       
       directionsService.route(req, (res, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
           console.log(status)
           directionsDisp.setDirections(res);
+          directionsDisp.setPanel(document.getElementById(`mapPanel${id}`));
         }
       });
+
+
 
     };
 

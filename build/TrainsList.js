@@ -24,7 +24,7 @@ var TrainsList = function (_React$Component) {
 
       return React.createElement(
         "div",
-        { className: "trainsList" },
+        { className: "trainsList", id: "trainsList" },
         this.props.trains ? this.props.trains.map(function (train) {
           return React.createElement(
             "div",

@@ -58,7 +58,8 @@ var TrainsListEntryDropdown = function (_React$Component) {
         React.createElement(
           "div",
           { className: "trainEntryDropdownWrapper" },
-          React.createElement("div", { id: 'map' + train.id, className: "gmap" })
+          React.createElement("div", { id: 'map' + train.id, className: "gmap col-xs-7" }),
+          React.createElement("div", { id: 'mapPanel' + train.id, className: "gmapDir col-xs-5" })
         )
       );
     }

@@ -163,8 +163,8 @@ button {
   /*---TrainsListEntryDropdown---*/
 
 .details.open .trainEntryDropdownWrapper {
-  height: 35em;
-  background-color: blue;
+  height: 55em;
+  background-color: white;
 }
 
 .trainEntryDropdownWrapper {
@@ -172,7 +172,7 @@ button {
   height: 0;
   overflow: hidden;
   transition: all .2s ease-in;
-  background-color: blue;
+  background-color: white;
   margin-bottom: 20px;
   margin: 0px 10px;
   top: -23px;
@@ -180,5 +180,10 @@ button {
 }
 
 .gmap {
-  height: 500px;
+  height: 100%;
+}
+
+.gmapDir {
+  position: relative;
+  top: 25px;
 }
