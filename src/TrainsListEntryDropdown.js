@@ -36,7 +36,10 @@ class TrainsListEntryDropdown extends React.Component {
     return (
       <div className={this.state.accordionClass} ref="dropdown">
         <div className="trainEntryDropdownWrapper">
-          <div id={'map'+train.id} className="gmap"></div>
+          <div id={'map'+train.id} className="gmap col-xs-7"></div>
+          <div id={'mapPanel'+train.id} className="gmapDir col-xs-5">
+            {/*TODO: Transportation Modes*/}
+          </div>
         </div>
       </div>
     )

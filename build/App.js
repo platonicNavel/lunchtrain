@@ -54,6 +54,7 @@ var App = function (_React$Component) {
           console.log('POST successful');
         }
       });
+      this.getTeamTrains();
     }
   }, {
     key: 'handleAccordionMap',
@@ -105,13 +106,15 @@ var App = function (_React$Component) {
         var req = {
           destination: { lat: +lat, lng: +lon },
           origin: { lat: currLat, lng: currLon },
-          travelMode: google.maps.TravelMode.WALKING
+          travelMode: google.maps.TravelMode.WALKING,
+          provideRouteAlternatives: true
         };
 
         directionsService.route(req, function (res, status) {
           if (status === google.maps.DirectionsStatus.OK) {
             console.log(status);
             directionsDisp.setDirections(res);
+            directionsDisp.setPanel(document.getElementById('mapPanel' + id));
           }
         });
       };

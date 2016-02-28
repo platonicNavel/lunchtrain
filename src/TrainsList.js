@@ -6,7 +6,7 @@ class TrainsList extends React.Component {
 
   render() {
     return (
-      <div className="trainsList">
+      <div className="trainsList" id="trainsList">
         {this.props.trains ?
           this.props.trains.map( train =>
             <div className="trainAndDropdown" onClick={this.props.handleAccordionMap.bind(this, train.id, train.destination.lat, train.destination.lon)}>
