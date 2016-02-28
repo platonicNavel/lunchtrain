@@ -33,10 +33,18 @@ class App extends React.Component {
       type: 'POST',
       data: {'id': train.id},
       success: (data) => {
-        console.log('POST successful');
+        console.log('POST successful', data);
+        let me = {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          id: data.id,
+          slackId: data.slackId
+        };
+        train.users.push(me);
+        this.forceUpdate()
       }
     })
-    this.getTeamTrains()
+    console.log(train.users)
   }
 
   handleAccordionMap(id, lat, lon) {

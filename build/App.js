@@ -44,6 +44,8 @@ var App = function (_React$Component) {
   }, {
     key: 'joinTrain',
     value: function joinTrain(e, train) {
+      var _this3 = this;
+
       e.stopPropagation();
       console.log('join train, id = ', train.id);
       $.ajax({
@@ -51,10 +53,18 @@ var App = function (_React$Component) {
         type: 'POST',
         data: { 'id': train.id },
         success: function success(data) {
-          console.log('POST successful');
+          console.log('POST successful', data);
+          var me = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            id: data.id,
+            slackId: data.slackId
+          };
+          train.users.push(me);
+          _this3.forceUpdate();
         }
       });
-      this.getTeamTrains();
+      console.log(train.users);
     }
   }, {
     key: 'handleAccordionMap',
@@ -76,10 +86,10 @@ var App = function (_React$Component) {
   }, {
     key: 'getTeamTrains',
     value: function getTeamTrains() {
-      var _this3 = this;
+      var _this4 = this;
 
       getCurrentTrains(function (trains) {
-        _this3.setState({
+        _this4.setState({
           trains: trains
         });
       });
