@@ -24,12 +24,43 @@ var TrainsListEntryDropdown = function (_React$Component) {
   }
 
   _createClass(TrainsListEntryDropdown, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var coords = {
+        currLat: null,
+        currLon: null
+      };
+      var train = this.props.train;
+
+      var getDirections = function getDirections() {
+        if (!coords.currLat && !coords.currLon) {
+          _this2.props.getCurrentLocation(function (currLat, currLon) {
+            coords.currLat = currLat;
+            coords.currLon = currLon;
+          });
+        } else {
+          _this2.props.renderMap(train.destination.lat, train.destination.long, train.id, coords.currLat, coords.currLon);
+          clearInterval(fetchingLoc);
+        }
+      };
+
+      var fetchingLoc = setInterval(getDirections.bind(this), 1000);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var train = this.props.train;
       return React.createElement(
         "div",
         { className: this.state.accordionClass, ref: "dropdown" },
-        React.createElement("div", { className: "trainEntryDropdownWrapper" })
+        React.createElement(
+          "div",
+          { className: "trainEntryDropdownWrapper" },
+          React.createElement("div", { id: 'map' + train.id, className: "gmap col-xs-7" }),
+          React.createElement("div", { id: 'mapPanel' + train.id, className: "gmapDir col-xs-5" })
+        )
       );
     }
   }]);

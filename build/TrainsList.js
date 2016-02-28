@@ -24,13 +24,13 @@ var TrainsList = function (_React$Component) {
 
       return React.createElement(
         "div",
-        { className: "trainsList" },
+        { className: "trainsList", id: "trainsList" },
         this.props.trains ? this.props.trains.map(function (train) {
           return React.createElement(
             "div",
-            { "class": "trainAndDropdown", onClick: _this2.props.handleAccordionMap.bind(_this2, train.id) },
+            { className: "trainAndDropdown", onClick: _this2.props.handleAccordionMap.bind(_this2, train.id, train.destination.lat, train.destination.lon) },
             React.createElement(TrainsListEntry, { key: train.id, train: train, joinTrain: _this2.props.joinTrain }),
-            React.createElement(TrainsListEntryDropdown, { train: train, ref: 'dropdown' + train.id })
+            React.createElement(TrainsListEntryDropdown, { train: train, ref: 'dropdown' + train.id, renderMap: _this2.props.renderMap, key: train.id + 'd', getCurrentLocation: _this2.props.getCurrentLocation })
           );
         }) : "Looks like there are no trains here!"
       );
