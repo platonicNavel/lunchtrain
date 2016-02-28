@@ -1,17 +1,37 @@
-import React from 'react';
-import localFoodListEntry from './localFoodListEntry';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 
-const localLists = (props) => {
-  const listItmes = props.list.map( (item) => {
-    return <localFoodListEntry key={item.googleId} item={item} />
-  })
-  return (
-    <div>
-      <ul>
-        {listItmes}
-      </ul>
-    </div>
-  )
+class localLists extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    const listItems = this.props.list.map ( item => {
+      console.log('itemssssss', item)
+      return (
+        <div>
+          <div className="button"> 
+            {item.name} 
+          </div>
+          <div className="popup">
+            <div>
+              <p>{item.name}</p>
+              <p>{item.rating}</p>
+              <p>{item.vicinity}</p>
+            </div>
+            
+          </div>
+        </div>
+      )
+    })
+    return (
+      <div> 
+        {listItems} 
+      </div>
+    )
+  }
 }
+
 
 export default localLists;
