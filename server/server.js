@@ -24,6 +24,8 @@ and avoid confusion.  The components are as follows:
 const express = require('express');
 const app = express();
 
+const port = process.env.PORT || 5000;
+
 require('./config/middleware.js')(app, express);
 require('./config/routes.js')(app, express);
 
@@ -31,8 +33,8 @@ require('./config/routes.js')(app, express);
 const init = require('./db/dummyData');
 
 init().then(() => {
-  console.log('Server is listening on port 8000');
-  app.listen(8000);
+  console.log(`Server is listening on port ${port}`);
+  app.listen(port);
 });
 
 module.exports = app;
