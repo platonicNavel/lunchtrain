@@ -57,7 +57,6 @@ function getTrains(req, res) {
         id: train.dataValues.id,
         timeDeparting: train.dataValues.timeDeparting,
         timeDuration: train.dataValues.timeDuration,
-        // Use forEach for users, conductor and destination
         users: train.dataValues.Users.map((user) => {
           return _.pick(user, 'id', 'slackId', 'firstName', 'lastName', 'gravatar');
         }),
@@ -91,7 +90,6 @@ function createTrain(req, res) {
   const user = req.user;
   const data = req.body;
 
-  // todo: modularize, refactor
   db.findOne({ where: { id: user.id } }).then((dbUser) => {
     db.Train.create({
       timeDeparting: data.timeDeparting,
