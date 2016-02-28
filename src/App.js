@@ -25,7 +25,8 @@ class App extends React.Component {
     }
   }
 
-  joinTrain(e, train) {
+  joinTrain(e, train, joined) {
+    if (joined) {console.warn('You already joined this train, though.'); return;}
     e.stopPropagation();
     console.log('join train, id = ', train.id);
     $.ajax({
