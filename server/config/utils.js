@@ -123,7 +123,7 @@ function boardTrain(req, res) {
     db.Train.findOne({
       where: { id: data.id },
     }).then(train => dbUser.addTrain(train)).then(() => {
-      res.send(200, 'Passenger added to train');
+      res.send(200, req.user);
     });
   });
 }
