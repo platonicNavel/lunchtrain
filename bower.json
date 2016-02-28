@@ -21,6 +21,7 @@
     "redux": "https://cdnjs.cloudflare.com/ajax/libs/redux/1.0.1/redux.js",
     "jquery": "^2.2.0",
     "bootstrap": "^3.3.6",
-    "lodash": "^4.5.0"
+    "lodash": "^4.5.0",
+    "react-router": "^2.0.0"
   }
 }
