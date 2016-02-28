@@ -1,14 +1,5 @@
 module.exports = function(grunt) {
   grunt.initConfig({
-    concat: {
-      options: {
-        separator: ';',
-      },
-      dist: {
-        src: ['build/**/*.js'],
-        dest: ['dist/build.js'],
-      },
-    },
     mochaTest: {
       test: {
         options: {
@@ -20,13 +11,6 @@ module.exports = function(grunt) {
     nodemon: {
       dev: {
         script: 'server.js',
-      },
-    },
-    uglify: {
-      dist: {
-        files: {
-          'dist/build.min.js': 'dist/build.js'
-        },
       },
     },
     eslint: {
