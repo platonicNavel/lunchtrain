@@ -26,16 +26,20 @@ var App = function (_React$Component) {
 
   _createClass(App, [{
     key: 'getCurrentLocation',
-    value: function getCurrentLocation() {
+    value: function getCurrentLocation(cb) {
       var _this2 = this;
 
-      navigator.geolocation.getCurrentPosition(function (pos) {
-        _this2.setState({
-          currLat: +pos.coords.latitude,
-          currLon: +pos.coords.longitude
+      if (!cb) {
+        navigator.geolocation.getCurrentPosition(function (pos) {
+          _this2.setState({
+            currLat: +pos.coords.latitude,
+            currLon: +pos.coords.longitude
+          });
+          console.log(_this2.state);
         });
-        console.log(_this2.state);
-      });
+      } else {
+        cb(this.state.currLat, this.state.currLon);
+      }
     }
   }, {
     key: 'joinTrain',
@@ -53,7 +57,7 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'handleAccordionMap',
-    value: function handleAccordionMap(id) {
+    value: function handleAccordionMap(id, lat, lon) {
       console.log(this.refs['dropdown' + id]);
       var clickedTrain = this.refs['dropdown' + id];
       if (clickedTrain.state.open) {
@@ -81,8 +85,9 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'renderMap',
-    value: function renderMap(lat, lon, id, cb) {
-      console.log('dest', lat, lon, id);
+    value: function renderMap(lat, lon, id, currLat, currLon) {
+
+      console.log('dest', lat, lon, id, currLat, currLon);
 
       var map = new google.maps.Map(document.getElementById('map' + id), {
         center: { lat: +lat, lng: +lon },
@@ -93,20 +98,25 @@ var App = function (_React$Component) {
         map: map
       });
 
-      var req = {
-        destination: { lat: +lat, lng: +lon },
-        origin: { lat: +this.state.currLat, lng: +this.state.currLon },
-        travelMode: google.maps.TravelMode.WALKING
-      };
-
       var directionsService = new google.maps.DirectionsService();
 
-      directionsService.route(req, function (res, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-          directionsDisp.setDirections(res);
-          cb(map);
-        }
-      });
+      var renderDirections = function renderDirections(currLat, currLon) {
+        console.log('rendering directions');
+        var req = {
+          destination: { lat: +lat, lng: +lon },
+          origin: { lat: currLat, lng: currLon },
+          travelMode: google.maps.TravelMode.WALKING
+        };
+
+        directionsService.route(req, function (res, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            console.log(status);
+            directionsDisp.setDirections(res);
+          }
+        });
+      };
+
+      renderDirections(currLat, currLon);
     }
   }, {
     key: 'componentDidMount',
@@ -123,7 +133,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: _.debounce(this.renderMap.bind(this), 500) })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: this.renderMap.bind(this), getCurrentLocation: this.getCurrentLocation.bind(this) })
         )
       );
     }

@@ -5,20 +5,38 @@ class TrainsListEntryDropdown extends React.Component {
     this.state = {
       open: false,
       accordionClass: 'details',
-      map: null,
     };
+  }
+
+  componentDidMount() {
+    let coords = {
+      currLat: null,
+      currLon: null,
+    };
+    let train = this.props.train;
+
+    let getDirections = () => {
+      if (!coords.currLat && !coords.currLon) {
+        this.props.getCurrentLocation(function(currLat, currLon) {
+          coords.currLat = currLat;
+          coords.currLon = currLon;
+        })
+      }
+      else {
+        this.props.renderMap(train.destination.lat, train.destination.long, train.id, coords.currLat, coords.currLon);
+        clearInterval(fetchingLoc);
+      }
+    }
+
+    let fetchingLoc = setInterval(getDirections.bind(this), 1000);
   }
 
   render() {
     let train = this.props.train;
-    this.props.renderMap(train.destination.lat, train.destination.long, train.id, (map) => {
-      this.setState({map: map});
-    });
-    console.log(this.state.map)
     return (
       <div className={this.state.accordionClass} ref="dropdown">
         <div className="trainEntryDropdownWrapper">
-          <div id={'map'+this.props.train.id} className="gmap">{this.state.map}</div>
+          <div id={'map'+train.id} className="gmap"></div>
         </div>
       </div>
     )

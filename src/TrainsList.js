@@ -9,9 +9,9 @@ class TrainsList extends React.Component {
       <div className="trainsList">
         {this.props.trains ?
           this.props.trains.map( train =>
-            <div class="trainAndDropdown" onClick={this.props.handleAccordionMap.bind(this, train.id)}>
+            <div className="trainAndDropdown" onClick={this.props.handleAccordionMap.bind(this, train.id, train.destination.lat, train.destination.lon)}>
               <TrainsListEntry key={train.id} train={train} joinTrain={this.props.joinTrain}/>
-              <TrainsListEntryDropdown train={train} ref={'dropdown'+train.id} renderMap={this.props.renderMap}/>
+              <TrainsListEntryDropdown train={train} ref={'dropdown'+train.id} renderMap={this.props.renderMap} key={train.id+'d'} getCurrentLocation={this.props.getCurrentLocation} />
             </div>
             ) :
           "Looks like there are no trains here!"
