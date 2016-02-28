@@ -10,14 +10,19 @@ class App extends React.Component {
     };
   }
 
-  getCurrentLocation() {
-    navigator.geolocation.getCurrentPosition( (pos) => {
-      this.setState({
-        currLat: +pos.coords.latitude,
-        currLon: +pos.coords.longitude,
-      });
+  getCurrentLocation(cb) {
+    if (!cb) {
+      navigator.geolocation.getCurrentPosition( (pos) => {
+        this.setState({
+          currLat: +pos.coords.latitude,
+          currLon: +pos.coords.longitude,
+        });
       console.log(this.state)
-    });
+      });
+    }
+    else {
+      cb(this.state.currLat, this.state.currLon)
+    }
   }
 
   joinTrain(e, train) {
@@ -33,13 +38,13 @@ class App extends React.Component {
     })
   }
 
-  handleAccordionMap(id) {
+  handleAccordionMap(id, lat, lon) {
     console.log(this.refs['dropdown'+id])
     let clickedTrain = this.refs['dropdown'+id];
     if(clickedTrain.state.open) {
       clickedTrain.setState({
         open: false,
-        accordionClass: "details"
+        accordionClass: "details",
       });
     }
     else{
@@ -58,8 +63,9 @@ class App extends React.Component {
     });
   }
 
-  renderMap(lat, lon, id, cb) {
-    console.log('dest', lat, lon, id);
+  renderMap(lat, lon, id, currLat, currLon) {
+
+    console.log('dest', lat, lon, id, currLat, currLon);
 
     let map = new google.maps.Map(document.getElementById(`map${id}`), {
       center: {lat: +lat, lng: +lon},
@@ -70,20 +76,28 @@ class App extends React.Component {
       map: map
     });
 
-    let req = {
-      destination: {lat: +lat, lng: +lon},
-      origin: {lat: +this.state.currLat, lng: +this.state.currLon},
-      travelMode: google.maps.TravelMode.WALKING
-    }
-
     let directionsService = new google.maps.DirectionsService();
     
-    directionsService.route(req, (res, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        directionsDisp.setDirections(res);
-        cb(map)
+    let renderDirections = (currLat, currLon) => {
+      console.log('rendering directions')
+      let req = {
+        destination: {lat: +lat, lng: +lon},
+        origin: {lat: currLat, lng: currLon},
+        travelMode: google.maps.TravelMode.WALKING
       }
-    });
+
+      
+      directionsService.route(req, (res, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          console.log(status)
+          directionsDisp.setDirections(res);
+        }
+      });
+
+    };
+
+    renderDirections(currLat, currLon)
+
   }
 
   componentDidMount() {
@@ -95,7 +109,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={_.debounce(this.renderMap.bind(this), 500)}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)}></TrainsList>
         </div>
       </div>
     )
