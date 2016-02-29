@@ -1,5 +1,19 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    browserify: {
+      dist: {
+        options: {
+          transform: [
+            ['babelify', {
+              loose: 'all',
+            }],
+          ],
+        },
+        files: {
+          './build/client/index.js': ['./src/client/index.js'],
+        },
+      },
+    },
     mochaTest: {
       test: {
         options: {
@@ -57,18 +71,32 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  grunt.registerTask('server-dev', function(target) {
+    var nodemon = grunt.util.spawn({
+      cmd: 'grunt',
+      grunt: true,
+      args: 'nodemon',
+    });
+    nodemon.stdout.pipe(process.stdout);
+    nodemon.stderr.pipe(process.stderr);
+    grunt.task.run(['watch']);
+  });
 
   grunt.registerTask('test', [
     'eslint',
     'mochaTest',
   ]);
 
-  // TODO: deal with combining modules
-  grunt.registerTask('build', [
-    'babel',
-    'nodemon',
-  ]);
+  // TODO: handle concatination, minification
+  grunt.registerTask('build', []);
 
+  grunt.registerTask('upload', function(n) {
+    if (grunt.option('prod')) {
+      grunt.task.run(['shell:prodServer']);
+    } else {
+      grunt.task.run(['server-dev']);
+    }
+  });
 
   grunt.registerTask('deploy', [
     'test',
