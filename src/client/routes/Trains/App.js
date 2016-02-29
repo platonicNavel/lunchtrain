@@ -4,7 +4,7 @@ import TrainsListEntryDropdown from './components/TrainsListEntryDropdown.js';
 import TrainsListEntry from './components/TrainsListEntry.js';
 import TrainsList from './components/TrainsList.js';
 
-class App extends React.Component {
+class Trains extends React.Component {
 
   constructor(props) {
     super(props);
@@ -140,4 +140,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Trains;
