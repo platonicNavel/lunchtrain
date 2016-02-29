@@ -165,3 +165,5 @@ var App = function (_React$Component) {
 
   return App;
 }(React.Component);
+
+ReactDOM.render(React.createElement(App, null), document.getElementById('app'));
