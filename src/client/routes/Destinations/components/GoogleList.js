@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-class Lists extends Component {
+class GoogleList extends Component {
   constructor(props) {
     super(props)
     console.log('prop', props)
@@ -39,4 +39,4 @@ class Lists extends Component {
 }
 
 
-export default Lists;
+export default GoogleList;

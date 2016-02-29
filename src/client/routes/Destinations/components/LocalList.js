@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-class localLists extends Component {
+class LocalList extends Component {
   constructor(props) {
     super(props)
   }
@@ -34,4 +34,4 @@ class localLists extends Component {
 }
 
 
-export default localLists;
+export default LocalList;
