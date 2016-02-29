@@ -49251,70 +49251,102 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = require('react-router');
 
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // import routes from '../../routes.js'
 
-var Landing = function Landing() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'container' },
-    _react2.default.createElement(
-      'div',
-      { className: 'row button-row' },
-      _react2.default.createElement(
-        _reactRouter.Link,
-        { to: '/trains' },
+var Landing = function (_React$Component) {
+  _inherits(Landing, _React$Component);
+
+  function Landing(props) {
+    _classCallCheck(this, Landing);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Landing).call(this, props));
+  }
+
+  _createClass(Landing, [{
+    key: 'unmount',
+    value: function unmount() {
+      _reactDom2.default.unmountComponentAtNode(document.getElementById('app'));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'container' },
         _react2.default.createElement(
           'div',
-          { className: 'col-xs-4 col-xs-offset-1 btn btn-info' },
+          { className: 'row button-row' },
           _react2.default.createElement(
-            'div',
-            { className: 'dummy' },
-            'Board a Train'
+            _reactRouter.Link,
+            { to: '/trains', onClick: this.unmount() },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-4 col-xs-offset-1 btn btn-info' },
+              _react2.default.createElement(
+                'div',
+                { className: 'dummy' },
+                'Board a Train'
+              ),
+              _react2.default.createElement('img', { className: 'people', src: 'assets/people.png' }),
+              _react2.default.createElement('img', { className: 'train', src: 'assets/train.png' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'destinations-text' },
+                'Join your friends on fun outings'
+              )
+            )
           ),
-          _react2.default.createElement('img', { className: 'people', src: 'assets/people.png' }),
-          _react2.default.createElement('img', { className: 'train', src: 'assets/train.png' }),
           _react2.default.createElement(
-            'div',
-            { className: 'destinations-text' },
-            'Join your friends on fun outings'
+            _reactRouter.Link,
+            { to: '/destinations', onClick: this.unmount() },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-xs-4 col-xs-offset-2 btn btn-info' },
+              _react2.default.createElement(
+                'div',
+                { className: 'dummy' },
+                'Schedule a Train'
+              ),
+              _react2.default.createElement('img', { className: 'calendar', src: 'assets/calendar.png' }),
+              _react2.default.createElement('img', { className: 'location', src: 'assets/location.png' }),
+              _react2.default.createElement(
+                'div',
+                { className: 'trains-test' },
+                'Organize trips to new places or old favorites'
+              )
+            )
           )
         )
-      ),
-      _react2.default.createElement(
-        _reactRouter.Link,
-        { to: '/destinations' },
-        _react2.default.createElement(
-          'div',
-          { className: 'col-xs-4 col-xs-offset-2 btn btn-info' },
-          _react2.default.createElement(
-            'div',
-            { className: 'dummy' },
-            'Schedule a Train'
-          ),
-          _react2.default.createElement('img', { className: 'calendar', src: 'assets/calendar.png' }),
-          _react2.default.createElement('img', { className: 'location', src: 'assets/location.png' }),
-          _react2.default.createElement(
-            'div',
-            { className: 'trains-test' },
-            'Organize trips to new places or old favorites'
-          )
-        )
-      )
-    )
-  );
-};
+      );
+    }
+  }]);
+
+  return Landing;
+}(_react2.default.Component);
 
 exports.default = Landing;
 
-},{"react":215,"react-router":80}],226:[function(require,module,exports){
+},{"react":215,"react-dom":52,"react-router":80}],226:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
