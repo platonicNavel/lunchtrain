@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import GoogleMap from './components/GoogleMap.js';
 import GoogleList from './components/GoogleList.js';
+import GoogleListEntry from './components/GoogleListEntry.js';
+import GoogleListDropdown from './components/GoogleListDropdown.js';
 import LocalMap from './components/LocalMap.js';
 import LocalList from './components/LocalList.js';
 
@@ -28,11 +30,29 @@ class Destinations extends Component {
     // set the default HR lat lng, otherwise, users locationcheck
     // resultLocation is google place API default is restaurant and half mile radius
 
-  navi() {
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.setState({
-        lat: +position.coords.latitude,
-        lng: +position.coords.longitude,
+    handleDestAccordion(id) {
+      console.log('accordion', id)
+      let clickedDest = this.refs['dropdown'+id];
+      if (clickedDest.state.open) {
+        clickedDest.setState({
+          open: false,
+          accordionClass: "details",
+        });
+      }
+      else {
+        clickedDest.setState({
+          open: true,
+          accordionClass: "details open"
+        });
+      }
+    }
+
+    navi() {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.setState({
+          lat: +position.coords.latitude,
+          lng: +position.coords.longitude,
+        })
       });
     });
   }
@@ -139,25 +159,17 @@ class Destinations extends Component {
           <div>
 
             <div>
-              <button onClick={this.onRevese.bind(this)} >Google</button>
-              <button onClick={this.onClicks.bind(this)}>Recommendation</button>
-            </div>
-            <br />
-
-              <div id="map">
-                <GoogleMap onMapShow={ this.getPlace.bind(this) }/>
-              </div>
-              <div>
+              <br />
                 <button onClick={this.onRevese.bind(this)}>Google</button>
                 <button onClick={this.onClicks.bind(this)}>Recommendation</button>
-              </div>
-
               <div>
-                <div id="map" className="col-xs-6">
-                  <GoogleMap onMapShow={ this.getPlace.bind(this) } />
-                </div>
-                <div className="col-xs-6">
-                  <GoogleList list={this.state.list} />
+                <div>
+                  <div id="map" className="col-xs-6">
+                    <GoogleMap onMapShow={ this.getPlace.bind(this) } />
+                  </div>
+                  <div className="col-xs-6">
+                    <GoogleList list={this.state.list} handleDestAccordion={this.handleDestAccordion}/>
+                  </div>
                 </div>
               </div>
             </div>

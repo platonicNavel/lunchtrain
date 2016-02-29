@@ -48664,6 +48664,10 @@ var _GoogleList = require('./routes/Destinations/components/GoogleList.js');
 
 var _GoogleList2 = _interopRequireDefault(_GoogleList);
 
+var _GoogleListEntry = require('./routes/Destinations/components/GoogleListEntry.js');
+
+var _GoogleListEntry2 = _interopRequireDefault(_GoogleListEntry);
+
 var _GoogleMap = require('./routes/Destinations/components/GoogleMap.js');
 
 var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
@@ -48706,7 +48710,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./routes.js":219,"./routes/Destinations/App.js":220,"./routes/Destinations/components/GoogleList.js":221,"./routes/Destinations/components/GoogleMap.js":222,"./routes/Destinations/components/LocalList.js":223,"./routes/Destinations/components/LocalMap.js":224,"./routes/Landing/App.js":225,"./routes/Login/App.js":226,"./routes/Trains/App.js":227,"./routes/Trains/components/TrainsList.js":228,"./routes/Trains/components/TrainsListEntry.js":229,"./routes/Trains/components/TrainsListEntryDropdown.js":230,"./utils/getCurrentTrains.js":232,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
+},{"./routes.js":219,"./routes/Destinations/App.js":220,"./routes/Destinations/components/GoogleList.js":221,"./routes/Destinations/components/GoogleListEntry.js":223,"./routes/Destinations/components/GoogleMap.js":224,"./routes/Destinations/components/LocalList.js":225,"./routes/Destinations/components/LocalMap.js":226,"./routes/Landing/App.js":227,"./routes/Login/App.js":228,"./routes/Trains/App.js":229,"./routes/Trains/components/TrainsList.js":230,"./routes/Trains/components/TrainsListEntry.js":231,"./routes/Trains/components/TrainsListEntryDropdown.js":232,"./utils/getCurrentTrains.js":234,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48832,7 +48836,7 @@ _jquery2.default.get('/api/loggedin').then(function (loggedIn) {
 
 exports.default = routes;
 
-},{"./routes/Destinations/App.js":220,"./routes/Landing/App.js":225,"./routes/Login/App.js":226,"./routes/Trains/App.js":227,"jquery":48,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
+},{"./routes/Destinations/App.js":220,"./routes/Landing/App.js":227,"./routes/Login/App.js":228,"./routes/Trains/App.js":229,"jquery":48,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48856,6 +48860,14 @@ var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
 var _GoogleList = require('./components/GoogleList.js');
 
 var _GoogleList2 = _interopRequireDefault(_GoogleList);
+
+var _GoogleListEntry = require('./components/GoogleListEntry.js');
+
+var _GoogleListEntry2 = _interopRequireDefault(_GoogleListEntry);
+
+var _GoogleListDropdown = require('./components/GoogleListDropdown.js');
+
+var _GoogleListDropdown2 = _interopRequireDefault(_GoogleListDropdown);
 
 var _LocalMap = require('./components/LocalMap.js');
 
@@ -48902,6 +48914,23 @@ var Destinations = function (_Component) {
   // resultLocation is google place API default is restaurant and half mile radius
 
   _createClass(Destinations, [{
+    key: 'handleDestAccordion',
+    value: function handleDestAccordion(id) {
+      console.log('accordion', id);
+      var clickedDest = this.refs['dropdown' + id];
+      if (clickedDest.state.open) {
+        clickedDest.setState({
+          open: false,
+          accordionClass: "details"
+        });
+      } else {
+        clickedDest.setState({
+          open: true,
+          accordionClass: "details open"
+        });
+      }
+    }
+  }, {
     key: 'navi',
     value: function navi() {
       var _this2 = this;
@@ -49065,33 +49094,33 @@ var Destinations = function (_Component) {
           return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'button',
-                { onClick: this.onRevese.bind(this) },
-                'Google'
-              ),
-              _react2.default.createElement(
-                'button',
-                { onClick: this.onClicks.bind(this) },
-                'Recommendation'
-              )
-            ),
             _react2.default.createElement('br', null),
             _react2.default.createElement(
+              'button',
+              { onClick: this.onRevese.bind(this) },
+              'Google'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: this.onClicks.bind(this) },
+              'Recommendation'
+            ),
+            _react2.default.createElement(
               'div',
               null,
               _react2.default.createElement(
                 'div',
-                { id: 'map', className: 'col-xs-6' },
-                _react2.default.createElement(_GoogleMap2.default, { onMapShow: this.getPlace.bind(this) })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'col-xs-6' },
-                _react2.default.createElement(_GoogleList2.default, { list: this.state.list })
+                null,
+                _react2.default.createElement(
+                  'div',
+                  { id: 'map', className: 'col-xs-6' },
+                  _react2.default.createElement(_GoogleMap2.default, { onMapShow: this.getPlace.bind(this) })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'col-xs-6' },
+                  _react2.default.createElement(_GoogleList2.default, { list: this.state.list, handleDestAccordion: this.handleDestAccordion })
+                )
               )
             )
           );
@@ -49134,7 +49163,7 @@ var Destinations = function (_Component) {
 
 exports.default = Destinations;
 
-},{"./components/GoogleList.js":221,"./components/GoogleMap.js":222,"./components/LocalList.js":223,"./components/LocalMap.js":224,"jquery":48,"react":215,"react-dom":52}],221:[function(require,module,exports){
+},{"./components/GoogleList.js":221,"./components/GoogleListDropdown.js":222,"./components/GoogleListEntry.js":223,"./components/GoogleMap.js":224,"./components/LocalList.js":225,"./components/LocalMap.js":226,"jquery":48,"react":215,"react-dom":52}],221:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49151,6 +49180,212 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _GoogleMap = require('./GoogleMap.js');
+
+var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
+
+var _GoogleListEntry = require('./GoogleListEntry.js');
+
+var _GoogleListEntry2 = _interopRequireDefault(_GoogleListEntry);
+
+var _GoogleListDropdown = require('./GoogleListDropdown.js');
+
+var _GoogleListDropdown2 = _interopRequireDefault(_GoogleListDropdown);
+
+var _LocalMap = require('./LocalMap.js');
+
+var _LocalMap2 = _interopRequireDefault(_LocalMap);
+
+var _LocalList = require('./LocalList.js');
+
+var _LocalList2 = _interopRequireDefault(_LocalList);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GoogleList = function (_React$Component) {
+  _inherits(GoogleList, _React$Component);
+
+  function GoogleList(props) {
+    _classCallCheck(this, GoogleList);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GoogleList).call(this, props));
+  }
+
+  _createClass(GoogleList, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'destList', id: 'destList' },
+        this.props.list ? this.props.list.map(function (item, i) {
+          return _react2.default.createElement(
+            'div',
+            { className: 'placeAndDropdown', onClick: _this2.props.handleDestAccordion.bind(_this2, i) },
+            _react2.default.createElement(_GoogleListEntry2.default, { key: i, item: item }),
+            _react2.default.createElement(_GoogleListDropdown2.default, { item: item, ref: 'dropdown' + i, key: i + 'd' })
+          );
+        }) : "Couldn\'t find any places. Sorry about that! Try again!"
+      );
+    }
+  }]);
+
+  return GoogleList;
+}(_react2.default.Component);
+
+exports.default = GoogleList;
+
+},{"./GoogleListDropdown.js":222,"./GoogleListEntry.js":223,"./GoogleMap.js":224,"./LocalList.js":225,"./LocalMap.js":226,"jquery":48,"react":215,"react-dom":52}],222:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _createTrain = require('../../../utils/createTrain.js');
+
+var _createTrain2 = _interopRequireDefault(_createTrain);
+
+var _GoogleMap = require('./GoogleMap.js');
+
+var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
+
+var _GoogleList = require('./GoogleList.js');
+
+var _GoogleList2 = _interopRequireDefault(_GoogleList);
+
+var _GoogleListEntry = require('./GoogleListEntry.js');
+
+var _GoogleListEntry2 = _interopRequireDefault(_GoogleListEntry);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GoogleListDropdown = function (_React$Component) {
+  _inherits(GoogleListDropdown, _React$Component);
+
+  function GoogleListDropdown(props) {
+    _classCallCheck(this, GoogleListDropdown);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GoogleListDropdown).call(this, props));
+
+    _this.state = {
+      open: false,
+      accordionClass: 'details'
+    };
+    return _this;
+  }
+
+  _createClass(GoogleListDropdown, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      console.log(this.props.item);
+      return _react2.default.createElement(
+        'div',
+        { className: this.state.accordionClass, ref: 'dropdown' },
+        _react2.default.createElement(
+          'div',
+          { className: 'scheduleButtonWrapper' },
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Price: ',
+              this.props.item.price_level
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Rating: ',
+              this.props.item.rating
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Opening Now: ',
+              this.props.item.opening_hours.open_now
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              this.props.item.vicinity
+            )
+          ),
+          _react2.default.createElement(
+            'button',
+            { className: 'scheduleButton', onClick: function onClick(e) {
+                _this2.props.createTrain(e, d, d2, _this2.props.item.place_id, _this2.props.item.name, _this2.props.item.geometry.location.lat(), _this2.props.item.geometry.location.lng(), 0);
+              } },
+            'schedule train ',
+            this.props.item.name
+          )
+        )
+      );
+    }
+  }]);
+
+  return GoogleListDropdown;
+}(_react2.default.Component);
+
+exports.default = GoogleListDropdown;
+
+},{"../../../utils/createTrain.js":233,"./GoogleList.js":221,"./GoogleListEntry.js":223,"./GoogleMap.js":224,"react":215}],223:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _GoogleMap = require('./GoogleMap.js');
+
+var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
+
+var _GoogleList = require('./GoogleList.js');
+
+var _GoogleList2 = _interopRequireDefault(_GoogleList);
+
+var _GoogleListDropdown = require('./GoogleListDropdown.js');
+
+var _GoogleListDropdown2 = _interopRequireDefault(_GoogleListDropdown);
+
 var _createTrain2 = require('../../../utils/createTrain.js');
 
 var _createTrain3 = _interopRequireDefault(_createTrain2);
@@ -49163,16 +49398,16 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var GoogleList = function (_Component) {
-  _inherits(GoogleList, _Component);
+var GoogleListEntry = function (_Component) {
+  _inherits(GoogleListEntry, _Component);
 
-  function GoogleList(props) {
-    _classCallCheck(this, GoogleList);
+  function GoogleListEntry(props) {
+    _classCallCheck(this, GoogleListEntry);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(GoogleList).call(this, props));
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(GoogleListEntry).call(this, props));
   }
 
-  _createClass(GoogleList, [{
+  _createClass(GoogleListEntry, [{
     key: 'createTrain',
     value: function createTrain(e, d, d2, place_id, name, lat, lng, visits) {
       e.stopPropagation();
@@ -49181,95 +49416,39 @@ var GoogleList = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var item = this.props.item;
+      var placeId = item.place_id;
+      var smallMaps = "https://www.google.com/maps/embed/v1/place?q=place_id:" + placeId + "&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4";
 
-      var listItems = this.props.list.map(function (item) {
-        var placeId = item.place_id;
-        var smallMaps = 'https://www.google.com/maps/embed/v1/place?q=place_id:' + placeId + '&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4';
+      if (item.opening_hours.open_now) {
+        item.opening_hours.open_now = 'open';
+      } else {
+        item.opening_hours.open_now = 'closed';
+      }
 
-        if (item.opening_hours.open_now) {
-          item.opening_hours.open_now = 'open';
-        } else {
-          item.opening_hours.open_now = 'closed';
-        }
+      if (item.price_level === 1) {
+        item.price_level = '$';
+      } else if (item.price_level === 2) {
+        item.price_level = '$$';
+      } else if (item.price_level === 3) {
+        item.price_level = '$$$';
+      } else if (item.price_level === 4) {
+        item.price_level = '$$$$';
+      } else {
+        item.price_level = '$$$$$';
+      }
 
-        if (item.price_level === 1) {
-          item.price_level = '$';
-        } else if (item.price_level === 2) {
-          item.price_level = '$$';
-        } else if (item.price_level === 3) {
-          item.price_level = '$$$';
-        } else if (item.price_level === 4) {
-          item.price_level = '$$$$';
-        } else {
-          item.price_level = '$$$$$';
-        }
-
-        var d = new Date().getTime();
-        var d2 = d + 3600;
-        return _react2.default.createElement(
+      var d = new Date().getTime();
+      var d2 = d + 3600;
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement(
-            'button',
-            { className: 'button', onClick: function onClick(e) {
-                _this2.createTrain(e, d, d2, item.place_id, item.name, item.geometry.location.lat(), item.geometry.location.lng(), 0);
-                _this2.setState({
-                  joined: true
-                });
-              } },
-            'schedule train ',
-            item.name
-          ),
-          _react2.default.createElement(
-            'div',
-            null,
-            item.name
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'popup' },
-            _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'p',
-                null,
-                'Name: ',
-                item.name
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Price: ',
-                item.price_level
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Rating: ',
-                item.rating
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                'Opening Now: ',
-                item.opening_hours.open_now
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                item.vicinity
-              ),
-              _react2.default.createElement(
-                'p',
-                { className: 'smallMap' },
-                _react2.default.createElement('iframe', { width: '300', height: '250', frameBorder: '0', style: { border: 0 }, src: smallMaps, allowFullScreen: true })
-              )
-            )
-          )
-        );
-      });
+          item.name
+        )
+      );
       return _react2.default.createElement(
         'div',
         null,
@@ -49278,12 +49457,12 @@ var GoogleList = function (_Component) {
     }
   }]);
 
-  return GoogleList;
+  return GoogleListEntry;
 }(_react.Component);
 
-exports.default = GoogleList;
+exports.default = GoogleListEntry;
 
-},{"../../../utils/createTrain.js":231,"react":215,"react-dom":52}],222:[function(require,module,exports){
+},{"../../../utils/createTrain.js":233,"./GoogleList.js":221,"./GoogleListDropdown.js":222,"./GoogleMap.js":224,"react":215,"react-dom":52}],224:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49309,7 +49488,7 @@ var GoogleMap = function GoogleMap(props) {
 
 exports.default = GoogleMap;
 
-},{"react":215}],223:[function(require,module,exports){
+},{"react":215}],225:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49401,7 +49580,7 @@ var LocalList = function (_Component) {
 
 exports.default = LocalList;
 
-},{"react":215,"react-dom":52}],224:[function(require,module,exports){
+},{"react":215,"react-dom":52}],226:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49427,7 +49606,7 @@ var LocalMap = function LocalMap(props) {
 
 exports.default = LocalMap;
 
-},{"react":215}],225:[function(require,module,exports){
+},{"react":215}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49529,7 +49708,7 @@ var Landing = function (_React$Component) {
 
 exports.default = Landing;
 
-},{"react":215,"react-dom":52,"react-router":80}],226:[function(require,module,exports){
+},{"react":215,"react-dom":52,"react-router":80}],228:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49583,7 +49762,7 @@ var Login = function Login() {
 
 exports.default = Login;
 
-},{"react":215}],227:[function(require,module,exports){
+},{"react":215}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49782,7 +49961,7 @@ var Trains = function (_React$Component) {
 
 exports.default = Trains;
 
-},{"../../utils/getCurrentTrains.js":232,"./components/TrainsList.js":228,"./components/TrainsListEntry.js":229,"./components/TrainsListEntryDropdown.js":230,"react":215,"react-router":80}],228:[function(require,module,exports){
+},{"../../utils/getCurrentTrains.js":234,"./components/TrainsList.js":230,"./components/TrainsListEntry.js":231,"./components/TrainsListEntryDropdown.js":232,"react":215,"react-router":80}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49849,7 +50028,7 @@ var TrainsList = function (_React$Component) {
 
 exports.default = TrainsList;
 
-},{"../../../utils/getCurrentTrains.js":232,"./TrainsListEntry.js":229,"./TrainsListEntryDropdown.js":230,"react":215}],229:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":234,"./TrainsListEntry.js":231,"./TrainsListEntryDropdown.js":232,"react":215}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -50002,7 +50181,7 @@ var TrainsListEntry = function (_React$Component) {
 
 exports.default = TrainsListEntry;
 
-},{"../../../utils/getCurrentTrains.js":232,"./TrainsList.js":228,"./TrainsListEntryDropdown.js":230,"react":215}],230:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":234,"./TrainsList.js":230,"./TrainsListEntryDropdown.js":232,"react":215}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -50097,7 +50276,7 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
 exports.default = TrainsListEntryDropdown;
 
-},{"../../../utils/getCurrentTrains.js":232,"./TrainsList.js":228,"./TrainsListEntry.js":229,"react":215}],231:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":234,"./TrainsList.js":230,"./TrainsListEntry.js":231,"react":215}],233:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -50136,7 +50315,7 @@ window.createTrain = createTrain;
 
 exports.default = createTrain;
 
-},{"jquery":48,"lodash":49}],232:[function(require,module,exports){
+},{"jquery":48,"lodash":49}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

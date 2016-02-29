@@ -292,3 +292,19 @@ button {
   width: 200px;
   height: 200px;
 }
+
+.details.open .scheduleButtonWrapper {
+  height: 30em;
+  background-color: #FFFFFF;
+}
+
+.scheduleButtonWrapper {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: all .2s ease-in;
+  background-color: #FFFFFF;
+  margin-bottom: 20px;
+  margin: 0px 10px;
+  z-index: 1;
+}
