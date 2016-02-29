@@ -132,7 +132,14 @@ class Destinations extends Component {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     });
 
-    let infowindow = new google.maps.InfoWindow();
+      const locations = () => {
+
+        const lists = this.state.list;
+        for(var i = 0 ; i < lists.length; i ++ ) {
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
+            map: map
+          });
 
     let marker;
     let i;
@@ -153,9 +160,8 @@ class Destinations extends Component {
           };
         })(marker, i));
       }
-    };
     google.maps.event.addDomListener(window, 'load', locatGetPlace);
-  }
+    }
 
 
   render() {

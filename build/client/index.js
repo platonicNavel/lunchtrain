@@ -48767,8 +48767,13 @@ var Root = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { id: 'bossMode' },
-        this.props.children || _react2.default.createElement(_App4.default, null)
+        null,
+        _react2.default.createElement('div', { className: 'topbar' }),
+        _react2.default.createElement(
+          'div',
+          { id: 'bossMode' },
+          this.props.children || _react2.default.createElement(_App4.default, null)
+        )
       );
     }
   }]);
