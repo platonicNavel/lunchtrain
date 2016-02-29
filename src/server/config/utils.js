@@ -89,21 +89,22 @@ function indexRedirect(req, res) {
 function createTrain(req, res) {
   const user = req.user;
   const data = req.body;
-
-  db.findOne({ where: { id: user.id } }).then((dbUser) => {
+  console.log(data)
+  db.User.findOne({ where: { id: user.id } }).then((dbUser) => {
     db.Train.create({
       timeDeparting: data.timeDeparting,
       timeDuration: data.timeDuration,
     }).then((train) => {
-      train.addConductor(dbUser).then(() => {
-        db.Destination.findOrCreate({
-          googleId: data.googleId,
+      train.setConductor(dbUser).then(() => {
+        db.Destination.findOrCreate({ where: {
+          googleId: data.googleId
+        }, defaults: {
           name: data.name,
           lat: data.lat,
           long: data.long,
           visits: data.visits,
           likes: data.likes,
-        }).spread(destination => destination.addTrain(train)).then(() => {
+        }}).spread(destination => destination.addTrain(train)).then(() => {
           slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting);
           res.send(200, 'Train created');
         });

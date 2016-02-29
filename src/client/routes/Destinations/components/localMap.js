@@ -2,10 +2,10 @@ import React from 'react';
 
 const LocalMap = (props) => {
  const mapMarkers = () => {
-    props.onMapShow()
+    props.onMapShows()
   }
   return (
-    <div id="map">
+    <div>
       {mapMarkers()}
     </div>
   )

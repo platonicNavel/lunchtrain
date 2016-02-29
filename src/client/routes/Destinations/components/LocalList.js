@@ -11,9 +11,14 @@ class LocalList extends Component {
       console.log('itemssssss', item)
       return (
         <div>
-          <div className="button"> 
-            {item.name} 
-          </div>
+        <button className="button" onClick={
+          (e) => {
+            this.createTrain(e, d, d2, item.place_id, item.name, item.geometry.location.lat(), item.geometry.location.lng(), 0);
+            this.setState({
+              joined: true,
+            });
+          }
+        }>schedule train {item.name}</button>
           <div className="popup">
             <div>
               <p>{item.name}</p>

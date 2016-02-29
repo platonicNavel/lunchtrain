@@ -24,7 +24,14 @@ class Root extends React.Component {
 
 import $ from 'jquery';
 
-let routes;
+  <Router history={browserHistory}>
+    <Route path="/" component={Root}>
+      <IndexRoute component={Landing} />
+      <Route path="login" component={Login}></Route>
+      <Route path="destinations" component={Destinations}></Route>
+      <Route path="trains" component={Trains}></Route>
+    </Route>
+  </Router>
 
 /*
   Browserify causes a bug with onEnter, so we haven't been able
@@ -36,20 +43,24 @@ $.get('/api/loggedin').then((loggedIn) => {
   if (loggedIn) {
     routes = ReactDOM.render((
       <Router history={browserHistory}>
-        <Route path="/" component={Landing}></Route>
-        <Route path="/login" component={Login} ></Route>
-        <Route path="/destinations" component={Destinations}></Route>
-        <Route path="/trains" component={Trains}></Route>
+        <Route path="/" component={Root}>
+          <IndexRoute component={Landing} />
+          <Route path="/login" component={Login} ></Route>
+          <Route path="/destinations" component={Destinations}></Route>
+          <Route path="/trains" component={Trains}></Route>
+        </Route>
       </Router>
 
     ), document.getElementById('app'));
   } else {
     routes = ReactDOM.render((
       <Router history={browserHistory}>
-        <Route path="/" component={Login}></Route>
-        <Route path="/login" component={Login} ></Route>
-        <Route path="/destinations" component={Login}></Route>
-        <Route path="/trains" component={Login}></Route>
+        <Route path="/" component={Root}>
+          <IndexRoute component={Login} />
+          <Route path="/login" component={Login} ></Route>
+          <Route path="/destinations" component={Login}></Route>
+          <Route path="/trains" component={Login}></Route>
+        </Route>
       </Router>
 
     ), document.getElementById('app'));    
