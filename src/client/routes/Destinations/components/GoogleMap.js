@@ -5,11 +5,12 @@ const GoogleMap = (props) => {
     props.onMapShow()
   }
   return (
-    <div id="map">
+    <div className="refresh">
       {mapMarkers()}
     </div>
   )
 }
+
 
 
 export default GoogleMap

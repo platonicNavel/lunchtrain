@@ -22,16 +22,10 @@ class Root extends React.Component {
   }
 }
 
+<<<<<<< af6e7b7417df3cd867d0f6783348ea9ae8892d9d
 import $ from 'jquery';
 
-  <Router history={browserHistory}>
-    <Route path="/" component={Root}>
-      <IndexRoute component={Landing} />
-      <Route path="login" component={Login}></Route>
-      <Route path="destinations" component={Destinations}></Route>
-      <Route path="trains" component={Trains}></Route>
-    </Route>
-  </Router>
+let routes;
 
 /*
   Browserify causes a bug with onEnter, so we haven't been able
@@ -62,5 +56,32 @@ $.get('/api/loggedin').then((loggedIn) => {
     ), document.getElementById('app'));    
   }
 })
+||||||| merged common ancestors
+const routes = ReactDOM.render((
+
+  <Router history={browserHistory}>
+    <Route path="/" component={Root}>
+      <IndexRoute component={Landing} />
+      <Route path="/login" component={Login}></Route>
+      <Route path="/destinations" component={Destinations}></Route>
+      <Route path="/trains" component={Trains}></Route>
+    </Route>
+  </Router>
+
+), document.getElementById('app'));
+=======
+const routes = ReactDOM.render((
+
+  <Router history={browserHistory}>
+    <Route path="/" component={Root}>
+      <IndexRoute component={Landing} />
+      <Route path="login" component={Login}></Route>
+      <Route path="destinations" component={Destinations}></Route>
+      <Route path="trains" component={Trains}></Route>
+    </Route>
+  </Router>
+
+), document.getElementById('app'));
+>>>>>>> "Soft merge" Destinations updated code
 
 export default routes;
