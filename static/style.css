@@ -243,9 +243,8 @@ button {
   padding-left: 20px;
 }
 
-#map { 
-    width: 500px;
-    height: 500px;
+#map {
+  height: 500px;
 }
 
 #maps { 

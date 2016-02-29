@@ -49023,18 +49023,16 @@ var Destinations = function (_Component) {
         }
       });
 
-      var map = new google.maps.Map(document.getElementById('maps'), {
-        zoom: 10,
-        center: new google.maps.LatLng(-33.92, 151.25),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-
-      var infowindow = new google.maps.InfoWindow();
-
-      var marker = undefined;
-      var i = undefined;
-
       var locations = function locations() {
+        var map = new google.maps.Map(document.getElementById('maps'), {
+          zoom: 10,
+          center: new google.maps.LatLng(-33.92, 151.25),
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var marker, i;
 
         var lists = _this4.state.list;
         for (var _i = 0; _i < lists.length; _i++) {
@@ -49050,8 +49048,8 @@ var Destinations = function (_Component) {
             };
           }(marker, _i));
         }
+        google.maps.event.addDomListener(window, 'load', locatGetPlace);
       };
-      google.maps.event.addDomListener(window, 'load', locatGetPlace);
     })
   }, {
     key: 'render',
@@ -49084,13 +49082,17 @@ var Destinations = function (_Component) {
             _react2.default.createElement('br', null),
             _react2.default.createElement(
               'div',
-              { id: 'map' },
-              _react2.default.createElement(_GoogleMap2.default, { onMapShow: this.getPlace.bind(this) })
-            ),
-            _react2.default.createElement(
-              'div',
               null,
-              _react2.default.createElement(_GoogleList2.default, { list: this.state.list })
+              _react2.default.createElement(
+                'div',
+                { id: 'map', className: 'col-xs-6' },
+                _react2.default.createElement(_GoogleMap2.default, { onMapShow: this.getPlace.bind(this) })
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'col-xs-6' },
+                _react2.default.createElement(_GoogleList2.default, { list: this.state.list })
+              )
             )
           );
         } else {
