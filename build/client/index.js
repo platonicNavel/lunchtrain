@@ -48800,19 +48800,27 @@ _jquery2.default.get('/api/loggedin').then(function (loggedIn) {
     routes = _reactDom2.default.render(_react2.default.createElement(
       _reactRouter.Router,
       { history: _reactRouter.browserHistory },
-      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App4.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App6.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App8.default })
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/', component: Root },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: _App4.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App6.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App8.default })
+      )
     ), document.getElementById('app'));
   } else {
     routes = _reactDom2.default.render(_react2.default.createElement(
       _reactRouter.Router,
       { history: _reactRouter.browserHistory },
-      _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App2.default }),
-      _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App2.default })
+      _react2.default.createElement(
+        _reactRouter.Route,
+        { path: '/', component: Root },
+        _react2.default.createElement(_reactRouter.IndexRoute, { component: _App2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App2.default })
+      )
     ), document.getElementById('app'));
   }
 });
