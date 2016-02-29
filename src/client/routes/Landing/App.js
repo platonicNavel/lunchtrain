@@ -14,7 +14,7 @@ const Landing = () => {
             <div className="destinations-text">Join your friends on fun outings</div>
           </div>
         </Link>
-        <Link to="/login">
+        <Link to="/destinations">
           <div className="col-xs-4 col-xs-offset-2 btn btn-info">
             <div className="dummy">Schedule a Train</div>
             <img className="calendar" src="assets/calendar.png" />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Map = (props) => {
+const GoogleMap = (props) => {
  const mapMarkers = () => {
     props.onMapShow()
   }
@@ -12,5 +12,5 @@ const Map = (props) => {
 }
 
 
-export default Map
+export default GoogleMap
 

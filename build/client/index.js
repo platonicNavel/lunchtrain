@@ -48660,6 +48660,26 @@ var _App3 = require('./routes/Landing/App.js');
 
 var _App4 = _interopRequireDefault(_App3);
 
+var _GoogleList = require('./routes/Destinations/components/GoogleList.js');
+
+var _GoogleList2 = _interopRequireDefault(_GoogleList);
+
+var _GoogleMap = require('./routes/Destinations/components/GoogleMap.js');
+
+var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
+
+var _LocalList = require('./routes/Destinations/components/LocalList.js');
+
+var _LocalList2 = _interopRequireDefault(_LocalList);
+
+var _LocalMap = require('./routes/Destinations/components/LocalMap.js');
+
+var _LocalMap2 = _interopRequireDefault(_LocalMap);
+
+var _App5 = require('./routes/Destinations/App.js');
+
+var _App6 = _interopRequireDefault(_App5);
+
 var _getCurrentTrains = require('./utils/getCurrentTrains.js');
 
 var _getCurrentTrains2 = _interopRequireDefault(_getCurrentTrains);
@@ -48676,9 +48696,9 @@ var _TrainsList = require('./routes/Trains/components/TrainsList.js');
 
 var _TrainsList2 = _interopRequireDefault(_TrainsList);
 
-var _App5 = require('./routes/Trains/App.js');
+var _App7 = require('./routes/Trains/App.js');
 
-var _App6 = _interopRequireDefault(_App5);
+var _App8 = _interopRequireDefault(_App7);
 
 var _routes = require('./routes.js');
 
@@ -48686,7 +48706,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./routes.js":219,"./routes/Landing/App.js":220,"./routes/Login/App.js":221,"./routes/Trains/App.js":222,"./routes/Trains/components/TrainsList.js":223,"./routes/Trains/components/TrainsListEntry.js":224,"./routes/Trains/components/TrainsListEntryDropdown.js":225,"./utils/getCurrentTrains.js":226,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
+},{"./routes.js":219,"./routes/Destinations/App.js":220,"./routes/Destinations/components/GoogleList.js":221,"./routes/Destinations/components/GoogleMap.js":222,"./routes/Destinations/components/LocalList.js":223,"./routes/Destinations/components/LocalMap.js":224,"./routes/Landing/App.js":225,"./routes/Login/App.js":226,"./routes/Trains/App.js":227,"./routes/Trains/components/TrainsList.js":228,"./routes/Trains/components/TrainsListEntry.js":229,"./routes/Trains/components/TrainsListEntryDropdown.js":230,"./utils/getCurrentTrains.js":231,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48711,9 +48731,13 @@ var _App3 = require('./routes/Landing/App.js');
 
 var _App4 = _interopRequireDefault(_App3);
 
-var _App5 = require('./routes/Trains/App.js');
+var _App5 = require('./routes/Destinations/App.js');
 
 var _App6 = _interopRequireDefault(_App5);
+
+var _App7 = require('./routes/Trains/App.js');
+
+var _App8 = _interopRequireDefault(_App7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -48722,12 +48746,505 @@ var routes = _reactDom2.default.render(_react2.default.createElement(
   { history: _reactRouter.browserHistory },
   _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App4.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App6.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App6.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App8.default })
 ), document.getElementById('app'));
 
 exports.default = routes;
 
-},{"./routes/Landing/App.js":220,"./routes/Login/App.js":221,"./routes/Trains/App.js":222,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
+},{"./routes/Destinations/App.js":220,"./routes/Landing/App.js":225,"./routes/Login/App.js":226,"./routes/Trains/App.js":227,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _GoogleMap = require('./components/GoogleMap.js');
+
+var _GoogleMap2 = _interopRequireDefault(_GoogleMap);
+
+var _GoogleList = require('./components/GoogleList.js');
+
+var _GoogleList2 = _interopRequireDefault(_GoogleList);
+
+var _LocalMap = require('./components/LocalMap.js');
+
+var _LocalMap2 = _interopRequireDefault(_LocalMap);
+
+var _LocalList = require('./components/LocalList.js');
+
+var _LocalList2 = _interopRequireDefault(_LocalList);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var map = undefined;
+var service = undefined;
+var infowindow = undefined;
+
+var Destinations = function (_Component) {
+  _inherits(Destinations, _Component);
+
+  function Destinations(props) {
+    _classCallCheck(this, Destinations);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Destinations).call(this, props));
+
+    _this.state = {
+      list: [],
+      recommend: false,
+      lat: 37.783756,
+      lng: -122.40921549999999,
+      map: null
+    };
+
+    return _this;
+  }
+  // set the default HR lat lng, otherwise, users locationcheck
+  // resultLocation is google place API default is restaurant and half mile radius
+
+
+  _createClass(Destinations, [{
+    key: 'navi',
+    value: function navi() {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        this.setState({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+      }.bind(this));
+    }
+  }, {
+    key: 'onClicks',
+    value: function onClicks() {
+      this.setState({
+        recommend: true
+      });
+    }
+  }, {
+    key: 'onRevese',
+    value: function onRevese() {
+      this.getPlace();
+      this.setState({
+        recommend: false
+      });
+    }
+  }, {
+    key: 'getPlace',
+    value: function getPlace() {
+      var _this2 = this;
+
+      var initMap = function initMap() {
+        var city = { lat: _this2.state.lat, lng: _this2.state.lng };
+
+        map = new google.maps.Map(document.getElementById("map"), {
+          center: city,
+          zoom: 15
+        });
+
+        infowindow = new google.maps.InfoWindow();
+
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: city,
+          radius: 500,
+          types: ['restaurant', 'cafe']
+        }, callback);
+
+        _this2.setState({
+          map: map
+        });
+      };
+
+      var callback = function callback(results, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+          _this2.setState({
+            list: results
+          });
+          console.log('after ', _this2.state.list);
+        }
+      };
+
+      var createMarker = function createMarker(place) {
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      };
+      google.maps.event.addDomListener(window, 'load', initMap);
+    }
+  }, {
+    key: 'locatGetPlace',
+    value: function locatGetPlace() {
+      var _this3 = this;
+
+      _jquery2.default.ajax({
+        url: '/api/trains',
+        type: 'GET',
+        datatype: 'json',
+        success: function success(data) {
+          this.setState({
+            list: data
+          });
+          this.locations();
+          console.log('after local ', this.state.list);
+        },
+        error: function error(data) {
+          console.error(data);
+        }
+      });
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 10,
+        center: new google.maps.LatLng(-33.92, 151.25),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+
+      var infowindow = new google.maps.InfoWindow();
+
+      var marker, i;
+
+      var locations = function locations() {
+        var lists = _this3.state.list;
+        for (var i = 0; i < lists.length; i++) {
+          marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
+            map: map
+          });
+
+          google.maps.event.addListener(marker, 'click', function (marker, i) {
+            return function () {
+              infowindow.setContent(lists[i]);
+              infowindow.open(map, marker);
+            };
+          }(marker, i));
+        }
+      };
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.navi();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!this.state.recommend) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'button',
+              { onClick: this.onRevese.bind(this) },
+              'Google'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: this.onClicks.bind(this) },
+              'Recommendation'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_GoogleMap2.default, { onMapShow: this.getPlace.bind(this) }),
+            _react2.default.createElement(_GoogleList2.default, { list: this.state.list })
+          )
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'button',
+              { onClick: this.onRevese.bind(this) },
+              'Google'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: this.onClicks.bind(this) },
+              'Recommendation'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_LocalMap2.default, { onMapShow: this.locatGetPlace.bind(this) }),
+            _react2.default.createElement(_LocalList2.default, { list: this.state.list })
+          )
+        );
+      }
+    }
+  }]);
+
+  return Destinations;
+}(_react.Component);
+
+exports.default = Destinations;
+
+},{"./components/GoogleList.js":221,"./components/GoogleMap.js":222,"./components/LocalList.js":223,"./components/LocalMap.js":224,"jquery":48,"react":215,"react-dom":52}],221:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var GoogleList = function (_Component) {
+  _inherits(GoogleList, _Component);
+
+  function GoogleList(props) {
+    _classCallCheck(this, GoogleList);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(GoogleList).call(this, props));
+
+    console.log('prop', props);
+    _this.state = {
+      open: false,
+      accordionClass: 'details'
+    };
+    return _this;
+  }
+
+  _createClass(GoogleList, [{
+    key: 'render',
+    value: function render() {
+      var listItems = this.props.list.map(function (item) {
+        console.log('itemssssss', item);
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'button' },
+            item.name
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'popup' },
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'p',
+                null,
+                item.name
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                item.rating
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                item.vicinity
+              )
+            )
+          )
+        );
+      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        listItems
+      );
+    }
+  }]);
+
+  return GoogleList;
+}(_react.Component);
+
+exports.default = GoogleList;
+
+},{"react":215,"react-dom":52}],222:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var GoogleMap = function GoogleMap(props) {
+  var mapMarkers = function mapMarkers() {
+    props.onMapShow();
+  };
+  return _react2.default.createElement(
+    "div",
+    { id: "map" },
+    mapMarkers()
+  );
+};
+
+exports.default = GoogleMap;
+
+},{"react":215}],223:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LocalList = function (_Component) {
+  _inherits(LocalList, _Component);
+
+  function LocalList(props) {
+    _classCallCheck(this, LocalList);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(LocalList).call(this, props));
+  }
+
+  _createClass(LocalList, [{
+    key: 'render',
+    value: function render() {
+      var listItems = this.props.list.map(function (item) {
+        console.log('itemssssss', item);
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement(
+            'div',
+            { className: 'button' },
+            item.name
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'popup' },
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'p',
+                null,
+                item.name
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                item.rating
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                item.vicinity
+              )
+            )
+          )
+        );
+      });
+      return _react2.default.createElement(
+        'div',
+        null,
+        listItems
+      );
+    }
+  }]);
+
+  return LocalList;
+}(_react.Component);
+
+exports.default = LocalList;
+
+},{"react":215,"react-dom":52}],224:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var LocalMap = function LocalMap(props) {
+  var mapMarkers = function mapMarkers() {
+    props.onMapShow();
+  };
+  return _react2.default.createElement(
+    "div",
+    { id: "map" },
+    mapMarkers()
+  );
+};
+
+exports.default = LocalMap;
+
+},{"react":215}],225:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48773,7 +49290,7 @@ var Landing = function Landing() {
       ),
       _react2.default.createElement(
         _reactRouter.Link,
-        { to: '/login' },
+        { to: '/destinations' },
         _react2.default.createElement(
           'div',
           { className: 'col-xs-4 col-xs-offset-2 btn btn-info' },
@@ -48797,7 +49314,7 @@ var Landing = function Landing() {
 
 exports.default = Landing;
 
-},{"react":215,"react-router":80}],221:[function(require,module,exports){
+},{"react":215,"react-router":80}],226:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48851,7 +49368,7 @@ var Login = function Login() {
 
 exports.default = Login;
 
-},{"react":215}],222:[function(require,module,exports){
+},{"react":215}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49048,7 +49565,7 @@ var Trains = function (_React$Component) {
 
 exports.default = Trains;
 
-},{"../../utils/getCurrentTrains.js":226,"./components/TrainsList.js":223,"./components/TrainsListEntry.js":224,"./components/TrainsListEntryDropdown.js":225,"react":215}],223:[function(require,module,exports){
+},{"../../utils/getCurrentTrains.js":231,"./components/TrainsList.js":228,"./components/TrainsListEntry.js":229,"./components/TrainsListEntryDropdown.js":230,"react":215}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49115,7 +49632,7 @@ var TrainsList = function (_React$Component) {
 
 exports.default = TrainsList;
 
-},{"../../../utils/getCurrentTrains.js":226,"./TrainsListEntry.js":224,"./TrainsListEntryDropdown.js":225,"react":215}],224:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":231,"./TrainsListEntry.js":229,"./TrainsListEntryDropdown.js":230,"react":215}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49268,7 +49785,7 @@ var TrainsListEntry = function (_React$Component) {
 
 exports.default = TrainsListEntry;
 
-},{"../../../utils/getCurrentTrains.js":226,"./TrainsList.js":223,"./TrainsListEntryDropdown.js":225,"react":215}],225:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":231,"./TrainsList.js":228,"./TrainsListEntryDropdown.js":230,"react":215}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49363,7 +49880,7 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
 exports.default = TrainsListEntryDropdown;
 
-},{"../../../utils/getCurrentTrains.js":226,"./TrainsList.js":223,"./TrainsListEntry.js":224,"react":215}],226:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":231,"./TrainsList.js":228,"./TrainsListEntry.js":229,"react":215}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
