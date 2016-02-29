@@ -48652,6 +48652,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _App = require('./routes/Landing/App.js');
+
+var _App2 = _interopRequireDefault(_App);
+
 var _getCurrentTrains = require('./utils/getCurrentTrains.js');
 
 var _getCurrentTrains2 = _interopRequireDefault(_getCurrentTrains);
@@ -48668,9 +48672,9 @@ var _TrainsList = require('./routes/Trains/components/TrainsList.js');
 
 var _TrainsList2 = _interopRequireDefault(_TrainsList);
 
-var _App = require('./routes/Trains/App.js');
+var _App3 = require('./routes/Trains/App.js');
 
-var _App2 = _interopRequireDefault(_App);
+var _App4 = _interopRequireDefault(_App3);
 
 var _routes = require('./routes.js');
 
@@ -48678,7 +48682,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./routes.js":219,"./routes/Trains/App.js":220,"./routes/Trains/components/TrainsList.js":221,"./routes/Trains/components/TrainsListEntry.js":222,"./routes/Trains/components/TrainsListEntryDropdown.js":223,"./utils/getCurrentTrains.js":224,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
+},{"./routes.js":219,"./routes/Landing/App.js":220,"./routes/Trains/App.js":221,"./routes/Trains/components/TrainsList.js":222,"./routes/Trains/components/TrainsListEntry.js":223,"./routes/Trains/components/TrainsListEntryDropdown.js":224,"./utils/getCurrentTrains.js":225,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48695,21 +48699,83 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = require('react-router');
 
-var _App = require('./routes/Trains/App.js');
+var _App = require('./routes/Landing/App.js');
 
 var _App2 = _interopRequireDefault(_App);
+
+var _App3 = require('./routes/Trains/App.js');
+
+var _App4 = _interopRequireDefault(_App3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRouter.Router,
   { history: _reactRouter.browserHistory },
-  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App4.default })
 ), document.getElementById('app'));
 
 exports.default = routes;
 
-},{"./routes/Trains/App.js":220,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
+},{"./routes/Landing/App.js":220,"./routes/Trains/App.js":221,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Landing = function Landing() {
+  return _react2.default.createElement(
+    "div",
+    { className: "container" },
+    _react2.default.createElement(
+      "div",
+      { className: "row button-row" },
+      _react2.default.createElement(
+        "div",
+        { className: "col-xs-4 col-xs-offset-1 btn btn-info" },
+        _react2.default.createElement(
+          "div",
+          { className: "dummy" },
+          "Board a Train"
+        ),
+        _react2.default.createElement("img", { className: "people", src: "assets/people.png" }),
+        _react2.default.createElement("img", { className: "train", src: "assets/train.png" }),
+        _react2.default.createElement(
+          "div",
+          { className: "destinations-text" },
+          "Join your friends on fun outings"
+        )
+      ),
+      _react2.default.createElement(
+        "div",
+        { className: "col-xs-4 col-xs-offset-2 btn btn-info" },
+        _react2.default.createElement(
+          "div",
+          { className: "dummy" },
+          "Schedule a Train"
+        ),
+        _react2.default.createElement("img", { className: "calendar", src: "assets/calendar.png" }),
+        _react2.default.createElement("img", { className: "location", src: "assets/location.png" }),
+        _react2.default.createElement(
+          "div",
+          { className: "trains-test" },
+          "Organize trips to new places or old favorites"
+        )
+      )
+    )
+  );
+};
+
+exports.default = Landing;
+
+},{"react":215}],221:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48746,13 +48812,13 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var App = function (_React$Component) {
-  _inherits(App, _React$Component);
+var Trains = function (_React$Component) {
+  _inherits(Trains, _React$Component);
 
-  function App(props) {
-    _classCallCheck(this, App);
+  function Trains(props) {
+    _classCallCheck(this, Trains);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this, props));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Trains).call(this, props));
 
     _this.state = {
       trains: [],
@@ -48763,7 +48829,7 @@ var App = function (_React$Component) {
     return _this;
   }
 
-  _createClass(App, [{
+  _createClass(Trains, [{
     key: 'getCurrentLocation',
     value: function getCurrentLocation(cb) {
       var _this2 = this;
@@ -48901,12 +48967,12 @@ var App = function (_React$Component) {
     }
   }]);
 
-  return App;
+  return Trains;
 }(_react2.default.Component);
 
-exports.default = App;
+exports.default = Trains;
 
-},{"../../utils/getCurrentTrains.js":224,"./components/TrainsList.js":221,"./components/TrainsListEntry.js":222,"./components/TrainsListEntryDropdown.js":223,"react":215}],221:[function(require,module,exports){
+},{"../../utils/getCurrentTrains.js":225,"./components/TrainsList.js":222,"./components/TrainsListEntry.js":223,"./components/TrainsListEntryDropdown.js":224,"react":215}],222:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48973,7 +49039,7 @@ var TrainsList = function (_React$Component) {
 
 exports.default = TrainsList;
 
-},{"../../../utils/getCurrentTrains.js":224,"./TrainsListEntry.js":222,"./TrainsListEntryDropdown.js":223,"react":215}],222:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":225,"./TrainsListEntry.js":223,"./TrainsListEntryDropdown.js":224,"react":215}],223:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49126,7 +49192,7 @@ var TrainsListEntry = function (_React$Component) {
 
 exports.default = TrainsListEntry;
 
-},{"../../../utils/getCurrentTrains.js":224,"./TrainsList.js":221,"./TrainsListEntryDropdown.js":223,"react":215}],223:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":225,"./TrainsList.js":222,"./TrainsListEntryDropdown.js":224,"react":215}],224:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49221,7 +49287,7 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
 exports.default = TrainsListEntryDropdown;
 
-},{"../../../utils/getCurrentTrains.js":224,"./TrainsList.js":221,"./TrainsListEntry.js":222,"react":215}],224:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":225,"./TrainsList.js":222,"./TrainsListEntry.js":223,"react":215}],225:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
