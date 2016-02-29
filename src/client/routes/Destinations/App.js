@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-import Map from './component/map';
-import Lists from './component/lists';
-//import FoodListEntry from './component/FoodListEntry';
-import localMap from './component/localMap';
-import localLists from './component/localLists';
+import GoogleMap from './components/GoogleMap.js';
+import GoogleList from './components/GoogleList.js';
+import LocalMap from './components/LocalMap.js';
+import LocalList from './components/LocalList.js';
+
+import $ from 'jquery';
 
 
 let map;
 let service;
 let infowindow;
-class App extends Component {
+
+class Destinations extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -154,8 +156,8 @@ class App extends Component {
             <button onClick={this.onClicks.bind(this)}>Recommendation</button>
           </div>
           <div>
-            <Map onMapShow={this.getPlace.bind(this)}/>
-            <Lists list={this.state.list} />
+            <GoogleMap onMapShow={this.getPlace.bind(this)}/>
+            <GoogleList list={this.state.list} />
           </div>
         </div>
       )
@@ -167,8 +169,8 @@ class App extends Component {
             <button onClick={this.onClicks.bind(this)}>Recommendation</button>
           </div>
           <div>
-            <localMap onMapShow={this.locatGetPlace.bind(this)}/>
-            <localLists list={this.state.list}/>
+            <LocalMap onMapShow={this.locatGetPlace.bind(this)}/>
+            <LocalList list={this.state.list}/>
           </div>
         </div>
       )
@@ -176,6 +178,4 @@ class App extends Component {
   }
 }
 
-
-
-ReactDOM.render(<App />, document.querySelector('.app'))
+export default Destinations;
