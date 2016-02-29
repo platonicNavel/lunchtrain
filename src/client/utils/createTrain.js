@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import _ from 'lodash'
 
-const createTrain = (d, d2, place_id, name, lat, lng, visits) => {
+const createTrain = (d, d2, place_id, name, lat, lng, visits, local) => {
   console.log('LET\'S GOOOOOOOOOOOOOO', d, d2, place_id, name, lat, lng, visits)
   $.ajax({
     url: '/destinations',

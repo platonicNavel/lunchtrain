@@ -48980,7 +48980,17 @@ var Destinations = function (_Component) {
     }
   }, {
     key: 'locatGetPlace',
-    value: function locatGetPlace() {
+    value: function (_locatGetPlace) {
+      function locatGetPlace() {
+        return _locatGetPlace.apply(this, arguments);
+      }
+
+      locatGetPlace.toString = function () {
+        return _locatGetPlace.toString();
+      };
+
+      return locatGetPlace;
+    }(function () {
       var _this4 = this;
 
       _jquery2.default.ajax({
@@ -49010,6 +49020,7 @@ var Destinations = function (_Component) {
       var marker, i;
 
       var locations = function locations() {
+
         var lists = _this4.state.list;
         for (var i = 0; i < lists.length; i++) {
           marker = new google.maps.Marker({
@@ -49025,7 +49036,8 @@ var Destinations = function (_Component) {
           }(marker, i));
         }
       };
-    }
+      google.maps.event.addDomListener(window, 'load', locatGetPlace);
+    })
   }, {
     key: 'render',
     value: function render() {
@@ -49317,14 +49329,22 @@ var LocalList = function (_Component) {
   _createClass(LocalList, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var listItems = this.props.list.map(function (item) {
         console.log('itemssssss', item);
         return _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
-            'div',
-            { className: 'button' },
+            'button',
+            { className: 'button', onClick: function onClick(e) {
+                _this2.createTrain(e, d, d2, item.place_id, item.name, item.geometry.location.lat(), item.geometry.location.lng(), 0);
+                _this2.setState({
+                  joined: true
+                });
+              } },
+            'schedule train ',
             item.name
           ),
           _react2.default.createElement(
@@ -50078,7 +50098,7 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var createTrain = function createTrain(d, d2, place_id, name, lat, lng, visits) {
+var createTrain = function createTrain(d, d2, place_id, name, lat, lng, visits, local) {
   console.log('LET\'S GOOOOOOOOOOOOOO', d, d2, place_id, name, lat, lng, visits);
   _jquery2.default.ajax({
     url: '/destinations',
