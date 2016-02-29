@@ -1,3 +1,6 @@
+import $ from 'jquery';
+import _ from 'lodash'
+
 const getCurrentTrains = (cb) => {
   $.ajax({
     url: '/api/trains',

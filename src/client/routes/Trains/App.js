@@ -1,3 +1,9 @@
+import React from 'react';
+import getCurrentTrains from '../../utils/getCurrentTrains.js';
+import TrainsListEntryDropdown from './components/TrainsListEntryDropdown.js';
+import TrainsListEntry from './components/TrainsListEntry.js';
+import TrainsList from './components/TrainsList.js';
+
 class App extends React.Component {
 
   constructor(props) {
