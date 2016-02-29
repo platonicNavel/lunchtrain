@@ -1,8 +1,13 @@
 const auth = require('./auth');
 const utils = require('./utils.js');
+// TO DELETE:
+const path = require('path');
 
-module.exports = function routes(app) {
+module.exports = (app) => {
   app.get('/', auth.ensureAuthenticated, utils.serveIndex);
+  app.get('/landing', auth.ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, '../../../views/landing.html'));
+  });
   app.get('/login', utils.serveLogin);
   app.get('/api/destinations', auth.ensureAuthenticated, utils.getDestinations);
   app.get('/api/trains', auth.ensureAuthenticated, utils.getTrains);
@@ -15,3 +20,4 @@ module.exports = function routes(app) {
   app.post('/trains', utils.boardTrain);
   app.get('/*', utils.serveNotFound);
 };
+
