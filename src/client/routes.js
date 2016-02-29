@@ -1,17 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
 import Login from './routes/Login/App.js';
 import Landing from './routes/Landing/App.js';
 import Trains from './routes/Trains/App.js';
 
-ReactDOM.render((
+const routes = ReactDOM.render((
 
   <Router history={browserHistory}>
-    {/*Change when landing page is built*/}
-    <Route path="/" component={Login}>
-    </Route>
+    <Route path="/" component={Landing}></Route>
+    <Route path="/login" component={Login}></Route>
+    <Route path="/trains" component={Trains}></Route>
   </Router>
 
 ), document.getElementById('app'));
