@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
+import createTrain from '../../../utils/createTrain.js';
+
 class GoogleList extends Component {
   constructor(props) {
       super(props)
     }
 
+
+  createTrain(e, d, d2, place_id, name, lat, lng, visits) {
+    e.stopPropagation();
+    createTrain(d, d2, place_id, name, lat, lng, visits);
+  }
 
     render() {
       const listItems = this.props.list.map ( item => {
@@ -29,14 +36,22 @@ class GoogleList extends Component {
         } else if(item.price_level === 4) {
           item.price_level = '$$$$'
         } else {
-          item.price_level = ''
+          item.price_level = '$$$$$'
         }
 
-        
+        let d = new Date().getTime();
+        let d2 = d+3600;
         return (
           <div>
-            <button>Get on the train</button>
-            <div className="button"> 
+            <button className="button" onClick={
+              (e) => {
+                this.createTrain(e, d, d2, item.place_id, item.name, item.geometry.location.lat(), item.geometry.location.lng(), 0);
+                this.setState({
+                  joined: true,
+                });
+              }
+            }>schedule train {item.name}</button>
+            <div>
               {item.name} 
             </div>
             <div className="popup">

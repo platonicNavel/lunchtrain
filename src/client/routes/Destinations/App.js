@@ -41,6 +41,7 @@ class Destinations extends Component {
     };
 
     onClicks() {
+      this.locatGetPlace();
       this.setState({
         recommend: true
       })
@@ -111,7 +112,7 @@ class Destinations extends Component {
     
     locatGetPlace() {
       $.ajax({
-        url: '/api/trains',
+        url: '/api/destinations',
         type: 'GET',
         datatype: 'json',
         success: function(data) {
@@ -188,10 +189,10 @@ class Destinations extends Component {
                 <button onClick={this.onRevese.bind(this)}>Google</button>
                 <button onClick={this.onClicks.bind(this)}>Recommendation</button>
               </div>
-              <div>
-                <localMap onMapShow={this.locatGetPlace.bind(this)}/>
-              </div>
               <div id="maps">
+                <localMap onMapShows={this.locatGetPlace.bind(this)}/>
+              </div>
+              <div>
                 <localLists list={this.state.list}/>
               </div>
             </div>
@@ -201,4 +202,4 @@ class Destinations extends Component {
     }
   }
 export default Destinations;
-//hello world
+
