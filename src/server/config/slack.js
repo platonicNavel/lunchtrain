@@ -33,7 +33,7 @@ function slackAlert(token, destination, conductor, timeDeparting) {
   });
 }
 
-function alertDepartingTrains () {
+function alertDepartingTrains() {
   // only trains within 10 minutes of departure time get alert
   const alertWindow = Date.now() + 10 * 60 * 1000;
   db.Train.findAll({
@@ -43,18 +43,18 @@ function alertDepartingTrains () {
         $lt: alertWindow,
       },
       alerted: false,
-    }
-  }).then((trainsToAlert) => {
-    return Sequelize.Promise.map(trainsToAlert, (train) => {
+    },
+  }).then((trainsToAlert) => 
+    Sequelize.Promise.map(trainsToAlert, (train) => {
       const token = train.dataValues.Conductor.dataValues.token;
       const dest = train.dataValues.Destination.dataValues.name;
       slackAlert(token, dest);
       return train.update({ alerted: true });
-    });
-  }).then(trainsAlerted => console.log(`${trainsAlerted.length} trains alerted`));
+    })
+  ).then(trainsAlerted => console.log(`${trainsAlerted.length} trains alerted`));
 }
 
-//check every minute for trains about to depart
+// check every minute for trains about to depart
 setInterval(alertDepartingTrains, 1 * 60 * 1000);
 
 module.exports = {

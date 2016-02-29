@@ -96,15 +96,16 @@ function createTrain(req, res) {
     }).then(function (train) {
       train.setConductor(dbUser).then(function () {
         train.setTeam(dbUser.dataValues.Teams[0]).then(function () {
-          db.Destination.findOrCreate({ where: {
-              googleId: data.googleId
-            }, defaults: {
+          db.Destination.findOrCreate({
+            where: { googleId: data.googleId },
+            defaults: {
               name: data.name,
               lat: data.lat,
               long: data.long,
               visits: data.visits,
               likes: data.likes
-            } }).spread(function (destination) {
+            }
+          }).spread(function (destination) {
             return destination.addTrain(train);
           }).then(function () {
             slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting);
