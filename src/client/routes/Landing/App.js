@@ -9,15 +9,15 @@ class Landing extends React.Component {
     super(props);
   }
 
-  unmount() {
-    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
+  componentWillUnmount() {
+    ReactDOM.unmountComponentAtNode(document.getElementById('bossMode'));
   }
 
   render() {
     return (
       <div className="container">
         <div className="row button-row">
-         <Link to="/trains" onClick={this.unmount()}>
+         <Link to="/trains" onClick={this.componentWillUnmount}>
             <div className="col-xs-4 col-xs-offset-1 btn btn-info">
             <div className="dummy">Board a Train</div>
               <img className="people" src="assets/people.png" />
@@ -25,7 +25,7 @@ class Landing extends React.Component {
               <div className="destinations-text">Join your friends on fun outings</div>
             </div>
           </Link>
-          <Link to="/destinations" onClick={this.unmount()}>
+          <Link to="/destinations" onClick={this.componentWillUnmount}>
             <div className="col-xs-4 col-xs-offset-2 btn btn-info">
               <div className="dummy">Schedule a Train</div>
               <img className="calendar" src="assets/calendar.png" />
