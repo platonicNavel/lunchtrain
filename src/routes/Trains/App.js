@@ -7,6 +7,7 @@ class App extends React.Component {
       trains: [],
       currLat: null,
       currLon: null,
+      maps: [],
     };
   }
 
@@ -48,8 +49,8 @@ class App extends React.Component {
     console.log(train.users)
   }
 
-  handleAccordionMap(id, lat, lon) {
-    console.log(this.refs['dropdown'+id])
+  handleAccordionMap(id, lat, lon, map) {
+    console.log('accordion', this.refs['dropdown'+id], map, this.props.currentLoc)
     let clickedTrain = this.refs['dropdown'+id];
     if(clickedTrain.state.open) {
       clickedTrain.setState({
@@ -62,6 +63,11 @@ class App extends React.Component {
         open: true,
         accordionClass: "details open"
       });
+      let fixMap = (map, currentLoc) => {
+        map.setZoom(15);
+        google.maps.event.trigger(map, "resize");
+      };
+      _.delay(fixMap, 500, map[id-1], this.props.currentLoc)
     }
   }
 
@@ -83,7 +89,7 @@ class App extends React.Component {
     });
 
     let directionsDisp = new google.maps.DirectionsRenderer({
-      map: map
+      map: map,
     });
 
     let directionsService = new google.maps.DirectionsService();
@@ -104,13 +110,12 @@ class App extends React.Component {
           directionsDisp.setPanel(document.getElementById(`mapPanel${id}`));
         }
       });
-
-
-
     };
 
-    renderDirections(currLat, currLon)
 
+    renderDirections(currLat, currLon)
+    this.state.maps.push(map);
+    console.log(this.state.maps)
   }
 
   componentDidMount() {
@@ -122,7 +127,7 @@ class App extends React.Component {
     return (
       <div>
         <div className="trainsView container-fluid">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)}></TrainsList>
+          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)} maps={this.state.maps} currentLoc={{lat: this.state.currLat, lng: this.state.currLon}}></TrainsList>
         </div>
       </div>
     )
