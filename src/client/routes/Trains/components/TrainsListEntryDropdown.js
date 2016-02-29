@@ -45,3 +45,5 @@ class TrainsListEntryDropdown extends React.Component {
     )
   }
 }
+
+export default TrainsListEntryDropdown;

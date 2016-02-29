@@ -7,3 +7,5 @@ ReactDOM.render((
   </Router>
 
 ), document.body);
+
+export default routes

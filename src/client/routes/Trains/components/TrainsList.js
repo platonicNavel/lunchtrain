@@ -21,3 +21,5 @@ class TrainsList extends React.Component {
   }
 
 }
+
+export default TrainsList;
