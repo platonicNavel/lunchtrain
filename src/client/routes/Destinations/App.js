@@ -127,7 +127,6 @@ class Destinations extends Component {
         }
       });
 
-
       var map = new google.maps.Map(document.getElementById('maps'), {
         zoom: 10,
         center: new google.maps.LatLng(-33.92, 151.25),
@@ -139,6 +138,7 @@ class Destinations extends Component {
       var marker, i;
 
       const locations = () => {
+        
         const lists = this.state.list;
         for(var i = 0 ; i < lists.length; i ++ ) {
           marker = new google.maps.Marker({
@@ -154,6 +154,7 @@ class Destinations extends Component {
           })(marker, i));
         }
       }
+      google.maps.event.addDomListener(window, 'load', locatGetPlace);
     }
 
 
