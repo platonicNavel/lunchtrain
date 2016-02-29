@@ -64,6 +64,25 @@ passport.use(new SlackStrategy({
     });
   }));
 
+exports.checkAuthenticated = (req, res, next) => {
+  let authenticated = false;
+  if (config.devMode) {
+     req.user = {
+      dataValues: {
+        firstName: 'Griffin',
+        lastName: 'Michl',
+      },
+      slackTeamId: 'T0AHB62V6',
+      teamName: 'T0AHB62V6',
+    };   
+  }
+  if (req.isAuthenticated() || config.devMode) {
+    authenticated = true;
+  }
+  res.send(authenticated);
+};
+
+
 exports.ensureAuthenticated = (req, res, next) => {
   let retVal;
   if (config.devMode) {
