@@ -48652,9 +48652,13 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _App = require('./routes/Landing/App.js');
+var _App = require('./routes/Login/App.js');
 
 var _App2 = _interopRequireDefault(_App);
+
+var _App3 = require('./routes/Landing/App.js');
+
+var _App4 = _interopRequireDefault(_App3);
 
 var _getCurrentTrains = require('./utils/getCurrentTrains.js');
 
@@ -48672,9 +48676,9 @@ var _TrainsList = require('./routes/Trains/components/TrainsList.js');
 
 var _TrainsList2 = _interopRequireDefault(_TrainsList);
 
-var _App3 = require('./routes/Trains/App.js');
+var _App5 = require('./routes/Trains/App.js');
 
-var _App4 = _interopRequireDefault(_App3);
+var _App6 = _interopRequireDefault(_App5);
 
 var _routes = require('./routes.js');
 
@@ -48682,7 +48686,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./routes.js":219,"./routes/Landing/App.js":220,"./routes/Trains/App.js":221,"./routes/Trains/components/TrainsList.js":222,"./routes/Trains/components/TrainsListEntry.js":223,"./routes/Trains/components/TrainsListEntryDropdown.js":224,"./utils/getCurrentTrains.js":225,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
+},{"./routes.js":219,"./routes/Landing/App.js":220,"./routes/Login/App.js":221,"./routes/Trains/App.js":222,"./routes/Trains/components/TrainsList.js":223,"./routes/Trains/components/TrainsListEntry.js":224,"./routes/Trains/components/TrainsListEntryDropdown.js":225,"./utils/getCurrentTrains.js":226,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48699,25 +48703,29 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = require('react-router');
 
-var _App = require('./routes/Landing/App.js');
+var _App = require('./routes/Login/App.js');
 
 var _App2 = _interopRequireDefault(_App);
 
-var _App3 = require('./routes/Trains/App.js');
+var _App3 = require('./routes/Landing/App.js');
 
 var _App4 = _interopRequireDefault(_App3);
+
+var _App5 = require('./routes/Trains/App.js');
+
+var _App6 = _interopRequireDefault(_App5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(
   _reactRouter.Router,
   { history: _reactRouter.browserHistory },
-  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App4.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
 ), document.getElementById('app'));
 
 exports.default = routes;
 
-},{"./routes/Landing/App.js":220,"./routes/Trains/App.js":221,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
+},{"./routes/Landing/App.js":220,"./routes/Login/App.js":221,"./routes/Trains/App.js":222,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -48776,6 +48784,60 @@ var Landing = function Landing() {
 exports.default = Landing;
 
 },{"react":215}],221:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Login = function Login() {
+  return _react2.default.createElement(
+    "div",
+    { className: "container" },
+    _react2.default.createElement(
+      "div",
+      { className: "row" },
+      _react2.default.createElement(
+        "div",
+        { className: "col-xs-8 col-xs-offset-2" },
+        _react2.default.createElement("img", { className: "slack-icon", src: "assets/slack_icon.png" }),
+        _react2.default.createElement(
+          "span",
+          { className: "login-text" },
+          "LunchTrain + Slack"
+        )
+      )
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "row" },
+      _react2.default.createElement(
+        "div",
+        { className: "col-xs-8 col-xs-offset-2" },
+        "Organizing social activities with your team just got easier!  LunchTrain lets you organize group outings and find new places to hang out. All aboard!"
+      )
+    ),
+    _react2.default.createElement(
+      "div",
+      { className: "row" },
+      _react2.default.createElement(
+        "a",
+        { className: "col-xs-2 col-xs-offset-5 btn btn-primary", href: "/auth/slack" },
+        "Connect with Slack"
+      )
+    )
+  );
+};
+
+exports.default = Login;
+
+},{"react":215}],222:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48972,7 +49034,7 @@ var Trains = function (_React$Component) {
 
 exports.default = Trains;
 
-},{"../../utils/getCurrentTrains.js":225,"./components/TrainsList.js":222,"./components/TrainsListEntry.js":223,"./components/TrainsListEntryDropdown.js":224,"react":215}],222:[function(require,module,exports){
+},{"../../utils/getCurrentTrains.js":226,"./components/TrainsList.js":223,"./components/TrainsListEntry.js":224,"./components/TrainsListEntryDropdown.js":225,"react":215}],223:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49039,7 +49101,7 @@ var TrainsList = function (_React$Component) {
 
 exports.default = TrainsList;
 
-},{"../../../utils/getCurrentTrains.js":225,"./TrainsListEntry.js":223,"./TrainsListEntryDropdown.js":224,"react":215}],223:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":226,"./TrainsListEntry.js":224,"./TrainsListEntryDropdown.js":225,"react":215}],224:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49192,7 +49254,7 @@ var TrainsListEntry = function (_React$Component) {
 
 exports.default = TrainsListEntry;
 
-},{"../../../utils/getCurrentTrains.js":225,"./TrainsList.js":222,"./TrainsListEntryDropdown.js":224,"react":215}],224:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":226,"./TrainsList.js":223,"./TrainsListEntryDropdown.js":225,"react":215}],225:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49287,7 +49349,7 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
 exports.default = TrainsListEntryDropdown;
 
-},{"../../../utils/getCurrentTrains.js":225,"./TrainsList.js":222,"./TrainsListEntry.js":223,"react":215}],225:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":226,"./TrainsList.js":223,"./TrainsListEntry.js":224,"react":215}],226:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
