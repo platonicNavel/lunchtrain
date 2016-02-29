@@ -14,6 +14,7 @@ const dbSpec = require('./db-spec.js');
 
 describe('Privileged Access:', () => {
   it('Redirects to login page if user tries to access main page while not signed in', (done) => {
+    console.log(config.devMode);
     request(server)
       .get('/')
       .expect(302)
@@ -46,7 +47,7 @@ describe('Privileged Access:', () => {
 
 
 describe('User Login:', () => {
-  xit('Signup logs in a new user', (done) => {
+  it('Signup logs in a new user', (done) => {
     request(server)
     .get('/login')
     .expect(200)
