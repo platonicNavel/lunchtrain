@@ -126,7 +126,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="trainsView container-fluid">
+        <div className="trainsView container">
           <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)} maps={this.state.maps} currentLoc={{lat: this.state.currLat, lng: this.state.currLon}}></TrainsList>
         </div>
       </div>
