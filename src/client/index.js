@@ -1,3 +1,5 @@
+import { Router, Route, Link } from './lib/react-router';
+
 import routes from './routes.js';
 import getCurrentTrains from './utils/getCurrentTrains.js';
 import TrainsListEntryDropdown from './routes/Trains/components/TrainsListEntryDropdown.js';
