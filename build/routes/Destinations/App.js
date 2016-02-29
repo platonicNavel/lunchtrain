@@ -32,16 +32,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //google api in html head we need to put this
-//<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4&libraries=places"></script>
-// <style>
-//     #map {
-//       width: 500px;
-//       height: 500px;
-//     }
-// </style>
-// need to do in order to show the google map
-
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 //import FoodListEntry from './component/FoodListEntry';
 
 
@@ -61,7 +52,8 @@ var App = function (_Component) {
       list: [],
       recommend: false,
       lat: 37.783756,
-      lng: -122.40921549999999
+      lng: -122.40921549999999,
+      map: null
     };
 
     return _this;
@@ -90,6 +82,7 @@ var App = function (_Component) {
   }, {
     key: 'onRevese',
     value: function onRevese() {
+      this.getPlace();
       this.setState({
         recommend: false
       });
@@ -115,6 +108,10 @@ var App = function (_Component) {
           radius: 500,
           types: ['restaurant', 'cafe']
         }, callback);
+
+        _this2.setState({
+          map: map
+        });
       };
 
       var callback = function callback(results, status) {
@@ -191,11 +188,6 @@ var App = function (_Component) {
       };
     }
   }, {
-    key: 'handleDropdown',
-    value: function handleDropdown() {
-      return alert('hi');
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.navi();
@@ -225,7 +217,7 @@ var App = function (_Component) {
             'div',
             null,
             _react2.default.createElement(_map2.default, { onMapShow: this.getPlace.bind(this) }),
-            _react2.default.createElement(_lists2.default, { list: this.state.list, handleDropdown: this.handleDropdown.bind(this) })
+            _react2.default.createElement(_lists2.default, { list: this.state.list })
           )
         );
       } else {

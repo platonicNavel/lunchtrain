@@ -1,12 +1,3 @@
-//google api in html head we need to put this 
-//<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4&libraries=places"></script>
-// <style>
-//     #map {
-//       width: 500px;
-//       height: 500px;
-//     }
-// </style>
-// need to do in order to show the google map
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
@@ -27,7 +18,8 @@ class App extends Component {
       list: [],
       recommend: false,
       lat: 37.783756,
-      lng: -122.40921549999999
+      lng: -122.40921549999999,
+      map: null
     } 
 
   }
@@ -49,6 +41,7 @@ class App extends Component {
   }
 
   onRevese() {
+    this.getPlace();
     this.setState({
       recommend: false
     })
@@ -71,6 +64,10 @@ class App extends Component {
         radius: 500,
         types: ['restaurant','cafe']
       }, callback);
+
+      this.setState({
+        map: map
+      });
     };
     
     const callback = (results, status) => {
@@ -144,12 +141,6 @@ class App extends Component {
     }
   }
 
-  handleDropdown() {
-    return (
-      alert('hi')
-    )
-  }
-
   componentDidMount() {
     this.navi();
   };
@@ -159,12 +150,12 @@ class App extends Component {
       return(
         <div>
           <div>
-            <button onClick={this.onRevese.bind(this)}>Google</button>
+            <button onClick={this.onRevese.bind(this)} >Google</button>
             <button onClick={this.onClicks.bind(this)}>Recommendation</button>
           </div>
           <div>
             <Map onMapShow={this.getPlace.bind(this)}/>
-            <Lists list={this.state.list} handleDropdown={this.handleDropdown.bind(this)}/>
+            <Lists list={this.state.list} />
           </div>
         </div>
       )
