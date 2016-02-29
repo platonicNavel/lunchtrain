@@ -14,7 +14,7 @@ module.exports = function(grunt) {
       },
     },
     eslint: {
-      target: ['server/**/*.js', 'src/**/*.js'],
+      target: ['src/**/*.js'],
     },
     shell: {
       local: {
@@ -43,8 +43,6 @@ module.exports = function(grunt) {
   });
 
   // TODO: minify css
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
