@@ -48717,64 +48717,78 @@ var _App6 = _interopRequireDefault(_App5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(
+var routes = _reactDom2.default.render(_react2.default.createElement(
   _reactRouter.Router,
   { history: _reactRouter.browserHistory },
-  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App4.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App6.default })
 ), document.getElementById('app'));
 
 exports.default = routes;
 
 },{"./routes/Landing/App.js":220,"./routes/Login/App.js":221,"./routes/Trains/App.js":222,"react":215,"react-dom":52,"react-router":80}],220:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import routes from '../../routes.js'
 
 var Landing = function Landing() {
   return _react2.default.createElement(
-    "div",
-    { className: "container" },
+    'div',
+    { className: 'container' },
     _react2.default.createElement(
-      "div",
-      { className: "row button-row" },
+      'div',
+      { className: 'row button-row' },
       _react2.default.createElement(
-        "div",
-        { className: "col-xs-4 col-xs-offset-1 btn btn-info" },
+        _reactRouter.Link,
+        { to: '/trains' },
         _react2.default.createElement(
-          "div",
-          { className: "dummy" },
-          "Board a Train"
-        ),
-        _react2.default.createElement("img", { className: "people", src: "assets/people.png" }),
-        _react2.default.createElement("img", { className: "train", src: "assets/train.png" }),
-        _react2.default.createElement(
-          "div",
-          { className: "destinations-text" },
-          "Join your friends on fun outings"
+          'div',
+          { className: 'col-xs-4 col-xs-offset-1 btn btn-info' },
+          _react2.default.createElement(
+            'div',
+            { className: 'dummy' },
+            'Board a Train'
+          ),
+          _react2.default.createElement('img', { className: 'people', src: 'assets/people.png' }),
+          _react2.default.createElement('img', { className: 'train', src: 'assets/train.png' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'destinations-text' },
+            'Join your friends on fun outings'
+          )
         )
       ),
       _react2.default.createElement(
-        "div",
-        { className: "col-xs-4 col-xs-offset-2 btn btn-info" },
+        _reactRouter.Link,
+        { to: '/login' },
         _react2.default.createElement(
-          "div",
-          { className: "dummy" },
-          "Schedule a Train"
-        ),
-        _react2.default.createElement("img", { className: "calendar", src: "assets/calendar.png" }),
-        _react2.default.createElement("img", { className: "location", src: "assets/location.png" }),
-        _react2.default.createElement(
-          "div",
-          { className: "trains-test" },
-          "Organize trips to new places or old favorites"
+          'div',
+          { className: 'col-xs-4 col-xs-offset-2 btn btn-info' },
+          _react2.default.createElement(
+            'div',
+            { className: 'dummy' },
+            'Schedule a Train'
+          ),
+          _react2.default.createElement('img', { className: 'calendar', src: 'assets/calendar.png' }),
+          _react2.default.createElement('img', { className: 'location', src: 'assets/location.png' }),
+          _react2.default.createElement(
+            'div',
+            { className: 'trains-test' },
+            'Organize trips to new places or old favorites'
+          )
         )
       )
     )
@@ -48783,7 +48797,7 @@ var Landing = function Landing() {
 
 exports.default = Landing;
 
-},{"react":215}],221:[function(require,module,exports){
+},{"react":215,"react-router":80}],221:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
