@@ -10,11 +10,17 @@ button {
   display: block;
 }
 
+.topbar {
+  width: 100vw;
+  height: 75px;
+  background-color: #064887;
+}
+
 /*Structure*/
 
 .trainsView {
   background-color: #1976D2;
-  height: 100em;
+  height: 100%;
 }
 
 /*Current Trains*/
@@ -22,9 +28,7 @@ button {
   /*---TrainsList---*/
 .trainsList {
   position: relative;
-  top: 3%;
-  height: 50vh;
-  border: 1px dashed #222222;
+  padding-top: 10%;
 }
 
   /*---TrainsListEntry---*/
@@ -38,8 +42,7 @@ button {
   position: relative;
   height: 15.8em;
   background-color: #2196F3;
-  margin: 3em auto;
-  margin-bottom: 20px;
+  margin: 0.1em auto;
   z-index: 2;
   border-radius: 10px;
 }
@@ -195,6 +198,9 @@ button {
       width: 1100px !important;
   }
 }
+
+/* DESTINATION */
+
 .dummy {
   font-size: 30px;
   text-decoration: underline;
@@ -236,9 +242,6 @@ button {
   font-size: 20px;
   padding-left: 20px;
 }
-
-
-/* Destination */
 
 #map { 
     width: 500px;

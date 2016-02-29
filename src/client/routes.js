@@ -15,8 +15,11 @@ class Root extends React.Component {
 
   render() {
     return(
-      <div id="bossMode">
-        {this.props.children || <Landing />}
+      <div>
+        <div className="topbar"></div>
+        <div id="bossMode">
+          {this.props.children || <Landing />}
+        </div>
       </div>
     )
   }
