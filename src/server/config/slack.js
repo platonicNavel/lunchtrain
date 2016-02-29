@@ -17,7 +17,6 @@ function createChannel(token) {
 function slackAlert(token, destination, conductor, timeDeparting) {
   let str;
   if (conductor && timeDeparting) {
-    typeof
     const dateDeparting = new Date(+timeDeparting);
     // todo: make conductor @username, format timeDeparting
     str = `${conductor} has scheduled a train to ${destination} on ${dateDeparting}`;
