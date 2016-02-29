@@ -1,9 +1,17 @@
+// SHARED
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Link, browserHistory } from 'react-router';
 
 import $ from 'jquery';
 import _ from 'lodash';
+
+// LANDING
+
+import Landing from './routes/Landing/App.js';
+
+// TRAINS
 
 import getCurrentTrains from './utils/getCurrentTrains.js';
 import TrainsListEntryDropdown from './routes/Trains/components/TrainsListEntryDropdown.js';
