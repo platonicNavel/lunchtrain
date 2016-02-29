@@ -65,7 +65,7 @@ passport.use(new SlackStrategy({
   });
 }));
 
-exports.checkAuthenticated = function (req, res, next) {
+exports.checkAuthenticated = function (req, res) {
   var authenticated = false;
   if (config.devMode) {
     req.user = {

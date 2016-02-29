@@ -2,7 +2,6 @@
 
 var request = require('request');
 var db = require('../db/index');
-var _ = require('underscore');
 var Sequelize = require('sequelize');
 
 // todo: alert the user that this channel has/will be created
@@ -18,7 +17,7 @@ function createChannel(token) {
 // can probably make these request more robust relative to the posting channel
 function slackAlert(token, destination, conductor, timeDeparting) {
   var str = undefined;
-  if (arguments.length > 2) {
+  if (conductor && timeDeparting) {
     // todo: make conductor @username, format timeDeparting
     str = conductor + ' has scheduled a train to ' + destination + ' at ' + timeDeparting;
   } else {
@@ -57,7 +56,7 @@ function alertDepartingTrains() {
   });
 }
 
-//check every minute for trains about to depart
+// check every minute for trains about to depart
 setInterval(alertDepartingTrains, 1 * 60 * 1000);
 
 module.exports = {
