@@ -49,3 +49,5 @@ class TrainsListEntry extends React.Component {
     )
   }
 }
+
+export default TrainsListEntry;

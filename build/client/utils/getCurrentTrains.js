@@ -1,5 +1,8 @@
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var getCurrentTrains = function getCurrentTrains(cb) {
   $.ajax({
     url: '/api/trains',
@@ -39,3 +42,5 @@ var convertHours = function convertHours(hours) {
 };
 
 window.getCurrentTrains = getCurrentTrains;
+
+exports.default = getCurrentTrains;
