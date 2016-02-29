@@ -99,11 +99,10 @@ var train3 = {
 
 var allTrains = [train1, train2, train3];
 
-//create arrays of each db entry for dummy data
+// create arrays of each db entry for dummy data
 var createdUsers = undefined;
 var createdTeams = undefined;
 var createdDestinations = undefined;
-var createdTrains = undefined;
 
 function initializeData() {
   return db.sequelize.sync({ force: true }).then(function () {
@@ -126,7 +125,7 @@ function initializeData() {
       return db.Train.create(train);
     });
   }).then(function (trains) {
-    createdTrains = trains;
+    var createdTrains = trains;
     /*
       At this point all promises have resolved, and
       we have 4 arrays with all our ORM dummy data.
