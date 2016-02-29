@@ -7,6 +7,10 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import $ from 'jquery';
 import _ from 'lodash';
 
+// LOGIN
+
+import Login from './routes/Login/App.js'
+
 // LANDING
 
 import Landing from './routes/Landing/App.js';
