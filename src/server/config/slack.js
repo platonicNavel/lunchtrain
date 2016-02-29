@@ -1,6 +1,5 @@
 const request = require('request');
 const db = require('../db/index');
-const _ = require('underscore');
 const Sequelize = require('sequelize');
 
 
@@ -17,7 +16,7 @@ function createChannel(token) {
 // can probably make these request more robust relative to the posting channel
 function slackAlert(token, destination, conductor, timeDeparting) {
   let str;
-  if (arguments.length > 2) {
+  if (conductor && timeDeparting) {
     // todo: make conductor @username, format timeDeparting
     str = `${conductor} has scheduled a train to ${destination} at ${timeDeparting}`;
   } else {
@@ -44,7 +43,7 @@ function alertDepartingTrains() {
       },
       alerted: false,
     },
-  }).then((trainsToAlert) => 
+  }).then((trainsToAlert) =>
     Sequelize.Promise.map(trainsToAlert, (train) => {
       const token = train.dataValues.Conductor.dataValues.token;
       const dest = train.dataValues.Destination.dataValues.name;
