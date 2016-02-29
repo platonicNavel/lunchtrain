@@ -11,7 +11,7 @@ class LocalList extends Component {
       console.log('itemssssss', item)
       return (
         <div>
-          <div className="button"> 
+          <div className="button">
             {item.name} 
           </div>
           <div className="popup">
