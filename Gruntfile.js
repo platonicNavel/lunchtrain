@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     },
     nodemon: {
       dev: {
-        script: 'server.js',
+        script: 'build/server/server.js',
       },
     },
     eslint: {
@@ -40,6 +40,12 @@ module.exports = function(grunt) {
         ]
       },
     },
+    watch: {
+      scripts: {
+        files: ['src/**/*.js'],
+        tasks: ['babel'],
+      },
+    },
   });
 
   // TODO: minify css
@@ -49,6 +55,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-babel');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
 
   grunt.registerTask('test', [
@@ -58,8 +65,8 @@ module.exports = function(grunt) {
 
   // TODO: deal with combining modules
   grunt.registerTask('build', [
-    'clean:build',
     'babel',
+    'nodemon',
   ]);
 
 
