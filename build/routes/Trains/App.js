@@ -19,7 +19,8 @@ var App = function (_React$Component) {
     _this.state = {
       trains: [],
       currLat: null,
-      currLon: null
+      currLon: null,
+      maps: []
     };
     return _this;
   }
@@ -71,8 +72,8 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'handleAccordionMap',
-    value: function handleAccordionMap(id, lat, lon) {
-      console.log(this.refs['dropdown' + id]);
+    value: function handleAccordionMap(id, lat, lon, map) {
+      console.log('accordion', this.refs['dropdown' + id], map, this.props.currentLoc);
       var clickedTrain = this.refs['dropdown' + id];
       if (clickedTrain.state.open) {
         clickedTrain.setState({
@@ -84,6 +85,11 @@ var App = function (_React$Component) {
           open: true,
           accordionClass: "details open"
         });
+        var fixMap = function fixMap(map, currentLoc) {
+          map.setZoom(15);
+          google.maps.event.trigger(map, "resize");
+        };
+        _.delay(fixMap, 500, map[id - 1], this.props.currentLoc);
       }
     }
   }, {
@@ -133,6 +139,8 @@ var App = function (_React$Component) {
       };
 
       renderDirections(currLat, currLon);
+      this.state.maps.push(map);
+      console.log(this.state.maps);
     }
   }, {
     key: 'componentDidMount',
@@ -149,7 +157,7 @@ var App = function (_React$Component) {
         React.createElement(
           'div',
           { className: 'trainsView container-fluid' },
-          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: this.renderMap.bind(this), getCurrentLocation: this.getCurrentLocation.bind(this) })
+          React.createElement(TrainsList, { trains: this.state.trains, handleAccordionMap: this.handleAccordionMap, joinTrain: this.joinTrain.bind(this), renderMap: this.renderMap.bind(this), getCurrentLocation: this.getCurrentLocation.bind(this), maps: this.state.maps, currentLoc: { lat: this.state.currLat, lng: this.state.currLon } })
         )
       );
     }
