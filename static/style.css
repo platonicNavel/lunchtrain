@@ -3,7 +3,7 @@
 body {
   font-family: 'Roboto', sans-serif !important;
   overflow-x: hidden;
-  background-color: black !important;
+  /*background-color: black !important;*/
 }
 
 button {
@@ -186,4 +186,46 @@ button {
 .gmapDir {
   position: relative;
   top: 25px;
+}
+
+.dummy {
+  font-size: 30px;
+  text-decoration: underline;
+  padding: 10px;
+}
+
+.calendar {
+  height: 25%; 
+  width: 25%; 
+}
+
+.people {
+  height: 25%; 
+  width: 25%; 
+}
+
+.train {
+  height: 25%; 
+  width: 25%; 
+}
+
+.location {
+  height: 25%; 
+  width: 25%; 
+}
+
+.button-row {
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+.slack-icon {
+  height: 5%;
+  width: 5%;
+}
+
+.login-text {
+  font-size: 20px;
+  padding-left: 20px;
 }
