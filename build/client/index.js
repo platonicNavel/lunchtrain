@@ -48975,6 +48975,7 @@ var Destinations = function (_Component) {
           infowindow.open(map, this);
         });
       };
+
       var iniRender = undefined;
       if (this.state.redering === false) {
         iniRender = '';
@@ -49177,7 +49178,7 @@ var GoogleList = function (_Component) {
 
       var listItems = this.props.list.map(function (item) {
         var placeId = item.place_id;
-        var smallMaps = "https://www.google.com/maps/embed/v1/place?q=place_id:" + placeId + "&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4";
+        var smallMaps = 'https://www.google.com/maps/embed/v1/place?q=place_id:' + placeId + '&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4';
 
         if (item.opening_hours.open_now) {
           item.opening_hours.open_now = 'open';

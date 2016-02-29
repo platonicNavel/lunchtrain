@@ -81,124 +81,125 @@ class Destinations extends Component {
         this.setState({
           list: results,
         });
-        console.log('after ', this.state.list)
+        console.log('after ', this.state.list);
       }
     };
 
-      const createMarker = (place) => {
-        let placeLoc = place.geometry.location;
-        let marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location,
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
-        });
-      };
-      let iniRender;
-      if (this.state.redering === false) {
-        iniRender = '';
-      } else {
-        iniRender = initMap.bind(this);
-        this.setState({
-          redering: false,
-        })
-      }
-      google.maps.event.addDomListener(window, 'load', setTimeout( iniRender, 3000) );
-    }
+    const createMarker = (place) => {
+      let placeLoc = place.geometry.location;
+      let marker = new google.maps.Marker({
+        map: map,
+        position: place.geometry.location,
+      });
+      google.maps.event.addListener(marker, 'click', function () {
+        infowindow.setContent(place.name);
+        infowindow.open(map, this);
+      });
+    };
     
-    locatGetPlace() {
-      $.ajax({
-        url: '/api/destinations',
-        type: 'GET',
-        datatype: 'json',
-        success: function(data) {
-          this.setState({
-            list: data
-          });
-          this.locations();
-          console.log('after local ', this.state.list);
-        },
-        error: function(data) {
-          console.error(data);
-        }
+    let iniRender;
+    if (this.state.redering === false) {
+      iniRender = '';
+    } else {
+      iniRender = initMap.bind(this);
+      this.setState({
+        redering: false,
       });
-
-      let map = new google.maps.Map(document.getElementById('maps'), {
-        zoom: 10,
-        center: new google.maps.LatLng(-33.92, 151.25),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-      });
-
-      let infowindow = new google.maps.InfoWindow();
-
-      let marker, i;
-
-      const locations = () => {
-        
-        const lists = this.state.list;
-        for(let i = 0 ; i < lists.length; i ++ ) {
-          marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
-            map: map,
-          });
-
-          google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-              infowindow.setContent(lists[i]);
-              infowindow.open(map, marker);
-            }
-          })(marker, i));
-        }
-      }
-      google.maps.event.addDomListener(window, 'load', locatGetPlace);
     }
+    google.maps.event.addDomListener(window, 'load', setTimeout(iniRender, 3000));
+  }
+
+  locatGetPlace() {
+    $.ajax({
+      url: '/api/destinations',
+      type: 'GET',
+      datatype: 'json',
+      success: function (data) {
+        this.setState({
+          list: data,
+        });
+        this.locations();
+        console.log('after local ', this.state.list);
+      },
+      error: function (data) {
+        console.error(data);
+      },
+    });
+
+    let map = new google.maps.Map(document.getElementById('maps'), {
+      zoom: 10,
+      center: new google.maps.LatLng(-33.92, 151.25),
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    });
+
+    let infowindow = new google.maps.InfoWindow();
+
+    let marker, i;
+
+    const locations = () => {
+      
+      const lists = this.state.list;
+      for(let i = 0 ; i < lists.length; i ++ ) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
+          map: map,
+        });
+
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+          return function () {
+            infowindow.setContent(lists[i]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+    }
+    google.maps.event.addDomListener(window, 'load', locatGetPlace);
+  }
 
 
-    render() {
-      if( this.state.lat === null || this.state.lng === null) {
-        return (
-          <div>Loading...</div>
+  render() {
+    if( this.state.lat === null || this.state.lng === null) {
+      return (
+        <div>Loading...</div>
+      )
+    } else {
+      if (!this.state.recommend) {
+        return(
+          <div>
+
+            <div>
+              <button onClick={this.onRevese.bind(this)} >Google</button>
+              <button onClick={this.onClicks.bind(this)}>Recommendation</button>
+            </div>
+            <br />
+
+              <div id="map">
+                <GoogleMap onMapShow={ this.getPlace.bind(this) }/>
+              </div>
+              <div>
+                <GoogleList list={this.state.list} />
+              </div>
+
+          </div>
         )
       } else {
-        if (!this.state.recommend) {
-          return(
+        return (
+          <div>
             <div>
-
-              <div>
-                <button onClick={this.onRevese.bind(this)} >Google</button>
-                <button onClick={this.onClicks.bind(this)}>Recommendation</button>
-              </div>
-              <br />
-
-                <div id="map">
-                  <GoogleMap onMapShow={ this.getPlace.bind(this) }/>
-                </div>
-                <div>
-                  <GoogleList list={this.state.list} />
-                </div>
-
+              <button onClick={this.onRevese.bind(this)}>Google</button>
+              <button onClick={this.onClicks.bind(this)}>Recommendation</button>
             </div>
-          )
-        } else {
-          return (
+            <div id="maps">
+              <localMap onMapShows={this.locatGetPlace.bind(this)}/>
+            </div>
             <div>
-              <div>
-                <button onClick={this.onRevese.bind(this)}>Google</button>
-                <button onClick={this.onClicks.bind(this)}>Recommendation</button>
-              </div>
-              <div id="maps">
-                <localMap onMapShows={this.locatGetPlace.bind(this)}/>
-              </div>
-              <div>
-                <localLists list={this.state.list}/>
-              </div>
+              <localLists list={this.state.list}/>
             </div>
-          )
-        }
+          </div>
+        )
       }
     }
   }
+}
 export default Destinations;
 
