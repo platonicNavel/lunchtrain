@@ -240,10 +240,15 @@ button {
 
 /* Destination */
 
- #map { 
-      width: 500px;
-      height: 500px;
-  }
+#map { 
+    width: 500px;
+    height: 500px;
+}
+
+#maps { 
+    width: 500px;
+    height: 500px;
+}
 
 .popup{
   position:fixed;

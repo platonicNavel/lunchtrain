@@ -48706,7 +48706,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./routes.js":219,"./routes/Destinations/App.js":220,"./routes/Destinations/components/GoogleList.js":221,"./routes/Destinations/components/GoogleMap.js":222,"./routes/Destinations/components/LocalList.js":223,"./routes/Destinations/components/LocalMap.js":224,"./routes/Landing/App.js":225,"./routes/Login/App.js":226,"./routes/Trains/App.js":227,"./routes/Trains/components/TrainsList.js":228,"./routes/Trains/components/TrainsListEntry.js":229,"./routes/Trains/components/TrainsListEntryDropdown.js":230,"./utils/getCurrentTrains.js":231,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
+},{"./routes.js":219,"./routes/Destinations/App.js":220,"./routes/Destinations/components/GoogleList.js":221,"./routes/Destinations/components/GoogleMap.js":222,"./routes/Destinations/components/LocalList.js":223,"./routes/Destinations/components/LocalMap.js":224,"./routes/Landing/App.js":225,"./routes/Login/App.js":226,"./routes/Trains/App.js":227,"./routes/Trains/components/TrainsList.js":228,"./routes/Trains/components/TrainsListEntry.js":229,"./routes/Trains/components/TrainsListEntryDropdown.js":230,"./utils/getCurrentTrains.js":232,"jquery":48,"lodash":49,"react":215,"react-dom":52,"react-router":80}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -48908,6 +48908,7 @@ var Destinations = function (_Component) {
   }, {
     key: 'onClicks',
     value: function onClicks() {
+      this.locatGetPlace();
       this.setState({
         recommend: true
       });
@@ -48983,7 +48984,7 @@ var Destinations = function (_Component) {
       var _this4 = this;
 
       _jquery2.default.ajax({
-        url: '/api/trains',
+        url: '/api/destinations',
         type: 'GET',
         datatype: 'json',
         success: function success(data) {
@@ -49085,12 +49086,12 @@ var Destinations = function (_Component) {
             ),
             _react2.default.createElement(
               'div',
-              null,
-              _react2.default.createElement('localMap', { onMapShow: this.locatGetPlace.bind(this) })
+              { id: 'maps' },
+              _react2.default.createElement('localMap', { onMapShows: this.locatGetPlace.bind(this) })
             ),
             _react2.default.createElement(
               'div',
-              { id: 'maps' },
+              null,
               _react2.default.createElement('localLists', { list: this.state.list })
             )
           );
@@ -49103,7 +49104,6 @@ var Destinations = function (_Component) {
 }(_react.Component);
 
 exports.default = Destinations;
-//hello world
 
 },{"./components/GoogleList.js":221,"./components/GoogleMap.js":222,"./components/LocalList.js":223,"./components/LocalMap.js":224,"jquery":48,"react":215,"react-dom":52}],221:[function(require,module,exports){
 'use strict';
@@ -49121,6 +49121,10 @@ var _react2 = _interopRequireDefault(_react);
 var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _createTrain2 = require('../../../utils/createTrain.js');
+
+var _createTrain3 = _interopRequireDefault(_createTrain2);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49140,8 +49144,16 @@ var GoogleList = function (_Component) {
   }
 
   _createClass(GoogleList, [{
+    key: 'createTrain',
+    value: function createTrain(e, d, d2, place_id, name, lat, lng, visits) {
+      e.stopPropagation();
+      (0, _createTrain3.default)(d, d2, place_id, name, lat, lng, visits);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var listItems = this.props.list.map(function (item) {
         var placeId = item.place_id;
         var smallMaps = "https://www.google.com/maps/embed/v1/place?q=place_id:" + placeId + "&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4";
@@ -49161,20 +49173,28 @@ var GoogleList = function (_Component) {
         } else if (item.price_level === 4) {
           item.price_level = '$$$$';
         } else {
-          item.price_level = '';
+          item.price_level = '$$$$$';
         }
 
+        var d = new Date().getTime();
+        var d2 = d + 3600;
         return _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
             'button',
-            null,
-            'Get on the train'
+            { className: 'button', onClick: function onClick(e) {
+                _this2.createTrain(e, d, d2, item.place_id, item.name, item.geometry.location.lat(), item.geometry.location.lng(), 0);
+                _this2.setState({
+                  joined: true
+                });
+              } },
+            'schedule train ',
+            item.name
           ),
           _react2.default.createElement(
             'div',
-            { className: 'button' },
+            null,
             item.name
           ),
           _react2.default.createElement(
@@ -49234,7 +49254,7 @@ var GoogleList = function (_Component) {
 
 exports.default = GoogleList;
 
-},{"react":215,"react-dom":52}],222:[function(require,module,exports){
+},{"../../../utils/createTrain.js":231,"react":215,"react-dom":52}],222:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49346,13 +49366,13 @@ var LocalList = function (_Component) {
 exports.default = LocalList;
 
 },{"react":215,"react-dom":52}],224:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -49360,11 +49380,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var LocalMap = function LocalMap(props) {
   var mapMarkers = function mapMarkers() {
-    props.onMapShow();
+    props.onMapShows();
   };
   return _react2.default.createElement(
-    "div",
-    { id: "map" },
+    'div',
+    null,
     mapMarkers()
   );
 };
@@ -49726,7 +49746,7 @@ var Trains = function (_React$Component) {
 
 exports.default = Trains;
 
-},{"../../utils/getCurrentTrains.js":231,"./components/TrainsList.js":228,"./components/TrainsListEntry.js":229,"./components/TrainsListEntryDropdown.js":230,"react":215,"react-router":80}],228:[function(require,module,exports){
+},{"../../utils/getCurrentTrains.js":232,"./components/TrainsList.js":228,"./components/TrainsListEntry.js":229,"./components/TrainsListEntryDropdown.js":230,"react":215,"react-router":80}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49793,7 +49813,7 @@ var TrainsList = function (_React$Component) {
 
 exports.default = TrainsList;
 
-},{"../../../utils/getCurrentTrains.js":231,"./TrainsListEntry.js":229,"./TrainsListEntryDropdown.js":230,"react":215}],229:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":232,"./TrainsListEntry.js":229,"./TrainsListEntryDropdown.js":230,"react":215}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -49946,7 +49966,7 @@ var TrainsListEntry = function (_React$Component) {
 
 exports.default = TrainsListEntry;
 
-},{"../../../utils/getCurrentTrains.js":231,"./TrainsList.js":228,"./TrainsListEntryDropdown.js":230,"react":215}],230:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":232,"./TrainsList.js":228,"./TrainsListEntryDropdown.js":230,"react":215}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -50041,7 +50061,46 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
 exports.default = TrainsListEntryDropdown;
 
-},{"../../../utils/getCurrentTrains.js":231,"./TrainsList.js":228,"./TrainsListEntry.js":229,"react":215}],231:[function(require,module,exports){
+},{"../../../utils/getCurrentTrains.js":232,"./TrainsList.js":228,"./TrainsListEntry.js":229,"react":215}],231:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var createTrain = function createTrain(d, d2, place_id, name, lat, lng, visits) {
+  console.log('LET\'S GOOOOOOOOOOOOOO', d, d2, place_id, name, lat, lng, visits);
+  _jquery2.default.ajax({
+    url: '/destinations',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      timeDeparting: d,
+      timeDuration: d2,
+      googleId: place_id,
+      name: name,
+      lat: lat,
+      long: lng,
+      visits: visits
+    }
+  });
+};
+
+window.createTrain = createTrain;
+
+exports.default = createTrain;
+
+},{"jquery":48,"lodash":49}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
