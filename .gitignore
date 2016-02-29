@@ -4,3 +4,5 @@ npm-debug.log
 **/lunchtrain.sqlite
 sampleTrain.json
 */utils/geocodeAPI.jstemp.html
+src/client/lib/*
+build/client/lib/*
