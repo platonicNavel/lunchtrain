@@ -89,25 +89,33 @@ function indexRedirect(req, res) {
 function createTrain(req, res) {
   const user = req.user;
   const data = req.body;
-  console.log(data)
-  db.User.findOne({ where: { id: user.id } }).then((dbUser) => {
+
+  db.User.findOne({
+    where: { id: user.id },
+    include: [{ model: db.Team, where: { slackTeamId: user.slackTeamId } }],
+  }).then((dbUser) => {
     db.Train.create({
       timeDeparting: data.timeDeparting,
       timeDuration: data.timeDuration,
     }).then((train) => {
       train.setConductor(dbUser).then(() => {
-        db.Destination.findOrCreate({ where: {
-          googleId: data.googleId
-        }, defaults: {
-          name: data.name,
-          lat: data.lat,
-          long: data.long,
-          visits: data.visits,
-          likes: data.likes,
-        }}).spread(destination => destination.addTrain(train)).then(() => {
-          slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting);
-          res.send(200, 'Train created');
-        });
+        console.log('>>>>>', dbUser.dataValues);
+        train.setTeam(dbUser.dataValues.Teams[0]).then(() => {
+
+          db.Destination.findOrCreate({ where: {
+            googleId: data.googleId
+          }, defaults: {
+            name: data.name,
+            lat: data.lat,
+            long: data.long,
+            visits: data.visits,
+            likes: data.likes,
+          }}).spread(destination => destination.addTrain(train)).then(() => {
+            slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting);
+            res.send(200, 'Train created');
+          });
+          
+        })
       });
     });
   });
