@@ -1,4 +1,5 @@
-import { Router, Route, Link } from './lib/react-router';
+import { Router, Route, Link } from 'react-router';
+import {React, ReactDOM} from 'react';
 
 import routes from './routes.js';
 import getCurrentTrains from './utils/getCurrentTrains.js';
