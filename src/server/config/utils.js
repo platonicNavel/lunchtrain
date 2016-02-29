@@ -99,9 +99,7 @@ function createTrain(req, res) {
       timeDuration: data.timeDuration,
     }).then((train) => {
       train.setConductor(dbUser).then(() => {
-        console.log('>>>>>', dbUser.dataValues);
         train.setTeam(dbUser.dataValues.Teams[0]).then(() => {
-
           db.Destination.findOrCreate({ where: {
             googleId: data.googleId
           }, defaults: {
