@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import GoogleMap from './components/GoogleMap.js';
@@ -14,84 +14,82 @@ let service;
 let infowindow;
 
 class Destinations extends Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        list: [],
-        recommend: false,
-        lat: null,
-        lng: null,
-        rendering: true
-      } 
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [],
+      recommend: false,
+      lat: null,
+      lng: null,
+      rendering: true,
+    };
+  }
     // set the default HR lat lng, otherwise, users locationcheck
     // resultLocation is google place API default is restaurant and half mile radius
 
-    navi() {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.setState({
-          lat: +position.coords.latitude,
-          lng: +position.coords.longitude,
-        })
+  navi() {
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        lat: +position.coords.latitude,
+        lng: +position.coords.longitude,
       });
-    }
+    });
+  }
 
-    componentDidMount() {
-      this.navi();
+  componentDidMount() {
+    this.navi();
+  }
+
+  onClicks() {
+    this.locatGetPlace();
+    this.setState({
+      recommend: true,
+    });
+  }
+
+  onRevese() {
+    this.getPlace();
+    this.setState({
+      recommend: false,
+      redering: true,
+    });
+  }
+
+  getPlace() {
+    const initMap = () => {
+      let city = { lat: this.state.lat, lng: this.state.lng };
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: city,
+        zoom: 15,
+      });
+
+      infowindow = new google.maps.InfoWindow();
+
+      service = new google.maps.places.PlacesService(map);
+      service.nearbySearch({
+        location: city,
+        radius: 500,
+        types: ['restaurant', 'cafe'],
+      }, callback);
     };
 
-    onClicks() {
-      this.locatGetPlace();
-      this.setState({
-        recommend: true
-      })
-    }
-
-    onRevese() {
-      this.getPlace();
-      this.setState({
-        recommend: false,
-        redering: true
-      })
-    }
-
-    getPlace() {
-      const initMap = () => {
-        let city = {lat: this.state.lat, lng: this.state.lng};
-          map = new google.maps.Map(document.getElementById("map"), {
-          center: city,
-          zoom: 15
-        });
-
-        infowindow = new google.maps.InfoWindow();
-
-        service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-          location: city,
-          radius: 500,
-          types: ['restaurant','cafe']
-        }, callback);
-      };
-
-      const callback = (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-          }
-          this.setState({
-            list: results
-          });
-          console.log('after ', this.state.list)
+    const callback = (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (let i = 0; i < results.length; i++) {
+          createMarker(results[i]);
         }
-      };
-
-
+        this.setState({
+          list: results,
+        });
+        console.log('after ', this.state.list)
+      }
+    };
 
       const createMarker = (place) => {
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
+        let placeLoc = place.geometry.location;
+        let marker = new google.maps.Marker({
           map: map,
-          position: place.geometry.location
+          position: place.geometry.location,
         });
         google.maps.event.addListener(marker, 'click', function() {
           infowindow.setContent(place.name);
@@ -99,12 +97,12 @@ class Destinations extends Component {
         });
       };
       let iniRender;
-      if(this.state.redering === false) {
+      if (this.state.redering === false) {
         iniRender = '';
       } else {
         iniRender = initMap.bind(this);
         this.setState({
-          redering: false
+          redering: false,
         })
       }
       google.maps.event.addDomListener(window, 'load', setTimeout( iniRender, 3000) );
@@ -127,23 +125,23 @@ class Destinations extends Component {
         }
       });
 
-      var map = new google.maps.Map(document.getElementById('maps'), {
+      let map = new google.maps.Map(document.getElementById('maps'), {
         zoom: 10,
         center: new google.maps.LatLng(-33.92, 151.25),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
       });
 
-      var infowindow = new google.maps.InfoWindow();
+      let infowindow = new google.maps.InfoWindow();
 
-      var marker, i;
+      let marker, i;
 
       const locations = () => {
         
         const lists = this.state.list;
-        for(var i = 0 ; i < lists.length; i ++ ) {
+        for(let i = 0 ; i < lists.length; i ++ ) {
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
-            map: map
+            map: map,
           });
 
           google.maps.event.addListener(marker, 'click', (function(marker, i) {
@@ -164,7 +162,7 @@ class Destinations extends Component {
           <div>Loading...</div>
         )
       } else {
-        if( !this.state.recommend ) {
+        if (!this.state.recommend) {
           return(
             <div>
 

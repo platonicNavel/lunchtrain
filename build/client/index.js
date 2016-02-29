@@ -49025,14 +49025,15 @@ var Destinations = function (_Component) {
 
       var infowindow = new google.maps.InfoWindow();
 
-      var marker, i;
+      var marker = undefined,
+          i = undefined;
 
       var locations = function locations() {
 
         var lists = _this4.state.list;
-        for (var i = 0; i < lists.length; i++) {
+        for (var _i = 0; _i < lists.length; _i++) {
           marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
+            position: new google.maps.LatLng(lists[_i]['destination'].lat, lists[_i]['destination'].long),
             map: map
           });
 
@@ -49041,7 +49042,7 @@ var Destinations = function (_Component) {
               infowindow.setContent(lists[i]);
               infowindow.open(map, marker);
             };
-          }(marker, i));
+          }(marker, _i));
         }
       };
       google.maps.event.addDomListener(window, 'load', locatGetPlace);
