@@ -41,7 +41,6 @@ button {
   margin: 3em auto;
   margin-bottom: 20px;
   z-index: 2;
-  box-shadow: 0px 0px 50px 2px #1976D2;
   border-radius: 10px;
 }
 .trainsList:first-child {
@@ -189,6 +188,13 @@ button {
   top: 25px;
 }
 
+/*MEDIA QUERIES FOR CONTAINER*/
+
+@media (min-width: 1200px) {
+  .container {
+      width: 1100px !important;
+  }
+}
 .dummy {
   font-size: 30px;
   text-decoration: underline;
