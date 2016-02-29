@@ -4,6 +4,8 @@ import TrainsListEntryDropdown from './components/TrainsListEntryDropdown.js';
 import TrainsListEntry from './components/TrainsListEntry.js';
 import TrainsList from './components/TrainsList.js';
 
+import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
+
 class Trains extends React.Component {
 
   constructor(props) {
