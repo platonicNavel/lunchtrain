@@ -48713,6 +48713,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -48741,13 +48743,46 @@ var _App8 = _interopRequireDefault(_App7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Root = function (_React$Component) {
+  _inherits(Root, _React$Component);
+
+  function Root(props) {
+    _classCallCheck(this, Root);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Root).call(this, props));
+  }
+
+  _createClass(Root, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { id: 'bossMode' },
+        this.props.children || _react2.default.createElement(_App4.default, null)
+      );
+    }
+  }]);
+
+  return Root;
+}(_react2.default.Component);
+
 var routes = _reactDom2.default.render(_react2.default.createElement(
   _reactRouter.Router,
   { history: _reactRouter.browserHistory },
-  _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App4.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App6.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App8.default })
+  _react2.default.createElement(
+    _reactRouter.Route,
+    { path: '/', component: Root },
+    _react2.default.createElement(_reactRouter.IndexRoute, { component: _App4.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _App2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/destinations', component: _App6.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: '/trains', component: _App8.default })
+  )
 ), document.getElementById('app'));
 
 exports.default = routes;
@@ -49283,9 +49318,9 @@ var Landing = function (_React$Component) {
   }
 
   _createClass(Landing, [{
-    key: 'unmount',
-    value: function unmount() {
-      _reactDom2.default.unmountComponentAtNode(document.getElementById('app'));
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _reactDom2.default.unmountComponentAtNode(document.getElementById('bossMode'));
     }
   }, {
     key: 'render',
@@ -49298,7 +49333,7 @@ var Landing = function (_React$Component) {
           { className: 'row button-row' },
           _react2.default.createElement(
             _reactRouter.Link,
-            { to: '/trains', onClick: this.unmount() },
+            { to: '/trains', onClick: this.componentWillUnmount },
             _react2.default.createElement(
               'div',
               { className: 'col-xs-4 col-xs-offset-1 btn btn-info' },
@@ -49318,7 +49353,7 @@ var Landing = function (_React$Component) {
           ),
           _react2.default.createElement(
             _reactRouter.Link,
-            { to: '/destinations', onClick: this.unmount() },
+            { to: '/destinations', onClick: this.componentWillUnmount },
             _react2.default.createElement(
               'div',
               { className: 'col-xs-4 col-xs-offset-2 btn btn-info' },
@@ -49428,6 +49463,8 @@ var _TrainsListEntry2 = _interopRequireDefault(_TrainsListEntry);
 var _TrainsList = require('./components/TrainsList.js');
 
 var _TrainsList2 = _interopRequireDefault(_TrainsList);
+
+var _reactRouter = require('react-router');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49597,7 +49634,7 @@ var Trains = function (_React$Component) {
 
 exports.default = Trains;
 
-},{"../../utils/getCurrentTrains.js":231,"./components/TrainsList.js":228,"./components/TrainsListEntry.js":229,"./components/TrainsListEntryDropdown.js":230,"react":215}],228:[function(require,module,exports){
+},{"../../utils/getCurrentTrains.js":231,"./components/TrainsList.js":228,"./components/TrainsListEntry.js":229,"./components/TrainsListEntryDropdown.js":230,"react":215,"react-router":80}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
