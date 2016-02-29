@@ -61,5 +61,6 @@ function alertDepartingTrains() {
 setInterval(alertDepartingTrains, 1 * 60 * 1000);
 
 module.exports = {
-  createChannel: createChannel
+  createChannel: createChannel,
+  slackAlert: slackAlert
 };
