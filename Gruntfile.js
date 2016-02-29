@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     });
     nodemon.stdout.pipe(process.stdout);
     nodemon.stderr.pipe(process.stderr);
-    grunt.task.run(['watch']);
+    grunt.task.run(['babel', 'browserify', 'watch']);
   });
 
   grunt.registerTask('test', [
