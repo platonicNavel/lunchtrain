@@ -1,3 +1,9 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
+
+import App from './routes/Trains/App.js';
+
 ReactDOM.render((
 
   <Router history={browserHistory}>
@@ -6,6 +12,6 @@ ReactDOM.render((
     </Route>
   </Router>
 
-), document.body);
+), document.getElementById('app'));
 
-export default routes
+export default routes;
