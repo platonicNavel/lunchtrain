@@ -1,4 +1,4 @@
-const db = require('../../server/db/index.js');
+const db = require('../../build/server/db/index.js');
 const expect = require('chai').expect;
 
 const newUser = {

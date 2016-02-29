@@ -4,11 +4,11 @@ const _ = require('underscore');
 const slackUtils = require('./slack');
 
 function serveIndex(req, res) {
-  res.sendFile(path.join(__dirname, '../../views/index.html'));
+  res.sendFile(path.join(__dirname, '../../../views/index.html'));
 }
 
 function serveLogin(req, res) {
-  res.sendFile(path.join(__dirname, '../../views/login.html'));
+  res.sendFile(path.join(__dirname, '../../../views/login.html'));
 }
 
 function getDestinations(req, res) {
@@ -70,11 +70,11 @@ function getTrains(req, res) {
 }
 
 function serveDestinations(req, res) {
-  res.sendFile(path.join(__dirname, '../../views/destinations.html'));
+  res.sendFile(path.join(__dirname, '../../../views/destinations.html'));
 }
 
 function serveTrains(req, res) {
-  res.sendFile(path.join(__dirname, '../../views/trains.html'));
+  res.sendFile(path.join(__dirname, '../../../views/trains.html'));
 }
 
 function serveLogout(req, res) {
