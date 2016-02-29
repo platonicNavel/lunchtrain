@@ -4,9 +4,7 @@ module.exports = function(grunt) {
       dist: {
         options: {
           transform: [
-            ['babelify', {
-              loose: 'all',
-            }],
+            ['babelify'],
           ],
         },
         files: {
@@ -55,9 +53,13 @@ module.exports = function(grunt) {
       },
     },
     watch: {
-      scripts: {
-        files: ['src/**/*.js'],
+      server: {
+        files: ['src/server/**/*.js'],
         tasks: ['babel'],
+      },
+      client: {
+        files: ['src/client/**/*.js'],
+        tasks: ['browserify'],
       },
     },
   });
@@ -70,6 +72,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-browserify');
 
   grunt.registerTask('server-dev', function(target) {
     var nodemon = grunt.util.spawn({
