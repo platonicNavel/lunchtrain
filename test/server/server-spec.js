@@ -1,14 +1,14 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
-const auth = require('../../server/config/auth.js');
-const config = require('../../server/config/config.js');
-const middleware = require('../../server/config/middleware.js');
-const routes = require('../../server/config/routes.js');
-const server = require('../../server/server.js');
-const utils = require('../../server/config/utils.js');
+const auth = require('../../build/server/config/auth.js');
+const config = require('../../build/server/config/config.js');
+const middleware = require('../../build/server/config/middleware.js');
+const routes = require('../../build/server/config/routes.js');
+const server = require('../../build/server/server.js');
+const utils = require('../../build/server/config/utils.js');
 
-const db = require('../../server/db/index.js');
+const db = require('../../build/server/db/index.js');
 const dbSpec = require('./db-spec.js');
 
 
