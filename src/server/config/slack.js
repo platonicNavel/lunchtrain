@@ -7,7 +7,7 @@ const Sequelize = require('sequelize');
 // todo: alert the user that this channel has/will be created
 function createChannel(token) {
   request({
-    uri: `https://slack.com/api/channels.create?token=${token}&name=lunchtrain`,
+    uri: `https://slack.com/api/channels.join?token=${token}&name=lunchtrain`,
     method: 'POST',
   }, (err, res, body) => {
     console.log(body);
