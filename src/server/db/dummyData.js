@@ -115,35 +115,27 @@ const allTrains = [
   train3,
 ];
 
-//create arrays of each db entry for dummy data
+// create arrays of each db entry for dummy data
 let createdUsers;
 let createdTeams;
 let createdDestinations;
-let createdTrains;
 
 function initializeData() {
   return db.sequelize.sync({ force: true })
-    .then(() => {
-      return Sequelize.Promise.map(allUsers, (user) => {
-        return db.User.create(user);
-      });
-    }).then((users) => {
+    .then(() =>
+      Sequelize.Promise.map(allUsers, user =>
+        db.User.create(user))
+    ).then((users) => {
       createdUsers = users;
-      return Sequelize.Promise.map(allTeams, (team) => {
-        return db.Team.create(team);
-      });
+      return Sequelize.Promise.map(allTeams, team => db.Team.create(team));
     }).then((teams) => {
       createdTeams = teams;
-      return Sequelize.Promise.map(allDestinations, (dest) => {
-        return db.Destination.create(dest);
-      });
+      return Sequelize.Promise.map(allDestinations, dest => db.Destination.create(dest));
     }).then((dests) => {
       createdDestinations = dests;
-      return Sequelize.Promise.map(allTrains, (train) => {
-        return db.Train.create(train);
-      });
+      return Sequelize.Promise.map(allTrains, train => db.Train.create(train));
     }).then((trains) => {
-      createdTrains = trains;
+      const createdTrains = trains;
       /*
         At this point all promises have resolved, and
         we have 4 arrays with all our ORM dummy data.
