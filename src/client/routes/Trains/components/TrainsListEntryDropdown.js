@@ -1,12 +1,9 @@
 import React from 'react';
-import getCurrentTrains from '../../../utils/getCurrentTrains.js';
-import TrainsListEntry from './TrainsListEntry.js';
-import TrainsList from './TrainsList.js';
 
 class TrainsListEntryDropdown extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       open: false,
       accordionClass: 'details',
@@ -14,40 +11,39 @@ class TrainsListEntryDropdown extends React.Component {
   }
 
   componentDidMount() {
-    let coords = {
+    const coords = {
       currLat: null,
       currLon: null,
     };
-    let train = this.props.train;
+    const train = this.props.train;
 
-    let getDirections = () => {
+    const getDirections = () => {
       if (!coords.currLat && !coords.currLon) {
-        this.props.getCurrentLocation(function(currLat, currLon) {
+        this.props.getCurrentLocation((currLat, currLon) => {
           coords.currLat = currLat;
           coords.currLon = currLon;
-        })
-      }
-      else {
+        });
+      } else {
         this.props.renderMap(train.destination.lat, train.destination.long, train.id, coords.currLat, coords.currLon);
         clearInterval(fetchingLoc);
       }
-    }
+    };
 
     let fetchingLoc = setInterval(getDirections.bind(this), 1000);
   }
 
   render() {
-    let train = this.props.train;
+    const train = this.props.train;
     return (
       <div className={this.state.accordionClass} ref="dropdown">
         <div className="trainEntryDropdownWrapper">
-          <div id={'map'+train.id} className="gmap col-xs-7"></div>
-          <div id={'mapPanel'+train.id} className="gmapDir col-xs-5">
-            {/*TODO: Transportation Modes*/}
+          <div id={`map${train.id}`} className="gmap col-xs-7"></div>
+          <div id={`mapPanel${train.id}`} className="gmapDir col-xs-5">
+            {/* TODO: Transportation Modes */}
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
