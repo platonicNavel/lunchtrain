@@ -28,11 +28,11 @@ class TrainsListEntry extends React.Component {
           </div>
           <div className="passengersWrapper">
             <div className="conductor passenger">
-              <div className="slackPic">{this.props.train.conductor.firstName}</div>
+              <img className="slackPic" src={this.props.train.conductor.gravatar} />
             </div>
             {this.props.train.users.map( passenger =>
               <div className="passenger">
-                <div className="slackPic">{passenger.firstName}</div>
+                <img className="slackPic" src={passenger.gravatar} />
               </div>
             )}
             <div className="joinWrapper" onClick={
