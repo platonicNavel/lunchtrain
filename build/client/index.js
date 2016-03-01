@@ -48975,6 +48975,7 @@ var Destinations = function (_Component) {
           infowindow.open(map, this);
         });
       };
+
       var iniRender = undefined;
       if (this.state.redering === false) {
         iniRender = '';
@@ -49025,15 +49026,16 @@ var Destinations = function (_Component) {
 
       var infowindow = new google.maps.InfoWindow();
 
-      var marker, i;
+      var marker = undefined;
+      var i = undefined;
 
       var locations = function locations() {
 
         var lists = _this4.state.list;
-        for (var i = 0; i < lists.length; i++) {
+        for (var _i = 0; _i < lists.length; _i++) {
           marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
-            map: map
+            map: map,
+            position: new google.maps.LatLng(lists[_i].destination.lat, lists[_i].destination.long)
           });
 
           google.maps.event.addListener(marker, 'click', function (marker, i) {
@@ -49041,7 +49043,7 @@ var Destinations = function (_Component) {
               infowindow.setContent(lists[i]);
               infowindow.open(map, marker);
             };
-          }(marker, i));
+          }(marker, _i));
         }
       };
       google.maps.event.addDomListener(window, 'load', locatGetPlace);
@@ -49176,7 +49178,7 @@ var GoogleList = function (_Component) {
 
       var listItems = this.props.list.map(function (item) {
         var placeId = item.place_id;
-        var smallMaps = "https://www.google.com/maps/embed/v1/place?q=place_id:" + placeId + "&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4";
+        var smallMaps = 'https://www.google.com/maps/embed/v1/place?q=place_id:' + placeId + '&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4';
 
         if (item.opening_hours.open_now) {
           item.opening_hours.open_now = 'open';
@@ -49340,7 +49342,6 @@ var LocalList = function (_Component) {
       var _this2 = this;
 
       var listItems = this.props.list.map(function (item) {
-        console.log('itemssssss', item);
         return _react2.default.createElement(
           'div',
           null,
