@@ -5,17 +5,10 @@ import GoogleMap from './GoogleMap.js';
 import GoogleList from './GoogleList.js';
 import GoogleListDropdown from './GoogleListDropdown.js';
 
-import createTrain from '../../../utils/createTrain.js';
-
 class GoogleListEntry extends Component {
   constructor(props) {
       super(props)
     }
-
-  createTrain(e, d, d2, place_id, name, lat, lng, visits) {
-    e.stopPropagation();
-    createTrain(d, d2, place_id, name, lat, lng, visits);
-  }
 
     render() {
         let item = this.props.item;
@@ -41,8 +34,6 @@ class GoogleListEntry extends Component {
           item.price_level = '$$$$$'
         }
 
-        let d = new Date().getTime();
-        let d2 = d+3600;
         return (
           <div>
             <div>

@@ -49293,12 +49293,22 @@ var GoogleListDropdown = function (_React$Component) {
 
     _this.state = {
       open: false,
-      accordionClass: 'details'
+      accordionClass: 'details',
+      departing: null,
+      returning: null
     };
     return _this;
   }
 
   _createClass(GoogleListDropdown, [{
+    key: 'submitTrain',
+    value: function submitTrain(e, d, d2, place_id, name, lat, lng, visits) {
+      console.log(d, d2);
+      e.preventDefault();
+      e.stopPropagation();
+      (0, _createTrain2.default)(d, d2, place_id, name, lat, lng, visits);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -49313,7 +49323,6 @@ var GoogleListDropdown = function (_React$Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement('br', null),
             _react2.default.createElement('br', null),
             _react2.default.createElement(
               'p',
@@ -49339,13 +49348,36 @@ var GoogleListDropdown = function (_React$Component) {
               this.props.item.vicinity
             )
           ),
+          _react2.default.createElement('hr', null),
+          'Schedule Train to ',
+          this.props.item.name,
           _react2.default.createElement(
-            'button',
-            { className: 'scheduleButton', onClick: function onClick(e) {
-                _this2.props.createTrain(e, d, d2, _this2.props.item.place_id, _this2.props.item.name, _this2.props.item.geometry.location.lat(), _this2.props.item.geometry.location.lng(), 0);
+            'form',
+            { onSubmit: function onSubmit(e) {
+                e.preventDefault();
+                _this2.submitTrain(e, _this2.state.departing, _this2.state.returning, _this2.props.item.place_id, _this2.props.item.name, _this2.props.item.geometry.location.lat(), _this2.props.item.geometry.location.lng(), 0);
               } },
-            'schedule train ',
-            this.props.item.name
+            _react2.default.createElement(
+              'b',
+              null,
+              'Departing'
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { type: 'datetime-local', value: this.state.departing, onClick: function onClick(e) {
+                e.preventDefault();e.stopPropagation();
+              } }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              'b',
+              null,
+              'Returning'
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { type: 'datetime-local', value: this.state.returning, onClick: function onClick(e) {
+                e.preventDefault();e.stopPropagation();
+              } }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('input', { type: 'submit', value: 'Submit', className: 'scheduleButton' })
           )
         )
       );
@@ -49386,10 +49418,6 @@ var _GoogleListDropdown = require('./GoogleListDropdown.js');
 
 var _GoogleListDropdown2 = _interopRequireDefault(_GoogleListDropdown);
 
-var _createTrain2 = require('../../../utils/createTrain.js');
-
-var _createTrain3 = _interopRequireDefault(_createTrain2);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49408,12 +49436,6 @@ var GoogleListEntry = function (_Component) {
   }
 
   _createClass(GoogleListEntry, [{
-    key: 'createTrain',
-    value: function createTrain(e, d, d2, place_id, name, lat, lng, visits) {
-      e.stopPropagation();
-      (0, _createTrain3.default)(d, d2, place_id, name, lat, lng, visits);
-    }
-  }, {
     key: 'render',
     value: function render() {
       var item = this.props.item;
@@ -49438,8 +49460,6 @@ var GoogleListEntry = function (_Component) {
         item.price_level = '$$$$$';
       }
 
-      var d = new Date().getTime();
-      var d2 = d + 3600;
       return _react2.default.createElement(
         'div',
         null,
@@ -49462,7 +49482,7 @@ var GoogleListEntry = function (_Component) {
 
 exports.default = GoogleListEntry;
 
-},{"../../../utils/createTrain.js":233,"./GoogleList.js":221,"./GoogleListDropdown.js":222,"./GoogleMap.js":224,"react":215,"react-dom":52}],224:[function(require,module,exports){
+},{"./GoogleList.js":221,"./GoogleListDropdown.js":222,"./GoogleMap.js":224,"react":215,"react-dom":52}],224:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
