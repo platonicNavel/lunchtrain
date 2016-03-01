@@ -207,6 +207,12 @@ button {
   top: 25px;
 }
 
+.trainIcon {
+  background-image: url(./assets/train.png);
+  background-size: 100%;
+  background-position: 0px 5px
+}
+
 /*MEDIA QUERIES FOR CONTAINER*/
 
 @media (min-width: 1200px) {
