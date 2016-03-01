@@ -49009,7 +49009,6 @@ var Destinations = function (_Component) {
           infowindow.open(map, this);
         });
       };
-
       var iniRender = undefined;
       if (this.state.redering === false) {
         iniRender = '';
@@ -49064,10 +49063,10 @@ var Destinations = function (_Component) {
         var marker, i;
 
         var lists = _this4.state.list;
-        for (var _i = 0; _i < lists.length; _i++) {
+        for (var i = 0; i < lists.length; i++) {
           marker = new google.maps.Marker({
-            map: map,
-            position: new google.maps.LatLng(lists[_i].destination.lat, lists[_i].destination.long)
+            position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
+            map: map
           });
 
           google.maps.event.addListener(marker, 'click', function (marker, i) {
@@ -49075,7 +49074,7 @@ var Destinations = function (_Component) {
               infowindow.setContent(lists[i]);
               infowindow.open(map, marker);
             };
-          }(marker, _i));
+          }(marker, i));
         }
         google.maps.event.addDomListener(window, 'load', locatGetPlace);
       };
