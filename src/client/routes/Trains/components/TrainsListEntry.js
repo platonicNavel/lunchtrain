@@ -1,15 +1,12 @@
 import React from 'react';
-import getCurrentTrains from '../../../utils/getCurrentTrains.js';
-import TrainsListEntryDropdown from './TrainsListEntryDropdown.js';
-import TrainsList from './TrainsList.js';
 
 class TrainsListEntry extends React.Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      joined: false
-    }
+      joined: false,
+    };
   }
 
   render() {
@@ -51,7 +48,7 @@ class TrainsListEntry extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

@@ -105,10 +105,10 @@ class Trains extends React.Component {
         travelMode: google.maps.TravelMode.WALKING,
         provideRouteAlternatives: true,
       };
-      
+
       directionsService.route(req, (res, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
-          console.log(status)
+          console.log(status);
           directionsDisp.setDirections(res);
           directionsDisp.setPanel(document.getElementById(`mapPanel${id}`));
         }
@@ -118,7 +118,7 @@ class Trains extends React.Component {
 
     renderDirections(currLat, currLon)
     this.state.maps.push(map);
-    console.log(this.state.maps)
+    console.log(this.state.maps);
   }
 
   componentDidMount() {
@@ -130,7 +130,7 @@ class Trains extends React.Component {
     return (
       <div>
         <div className="trainsView container">
-          <TrainsList trains={ this.state.trains } handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)} maps={this.state.maps} currentLoc={{lat: this.state.currLat, lng: this.state.currLon}}></TrainsList>
+          <TrainsList trains={ this.state.trains } handleAccordionMap={ this.handleAccordionMap } joinTrain={ this.joinTrain.bind(this) } renderMap={ this.renderMap.bind(this) } getCurrentLocation={ this.getCurrentLocation.bind(this) } maps={ this.state.maps } currentLoc={ { lat: this.state.currLat, lng: this.state.currLon } }></TrainsList>
         </div>
       </div>
     );

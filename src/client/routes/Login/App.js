@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Login = () => {
-  return (
+const Login = () => 
+  (
     <div className="container">
       <div className="row">
         <div className="col-xs-8 col-xs-offset-2">
@@ -20,7 +20,7 @@ const Login = () => {
         </a>
       </div>
     </div>
-  )
-}
+  );
 
-export default Login
+
+export default Login;
