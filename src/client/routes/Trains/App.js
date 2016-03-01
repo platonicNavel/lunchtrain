@@ -54,6 +54,7 @@ class Trains extends React.Component {
           lastName: data.lastName,
           id: data.id,
           slackId: data.slackId,
+          gravatar: data.gravatar,
         };
         train.users.push(me);
         this.forceUpdate();
