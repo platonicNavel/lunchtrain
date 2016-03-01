@@ -51554,18 +51554,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _getCurrentTrains = require('../../../utils/getCurrentTrains.js');
-
-var _getCurrentTrains2 = _interopRequireDefault(_getCurrentTrains);
-
-var _TrainsListEntry = require('./TrainsListEntry.js');
-
-var _TrainsListEntry2 = _interopRequireDefault(_TrainsListEntry);
-
-var _TrainsList = require('./TrainsList.js');
-
-var _TrainsList2 = _interopRequireDefault(_TrainsList);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -51636,7 +51624,7 @@ var TrainsListEntryDropdown = function (_React$Component) {
 
 exports.default = TrainsListEntryDropdown;
 
-},{"../../../utils/getCurrentTrains.js":233,"./TrainsList.js":229,"./TrainsListEntry.js":230,"react":215}],232:[function(require,module,exports){
+},{"react":215}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
