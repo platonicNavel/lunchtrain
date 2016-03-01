@@ -49365,7 +49365,10 @@ var GoogleListDropdown = function (_React$Component) {
             'form',
             { onSubmit: function onSubmit(e) {
                 e.preventDefault();
-                _this2.submitTrain(e, _this2.state.departing, _this2.state.returning, _this2.props.item.place_id, _this2.props.item.name, _this2.props.item.geometry.location.lat(), _this2.props.item.geometry.location.lng(), 0);
+                var departing = new Date(_this2.state.departing.toString()).getTime() / 100;
+                var returning = new Date(_this2.state.returning.toString()).getTime() / 100;
+
+                _this2.submitTrain(e, departing, returning, _this2.props.item.place_id, _this2.props.item.name, _this2.props.item.geometry.location.lat(), _this2.props.item.geometry.location.lng(), 0);
               } },
             _react2.default.createElement(
               'b',

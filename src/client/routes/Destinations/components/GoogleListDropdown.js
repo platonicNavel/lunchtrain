@@ -48,7 +48,10 @@ class GoogleListDropdown extends React.Component {
           <form onSubmit={
             (e) => {
               e.preventDefault();
-              this.submitTrain(e, this.state.departing, this.state.returning, this.props.item.place_id, this.props.item.name, this.props.item.geometry.location.lat(), this.props.item.geometry.location.lng(), 0);
+              let departing = (new Date(this.state.departing.toString()).getTime())/100;
+              let returning = (new Date(this.state.returning.toString()).getTime())/100;
+
+              this.submitTrain(e, departing, returning, this.props.item.place_id, this.props.item.name, this.props.item.geometry.location.lat(), this.props.item.geometry.location.lng(), 0);
             }
           }>
             <b>Departing</b>
