@@ -1,6 +1,5 @@
 const request = require('request');
 const db = require('../db/index');
-const _ = require('underscore');
 const Sequelize = require('sequelize');
 
 
@@ -17,9 +16,10 @@ function createChannel(token) {
 // can probably make these request more robust relative to the posting channel
 function slackAlert(token, destination, conductor, timeDeparting) {
   let str;
-  if (arguments.length > 2) {
+  if (conductor && timeDeparting) {
+    const dateDeparting = new Date(+timeDeparting);
     // todo: make conductor @username, format timeDeparting
-    str = `${conductor} has scheduled a train to ${destination} at ${timeDeparting}`;
+    str = `${conductor} has scheduled a train to ${destination} on ${dateDeparting}`;
   } else {
     str = `Train to ${destination} departing in 10 minutes`;
   }
@@ -33,7 +33,7 @@ function slackAlert(token, destination, conductor, timeDeparting) {
   });
 }
 
-function alertDepartingTrains () {
+function alertDepartingTrains() {
   // only trains within 10 minutes of departure time get alert
   const alertWindow = Date.now() + 10 * 60 * 1000;
   db.Train.findAll({
@@ -43,18 +43,18 @@ function alertDepartingTrains () {
         $lt: alertWindow,
       },
       alerted: false,
-    }
-  }).then((trainsToAlert) => {
-    return Sequelize.Promise.map(trainsToAlert, (train) => {
+    },
+  }).then((trainsToAlert) =>
+    Sequelize.Promise.map(trainsToAlert, (train) => {
       const token = train.dataValues.Conductor.dataValues.token;
       const dest = train.dataValues.Destination.dataValues.name;
       slackAlert(token, dest);
       return train.update({ alerted: true });
-    });
-  }).then(trainsAlerted => console.log(`${trainsAlerted.length} trains alerted`));
+    })
+  ).then(trainsAlerted => console.log(`${trainsAlerted.length} trains alerted`));
 }
 
-//check every minute for trains about to depart
+// check every minute for trains about to depart
 setInterval(alertDepartingTrains, 1 * 60 * 1000);
 
 module.exports = {

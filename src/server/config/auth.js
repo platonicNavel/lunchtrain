@@ -64,10 +64,10 @@ passport.use(new SlackStrategy({
     });
   }));
 
-exports.checkAuthenticated = (req, res, next) => {
+exports.checkAuthenticated = (req, res) => {
   let authenticated = false;
   if (config.devMode) {
-     req.user = {
+    req.user = {
       dataValues: {
         firstName: 'Griffin',
         lastName: 'Michl',

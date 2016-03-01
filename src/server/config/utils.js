@@ -57,9 +57,9 @@ function getTrains(req, res) {
         id: train.dataValues.id,
         timeDeparting: train.dataValues.timeDeparting,
         timeDuration: train.dataValues.timeDuration,
-        users: train.dataValues.Users.map((user) => {
-          return _.pick(user, 'id', 'slackId', 'firstName', 'lastName', 'gravatar');
-        }),
+        users: train.dataValues.Users.map(user =>
+          _.pick(user, 'id', 'slackId', 'firstName', 'lastName', 'gravatar')
+        ),
         conductor: train.dataValues.Conductor,
         destination: _.omit(train.dataValues.Destination.dataValues, 'createdAt', 'updatedAt'),
       };
@@ -100,20 +100,20 @@ function createTrain(req, res) {
     }).then((train) => {
       train.setConductor(dbUser).then(() => {
         train.setTeam(dbUser.dataValues.Teams[0]).then(() => {
-          db.Destination.findOrCreate({ where: {
-            googleId: data.googleId
-          }, defaults: {
-            name: data.name,
-            lat: data.lat,
-            long: data.long,
-            visits: data.visits,
-            likes: data.likes,
-          }}).spread(destination => destination.addTrain(train)).then(() => {
+          db.Destination.findOrCreate({
+            where: { googleId: data.googleId },
+            defaults: {
+              name: data.name,
+              lat: data.lat,
+              long: data.long,
+              visits: data.visits,
+              likes: data.likes,
+            },
+          }).spread(destination => destination.addTrain(train)).then(() => {
             slackUtils.slackAlert(user.accessToken, data.name, user.firstName, data.timeDeparting);
             res.send(200, 'Train created');
           });
-          
-        })
+        });
       });
     });
   });
