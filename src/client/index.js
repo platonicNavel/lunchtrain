@@ -17,6 +17,7 @@ import Landing from './routes/Landing/App.js';
 
 // DESTINATIONS
 import GoogleList from './routes/Destinations/components/GoogleList.js';
+import GoogleListEntry from './routes/Destinations/components/GoogleListEntry.js';
 import GoogleMap from './routes/Destinations/components/GoogleMap.js';
 import LocalList from './routes/Destinations/components/LocalList.js';
 import LocalMap from './routes/Destinations/components/LocalMap.js';
