@@ -252,31 +252,6 @@ button {
     height: 500px;
 }
 
-.popup{
-  position:fixed;
-  left:50vw;
-  margin-left:35px;
-  top:50vh;
-  margin-top:-210px;
-  opacity:0;
-  transition:all 1s;
-  -webkit-transition:all 1s;
-}
-
-
-.popup div {
-  width:400px;
-  font-size:20px;
-}
-
-.popup div {
-  padding:50px;
-  background-color:black;
-  border-radius:40px;
-  color:white;
-  text-align:center;
-}
-
 .button:hover {
   background-color:#B9E8B1;
   cursor:pointer;
