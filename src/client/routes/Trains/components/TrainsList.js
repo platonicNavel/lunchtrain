@@ -1,10 +1,9 @@
 import React from 'react';
-import getCurrentTrains from '../../../utils/getCurrentTrains.js';
 import TrainsListEntryDropdown from './TrainsListEntryDropdown.js';
 import TrainsListEntry from './TrainsListEntry.js';
 
 class TrainsList extends React.Component {
-  
+
   constructor(props) {
     super(props);
   }
@@ -13,16 +12,16 @@ class TrainsList extends React.Component {
     return (
       <div className="trainsList" id="trainsList">
         {this.props.trains ?
-          this.props.trains.map( train =>
+          this.props.trains.map(train =>
             <div className="trainAndDropdown" onClick={this.props.handleAccordionMap.bind(this, train.id, train.destination.lat, train.destination.lon, this.props.maps)}>
-              <TrainsListEntry key={train.id} train={train} joinTrain={this.props.joinTrain}/>
-              <TrainsListEntryDropdown train={train} ref={'dropdown'+train.id} renderMap={this.props.renderMap} key={train.id+'d'} getCurrentLocation={this.props.getCurrentLocation} />
+              <TrainsListEntry key={train.id} train={train} joinTrain={this.props.joinTrain} />
+              <TrainsListEntryDropdown train={train} ref={`dropdown${train.id}`} renderMap={this.props.renderMap} key={`${train.id}d`} getCurrentLocation={this.props.getCurrentLocation} />
             </div>
             ) :
           "Looks like there are no trains here!"
         }
       </div>
-    )
+    );
   }
 
 }
