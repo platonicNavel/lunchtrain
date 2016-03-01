@@ -1,10 +1,8 @@
 import React from 'react';
 import getCurrentTrains from '../../utils/getCurrentTrains.js';
-import TrainsListEntryDropdown from './components/TrainsListEntryDropdown.js';
-import TrainsListEntry from './components/TrainsListEntry.js';
 import TrainsList from './components/TrainsList.js';
-
-import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
+import $ from 'jquery';
+import _ from 'underscore';
 
 class Trains extends React.Component {
 
@@ -21,17 +19,24 @@ class Trains extends React.Component {
 
   getCurrentLocation(cb) {
     if (!cb) {
-      navigator.geolocation.getCurrentPosition( (pos) => {
+      navigator.geolocation.getCurrentPosition((pos) => {
         this.setState({
           currLat: +pos.coords.latitude,
           currLon: +pos.coords.longitude,
         });
-      console.log(this.state)
+        console.log(this.state);
       });
+    } else {
+      cb(this.state.currLat, this.state.currLon);
     }
-    else {
-      cb(this.state.currLat, this.state.currLon)
-    }
+  }
+
+  getTeamTrains() {
+    getCurrentTrains((trains) => {
+      this.setState({
+        trains,
+      });
+    });
   }
 
   joinTrain(e, train, joined) {
@@ -41,75 +46,65 @@ class Trains extends React.Component {
     $.ajax({
       url: '/trains',
       type: 'POST',
-      data: {'id': train.id},
+      data: { id: train.id },
       success: (data) => {
         console.log('POST successful', data);
-        let me = {
+        const me = {
           firstName: data.firstName,
           lastName: data.lastName,
           id: data.id,
-          slackId: data.slackId
+          slackId: data.slackId,
         };
         train.users.push(me);
-        this.forceUpdate()
-      }
-    })
-    console.log(train.users)
+        this.forceUpdate();
+      },
+    });
+    console.log(train.users);
   }
 
   handleAccordionMap(id, lat, lon, map) {
-    console.log('accordion', this.refs['dropdown'+id], map, this.props.currentLoc)
-    let clickedTrain = this.refs['dropdown'+id];
-    if(clickedTrain.state.open) {
+    console.log('accordion', this.refs[`dropdown${id}`], map, this.props.currentLoc);
+    const clickedTrain = this.refs[`dropdown${id}`];
+    if (clickedTrain.state.open) {
       clickedTrain.setState({
         open: false,
-        accordionClass: "details",
+        accordionClass: 'details',
       });
-    }
-    else{
+    } else {
       clickedTrain.setState({
         open: true,
-        accordionClass: "details open"
+        accordionClass: 'details open',
       });
-      let fixMap = (map, currentLoc) => {
+      const fixMap = (map, currentLoc) => {
         map.setZoom(15);
-        google.maps.event.trigger(map, "resize");
+        google.maps.event.trigger(map, 'resize');
       };
-      _.delay(fixMap, 500, map[id-1], this.props.currentLoc)
+      _.delay(fixMap, 500, map[id - 1], this.props.currentLoc);
     }
-  }
-
-  getTeamTrains() {
-    getCurrentTrains((trains) => {
-      this.setState({
-        trains: trains
-      });
-    });
   }
 
   renderMap(lat, lon, id, currLat, currLon) {
-
     console.log('dest', lat, lon, id, currLat, currLon);
 
-    let map = new google.maps.Map(document.getElementById(`map${id}`), {
-      center: {lat: +lat, lng: +lon},
+    const map = new google.maps.Map(document.getElementById(`map${id}`), {
+      center: { lat: +lat, lng: +lon },
       zoom: 15,
     });
 
-    let directionsDisp = new google.maps.DirectionsRenderer({
-      map: map,
+    const directionsDisp = new google.maps.DirectionsRenderer({
+      map,
     });
 
-    let directionsService = new google.maps.DirectionsService();
-    
-    let renderDirections = (currLat, currLon) => {
+    const directionsService = new google.maps.DirectionsService();
+
+    const renderDirections = (currLat, currLon) => {
       console.log('rendering directions')
       let req = {
-        destination: {lat: +lat, lng: +lon},
-        origin: {lat: currLat, lng: currLon},
+        destination: { lat: +lat, lng: +lon },
+        origin: { lat: currLat, lng: currLon },
         travelMode: google.maps.TravelMode.WALKING,
         provideRouteAlternatives: true,
-      }
+      };
       
       directionsService.route(req, (res, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
@@ -135,10 +130,10 @@ class Trains extends React.Component {
     return (
       <div>
         <div className="trainsView container">
-          <TrainsList trains={this.state.trains} handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)} maps={this.state.maps} currentLoc={{lat: this.state.currLat, lng: this.state.currLon}}></TrainsList>
+          <TrainsList trains={ this.state.trains } handleAccordionMap={this.handleAccordionMap} joinTrain={this.joinTrain.bind(this)} renderMap={this.renderMap.bind(this)} getCurrentLocation={this.getCurrentLocation.bind(this)} maps={this.state.maps} currentLoc={{lat: this.state.currLat, lng: this.state.currLon}}></TrainsList>
         </div>
       </div>
-    )
+    );
   }
 }
 
