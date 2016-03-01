@@ -49026,16 +49026,16 @@ var Destinations = function (_Component) {
 
       var infowindow = new google.maps.InfoWindow();
 
-      var marker = undefined,
-          i = undefined;
+      var marker = undefined;
+      var i = undefined;
 
       var locations = function locations() {
 
         var lists = _this4.state.list;
         for (var _i = 0; _i < lists.length; _i++) {
           marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lists[_i]['destination'].lat, lists[_i]['destination'].long),
-            map: map
+            map: map,
+            position: new google.maps.LatLng(lists[_i].destination.lat, lists[_i].destination.long)
           });
 
           google.maps.event.addListener(marker, 'click', function (marker, i) {
@@ -49342,7 +49342,6 @@ var LocalList = function (_Component) {
       var _this2 = this;
 
       var listItems = this.props.list.map(function (item) {
-        console.log('itemssssss', item);
         return _react2.default.createElement(
           'div',
           null,
