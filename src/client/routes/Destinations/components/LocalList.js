@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 class LocalList extends Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    const listItems = this.props.list.map ( item => {
-      console.log('itemssssss', item)
+    const listItems = this.props.list.map((item) => {
       return (
         <div>
         <button className="button" onClick={
@@ -25,16 +24,15 @@ class LocalList extends Component {
               <p>{item.rating}</p>
               <p>{item.vicinity}</p>
             </div>
-            
           </div>
         </div>
-      )
-    })
+      );
+    });
     return (
-      <div> 
-        {listItems} 
+      <div>
+        {listItems}
       </div>
-    )
+    );
   }
 }
 
