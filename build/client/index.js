@@ -49301,6 +49301,16 @@ var GoogleListDropdown = function (_React$Component) {
   }
 
   _createClass(GoogleListDropdown, [{
+    key: 'handleDepartChange',
+    value: function handleDepartChange(e) {
+      this.setState({ departing: e.target.value });
+    }
+  }, {
+    key: 'handleReturnChange',
+    value: function handleReturnChange(e) {
+      this.setState({ returning: e.target.value });
+    }
+  }, {
     key: 'submitTrain',
     value: function submitTrain(e, d, d2, place_id, name, lat, lng, visits) {
       console.log(d, d2);
@@ -49363,7 +49373,9 @@ var GoogleListDropdown = function (_React$Component) {
               'Departing'
             ),
             _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'datetime-local', value: this.state.departing, onClick: function onClick(e) {
+            _react2.default.createElement('input', { type: 'datetime-local', value: this.state.departing, onChange: function onChange(e) {
+                return _this2.handleDepartChange(e);
+              }, onClick: function onClick(e) {
                 e.preventDefault();e.stopPropagation();
               } }),
             _react2.default.createElement('br', null),
@@ -49373,7 +49385,9 @@ var GoogleListDropdown = function (_React$Component) {
               'Returning'
             ),
             _react2.default.createElement('br', null),
-            _react2.default.createElement('input', { type: 'datetime-local', value: this.state.returning, onClick: function onClick(e) {
+            _react2.default.createElement('input', { type: 'datetime-local', value: this.state.returning, onChange: function onChange(e) {
+                return _this2.handleReturnChange(e);
+              }, onClick: function onClick(e) {
                 e.preventDefault();e.stopPropagation();
               } }),
             _react2.default.createElement('br', null),

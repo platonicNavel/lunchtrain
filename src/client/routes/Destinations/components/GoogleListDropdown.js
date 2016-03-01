@@ -16,6 +16,14 @@ class GoogleListDropdown extends React.Component {
     };
   }
 
+  handleDepartChange(e) {
+    this.setState({departing: e.target.value});
+  }
+
+  handleReturnChange(e) {
+    this.setState({returning: e.target.value});
+  }
+
   submitTrain(e, d, d2, place_id, name, lat, lng, visits) {
     console.log(d, d2);
     e.preventDefault();
@@ -45,11 +53,11 @@ class GoogleListDropdown extends React.Component {
           }>
             <b>Departing</b>
             <br />
-            <input type="datetime-local" value={this.state.departing} onClick={(e) => {e.preventDefault(); e.stopPropagation();}}/>
+            <input type="datetime-local" value={this.state.departing} onChange={(e) => this.handleDepartChange(e)} onClick={(e) => {e.preventDefault(); e.stopPropagation();}}/>
             <br />
             <b>Returning</b>
             <br />
-            <input type="datetime-local" value={this.state.returning} onClick={(e) => {e.preventDefault(); e.stopPropagation();}}/>
+            <input type="datetime-local" value={this.state.returning} onChange={(e) => this.handleReturnChange(e)} onClick={(e) => {e.preventDefault(); e.stopPropagation();}}/>
             <br />
             <input type="submit" value="Submit" className="scheduleButton" />
           </form>
