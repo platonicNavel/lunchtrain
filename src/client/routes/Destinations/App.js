@@ -96,7 +96,7 @@ class Destinations extends Component {
         infowindow.open(map, this);
       });
     };
-    
+
     let iniRender;
     if (this.state.redering === false) {
       iniRender = '';
@@ -134,37 +134,38 @@ class Destinations extends Component {
 
     let infowindow = new google.maps.InfoWindow();
 
-    let marker, i;
+    let marker;
+    let i;
 
     const locations = () => {
-      
+
       const lists = this.state.list;
-      for(let i = 0 ; i < lists.length; i ++ ) {
+      for (let i = 0 ; i < lists.length; i ++) {
         marker = new google.maps.Marker({
-          position: new google.maps.LatLng(lists[i]['destination'].lat, lists[i]['destination'].long),
-          map: map,
+          map,
+          position: new google.maps.LatLng(lists[i].destination.lat, lists[i].destination.long),
         });
 
         google.maps.event.addListener(marker, 'click', (function (marker, i) {
           return function () {
             infowindow.setContent(lists[i]);
             infowindow.open(map, marker);
-          }
+          };
         })(marker, i));
       }
-    }
+    };
     google.maps.event.addDomListener(window, 'load', locatGetPlace);
   }
 
 
   render() {
-    if( this.state.lat === null || this.state.lng === null) {
+    if (this.state.lat === null || this.state.lng === null) {
       return (
         <div>Loading...</div>
-      )
+      );
     } else {
       if (!this.state.recommend) {
-        return(
+        return (
           <div>
 
             <div>
@@ -181,7 +182,7 @@ class Destinations extends Component {
               </div>
 
           </div>
-        )
+        );
       } else {
         return (
           <div>

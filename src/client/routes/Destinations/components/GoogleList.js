@@ -15,16 +15,16 @@ class GoogleList extends Component {
   }
 
   render() {
-    const listItems = this.props.list.map ( item => {
+    const listItems = this.props.list.map(item => {
       let placeId = item.place_id;
       let smallMaps = 'https://www.google.com/maps/embed/v1/place?q=place_id:' + placeId + '&key=AIzaSyAxXjy2uKnQcnU1SxfaSil-fY5ek_nmkE4';
 
 
       if (item.opening_hours.open_now) {
-          item.opening_hours.open_now = 'open'
-        } else {
-          item.opening_hours.open_now = 'closed'
-        }
+        item.opening_hours.open_now = 'open';
+      } else {
+        item.opening_hours.open_now = 'closed';
+      }
 
 
       if (item.price_level === 1) {
@@ -52,7 +52,7 @@ class GoogleList extends Component {
             }
           }>schedule train {item.name}</button>
           <div>
-            {item.name} 
+            {item.name}
           </div>
           <div className="popup">
             <div>
@@ -62,7 +62,7 @@ class GoogleList extends Component {
               <p>Opening Now: {item.opening_hours.open_now}</p>
               <p>{item.vicinity}</p>
               <p className="smallMap">
-                <iframe width="300" height="250" frameBorder="0" style={{border:0}} src={smallMaps} allowFullScreen></iframe>
+                <iframe width="300" height="250" frameBorder="0" style={{ border: 0 }} src={smallMaps} allowFullScreen></iframe>
               </p>
             </div>
           </div>
@@ -73,7 +73,7 @@ class GoogleList extends Component {
       <div>
         {listItems}
       </div>
-    )
+    );
   }
 }
 
