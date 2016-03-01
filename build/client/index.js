@@ -51108,7 +51108,7 @@ var Login = function Login() {
       _react2.default.createElement(
         "div",
         { className: "col-xs-8 col-xs-offset-2" },
-        "Organizing social activities with your team just got easier!  LunchTrain lets you organize group outings and find new places to hang out. All aboard!"
+        "Organizing social activities with your team just got easier! LunchTrain lets you organize group outings and find new places to hang out. All aboard!"
       )
     ),
     _react2.default.createElement(

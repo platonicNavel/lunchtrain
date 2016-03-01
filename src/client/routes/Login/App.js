@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = () => 
+const Login = () =>
   (
     <div className="container">
       <div className="row">
@@ -11,7 +11,9 @@ const Login = () =>
       </div>
       <div className="row">
         <div className="col-xs-8 col-xs-offset-2">
-          Organizing social activities with your team just got easier!  LunchTrain lets you organize group outings and find new places to hang out. All aboard!
+          Organizing social activities with your team just got easier!
+          LunchTrain lets you organize group outings and find new places to hang out.
+          All aboard!
         </div>
       </div>
       <div className="row">
