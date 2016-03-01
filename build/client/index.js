@@ -51334,10 +51334,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _getCurrentTrains = require('../../../utils/getCurrentTrains.js');
-
-var _getCurrentTrains2 = _interopRequireDefault(_getCurrentTrains);
-
 var _TrainsListEntryDropdown = require('./TrainsListEntryDropdown.js');
 
 var _TrainsListEntryDropdown2 = _interopRequireDefault(_TrainsListEntryDropdown);
@@ -51388,8 +51384,8 @@ var TrainsList = function (_React$Component) {
 
 exports.default = TrainsList;
 
-},{"../../../utils/getCurrentTrains.js":233,"./TrainsListEntry.js":230,"./TrainsListEntryDropdown.js":231,"react":215}],230:[function(require,module,exports){
-'use strict';
+},{"./TrainsListEntry.js":230,"./TrainsListEntryDropdown.js":231,"react":215}],230:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -51397,21 +51393,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
-
-var _getCurrentTrains = require('../../../utils/getCurrentTrains.js');
-
-var _getCurrentTrains2 = _interopRequireDefault(_getCurrentTrains);
-
-var _TrainsListEntryDropdown = require('./TrainsListEntryDropdown.js');
-
-var _TrainsListEntryDropdown2 = _interopRequireDefault(_TrainsListEntryDropdown);
-
-var _TrainsList = require('./TrainsList.js');
-
-var _TrainsList2 = _interopRequireDefault(_TrainsList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -51436,98 +51420,98 @@ var TrainsListEntry = function (_React$Component) {
   }
 
   _createClass(TrainsListEntry, [{
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'div',
-        { className: 'trainEntry' },
+        "div",
+        { className: "trainEntry" },
         _react2.default.createElement(
-          'div',
-          { className: 'trainContainer' },
+          "div",
+          { className: "trainContainer" },
           _react2.default.createElement(
-            'div',
-            { className: 'trainIconTimeWrapper' },
-            _react2.default.createElement('div', { className: 'trainIcon' }),
+            "div",
+            { className: "trainIconTimeWrapper" },
+            _react2.default.createElement("div", { className: "trainIcon" }),
             _react2.default.createElement(
-              'div',
-              { className: 'timeWrapper' },
+              "div",
+              { className: "timeWrapper" },
               _react2.default.createElement(
-                'div',
-                { className: 'time' },
+                "div",
+                { className: "time" },
                 this.props.train.timeDeparting,
-                ' --- ',
+                " --- ",
                 this.props.train.timeBack
               )
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'trainDetailsWrapper' },
+            "div",
+            { className: "trainDetailsWrapper" },
             _react2.default.createElement(
-              'h2',
-              { className: 'trainDest' },
+              "h2",
+              { className: "trainDest" },
               this.props.train.destination.name
             ),
             _react2.default.createElement(
-              'div',
-              { className: 'trainRatingsWrapper' },
+              "div",
+              { className: "trainRatingsWrapper" },
               _react2.default.createElement(
-                'div',
-                { className: 'likes col-xs-6' },
+                "div",
+                { className: "likes col-xs-6" },
                 _react2.default.createElement(
-                  'div',
+                  "div",
                   null,
-                  '♥3'
+                  "♥3"
                 )
               ),
               _react2.default.createElement(
-                'div',
-                { className: 'price col-xs-6' },
+                "div",
+                { className: "price col-xs-6" },
                 _react2.default.createElement(
-                  'div',
+                  "div",
                   null,
-                  '$$'
+                  "$$"
                 )
               )
             )
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'passengersWrapper' },
+            "div",
+            { className: "passengersWrapper" },
             _react2.default.createElement(
-              'div',
-              { className: 'conductor passenger' },
+              "div",
+              { className: "conductor passenger" },
               _react2.default.createElement(
-                'div',
-                { className: 'slackPic' },
+                "div",
+                { className: "slackPic" },
                 this.props.train.conductor.firstName
               )
             ),
             this.props.train.users.map(function (passenger) {
               return _react2.default.createElement(
-                'div',
-                { className: 'passenger' },
+                "div",
+                { className: "passenger" },
                 _react2.default.createElement(
-                  'div',
-                  { className: 'slackPic' },
+                  "div",
+                  { className: "slackPic" },
                   passenger.firstName
                 )
               );
             }),
             _react2.default.createElement(
-              'div',
-              { className: 'joinWrapper', onClick: function onClick(e) {
+              "div",
+              { className: "joinWrapper", onClick: function onClick(e) {
                   _this2.props.joinTrain(e, _this2.props.train, _this2.state.joined);
                   _this2.setState({
                     joined: true
                   });
                 } },
               _react2.default.createElement(
-                'div',
-                { className: 'joinArrow' },
-                '»'
+                "div",
+                { className: "joinArrow" },
+                "»"
               )
             )
           )
@@ -51541,7 +51525,7 @@ var TrainsListEntry = function (_React$Component) {
 
 exports.default = TrainsListEntry;
 
-},{"../../../utils/getCurrentTrains.js":233,"./TrainsList.js":229,"./TrainsListEntryDropdown.js":231,"react":215}],231:[function(require,module,exports){
+},{"react":215}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
