@@ -16,6 +16,22 @@ button {
   background-color: #064887;
 }
 
+.topbar>div {
+  position: relative;
+  top: 50%;
+  transform: translate(0%, -50%);
+  font-size: 40px;
+  text-align: center;
+  font-weight: 400 !important;
+  color: #FFFFFF;
+}
+
+.btn-info {
+  background-color: #2196F3 !important;
+  border: none !important;
+
+}
+
 /*Structure*/
 
 .trainsView {
@@ -191,6 +207,12 @@ button {
   top: 25px;
 }
 
+.trainIcon {
+  background-image: url(./assets/train.png);
+  background-size: 100%;
+  background-position: 0px 5px
+}
+
 /*MEDIA QUERIES FOR CONTAINER*/
 
 @media (min-width: 1200px) {
@@ -201,46 +223,84 @@ button {
 
 /* DESTINATION */
 
+.destinations-text, .trains-test {
+  position: relative;
+  margin-top: 100px;
+  margin-bottom: 50%;
+  text-align: center;
+}
+
 .dummy {
   font-size: 30px;
-  text-decoration: underline;
   padding: 10px;
+  margin-top: 50%;
+  margin-bottom: 40px;
 }
 
 .calendar {
   height: 25%; 
-  width: 25%; 
+  width: 25%;
+  margin-top: 50px; 
 }
 
 .people {
   height: 25%; 
-  width: 25%; 
+  width: 25%;
+  margin-top: 50px; 
 }
 
 .train {
   height: 25%; 
   width: 25%; 
+  margin-top: 50px;
 }
 
 .location {
   height: 25%; 
-  width: 25%; 
+  width: 25%;
+  margin-top: 50px; 
 }
 
 .button-row {
   position: absolute;
+  width: 100%;
   top: 50%;
-  transform: translate(0%, -50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loginWrapper {
+  position: relative;
+  top: 50%;
+  transform: translate(0%, 100%);
+}
+
+.top {
+  position: relative;
+  top: -50px;
 }
 
 .slack-icon {
-  height: 5%;
-  width: 5%;
+  height: 30%;
+  width: 30%;
 }
 
 .login-text {
   font-size: 20px;
-  padding-left: 20px;
+  padding-left: 75px;
+  color: #FFFFFF;
+}
+
+.loginp {
+  color: #FFFFFF;
+}
+
+.loginButton {
+  position: relative;
+  top: 50px;
+  width: 20em !important;
+  color: #FFFFFF;
+  margin-left: 30% !important;
 }
 
 #map {
@@ -282,4 +342,30 @@ button {
   margin-bottom: 20px;
   margin: 0px 10px;
   z-index: 1;
+}
+
+.destList {
+  height: 500px;
+}
+
+.itemWrapper {
+  height: 3em;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: #2196F3;
+  overflow: scroll;
+  cursor: pointer !important;
+}
+
+.itemWrapper:hover {
+  background-color: #064887;
+}
+
+.itemWrapper>div {
+  position: relative;
+  top: 50%;
+  transform: translate(0%, -50%);
+  font-weight: 300;
+  text-align: center;
+  color: #FFFFFF;
 }
