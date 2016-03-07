@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Login = () => {
-  return (
+const Login = () =>
+  (
     <div className="container">
       <div className="loginWrapper">
         <div className="row top">
@@ -10,6 +10,19 @@ const Login = () => {
             <span className="login-text">LunchTrain + Slack</span>
           </div>
         </div>
+<<<<<<< ebef00cc53099d6226fb982818468e01538359e8
+      </div>
+      <div className="row">
+        <div className="col-xs-8 col-xs-offset-2">
+          Organizing social activities with your team just got easier!
+          LunchTrain lets you organize group outings and find new places to hang out.
+          All aboard!
+||||||| merged common ancestors
+      </div>
+      <div className="row">
+        <div className="col-xs-8 col-xs-offset-2">
+          Organizing social activities with your team just got easier!  LunchTrain lets you organize group outings and find new places to hang out. All aboard!
+=======
         <div className="row mid">
           <div className="col-xs-8 col-xs-offset-2 loginp">
             Organizing social activities with your team just got easier!  LunchTrain lets you organize group outings and find new places to hang out. All aboard!
@@ -19,10 +32,11 @@ const Login = () => {
           <a className="col-xs-2 col-xs-offset-5 btn btn-primary loginButton" href="/auth/slack">
             Connect with Slack
           </a>
+>>>>>>> Implement styling changes
         </div>
       </div>
     </div>
-  )
-}
+  );
 
-export default Login
+
+export default Login;
