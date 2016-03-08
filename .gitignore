@@ -5,4 +5,4 @@ npm-debug.log
 sampleTrain.json
 */utils/geocodeAPI.jstemp.html
 src/client/lib/*
-build/client/lib/*
+build/
