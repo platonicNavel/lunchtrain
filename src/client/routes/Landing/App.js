@@ -18,7 +18,7 @@ class Landing extends React.Component {
       <div className="container">
         <div className="row button-row">
          <Link to="trains" onClick={this.componentWillUnmount}>
-            <div className="col-xs-4 col-xs-offset-1 btn btn-info">
+            <div className=" btn btn-info">
             <div className="dummy">Board a Train</div>
               <img className="people" src="assets/people.png" />
               <img className="train" src="assets/train.png" />
@@ -26,7 +26,7 @@ class Landing extends React.Component {
             </div>
           </Link>
           <Link to="destinations" onClick={this.componentWillUnmount}>
-            <div className="col-xs-4 col-xs-offset-2 btn btn-info">
+            <div className=" btn btn-info">
               <div className="dummy">Schedule a Train</div>
               <img className="calendar" src="assets/calendar.png" />
               <img className="location" src="assets/location.png" />

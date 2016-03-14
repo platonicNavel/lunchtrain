@@ -22,8 +22,8 @@ class TrainsListEntry extends React.Component {
           <div className="trainDetailsWrapper">
             <h2 className="trainDest">{this.props.train.destination.name}</h2>
             <div className="trainRatingsWrapper">
-              <div className="likes col-xs-6"><div>♥3</div></div>
-              <div className="price col-xs-6"><div>$$</div></div>
+              <div className="likes"><div>♥3</div></div>
+              <div className="price"><div>$$</div></div>
             </div>
           </div>
           <div className="passengersWrapper">

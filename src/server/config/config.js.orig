@@ -1,9 +1,0 @@
-exports.CLIENT_ID = '10589206992.22131652337';
-exports.CLIENT_SECRET = '63a441c7c9d19dcd6faa789d27a22d3a';
-<<<<<<< ebef00cc53099d6226fb982818468e01538359e8
-exports.devMode = false;
-||||||| merged common ancestors
-exports.devMode = true;
-=======
-exports.devMode = false;
->>>>>>> Implement styling changes

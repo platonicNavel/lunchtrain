@@ -188,10 +188,10 @@ class Destinations extends Component {
               <br />
               <div>
                 <div>
-                  <div id="map" className="col-xs-6">
+                  <div id="map">
                     <GoogleMap onMapShow={ this.getPlace.bind(this) } />
                   </div>
-                  <div className="col-xs-6">
+                  <div>
                     <button onClick={this.onRevese.bind(this)}>Google</button>
                     <button onClick={this.onClicks.bind(this)}>Recommendation</button>
                     <GoogleList list={this.state.list} handleDestAccordion={this.handleDestAccordion}/>

@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "body-parser": "^1.15.0",
-    "bootstrap": "^3.3.6",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "jquery": "^2.2.1",
