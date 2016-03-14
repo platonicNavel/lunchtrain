@@ -2,10 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
+import AppBar from 'material-ui/lib/app-bar';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import Login from './routes/Login/App.js';
 import Landing from './routes/Landing/App.js';
 import Destinations from './routes/Destinations/App.js';
 import Trains from './routes/Trains/App.js';
+
+injectTapEventPlugin();
 
 class Root extends React.Component {
   
@@ -16,9 +21,10 @@ class Root extends React.Component {
   render() {
     return(
       <div>
-        <div className="topbar">
-          <div>LunchTrain</div>
-        </div>
+        <AppBar
+          title="LunchTrain"
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+        />
         <div id="bossMode">
           {this.props.children || <Landing />}
         </div>
