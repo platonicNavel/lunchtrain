@@ -2,6 +2,7 @@ const path = require('path');
 const db = require('../db/index');
 const _ = require('underscore');
 const slackUtils = require('./slack');
+const config = require('./config');
 
 function serveIndex(req, res) {
   res.sendFile(path.join(__dirname, '../../../views/index.html'));
@@ -33,7 +34,7 @@ function getDestinations(req, res) {
 }
 
 function getTrains(req, res) {
-  const slackTeamId = req.user.slackTeamId;
+  const slackTeamId = config.devMode ? 'T0AHB62V6' : req.user.slackTeamId;
   db.Train.findAll({
     include: [
       {
