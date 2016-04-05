@@ -1,7 +1,4 @@
-# Platonic Navel
-
-Greenfield
-Working Name: Lunch Train
+# LunchTrain
 
 ## Team
 
