@@ -19,7 +19,7 @@ class Root extends React.Component {
         <div className="topbar">
           <div>LunchTrain</div>
         </div>
-        <div id="bossMode">
+        <div id="appWrapper">
           {this.props.children || <Landing />}
         </div>
       </div>

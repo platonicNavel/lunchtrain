@@ -15,7 +15,7 @@ class Root extends React.Component {
 
   render() {
     return(
-      <div id="bossMode">
+      <div id="appWrapper">
         {this.props.children || <Landing />}
       </div>
     )
