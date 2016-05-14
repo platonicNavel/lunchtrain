@@ -5,4 +5,29 @@ html {
 body {
   font-size: 13px;
   line-height: 20px;
+  background-color: #F9F9EF;
+  margin: 0;
+}
+
+.bg {
+/*  position: absolute;
+  background: url(assets/tracks.png) no-repeat;
+  background-position: center left;
+  height: 100vh;
+  width: 100vw;*/
+}
+
+.diag {
+  position: absolute;
+  background-color: #A7D2CB;
+  height: 70vh;
+  width: 120vw;
+  top: -15rem;
+  left: -5rem;
+  transform: rotate(10deg);
+}
+
+.container {
+  position: absolute;
+  z-index: 1;
 }
