@@ -40,3 +40,12 @@ body {
   margin-right: 5rem;
   margin-top: 3rem;
 }
+
+.logosm {
+  position: relative;
+  z-index: 2;
+  float: left;
+  height: 2.5rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}

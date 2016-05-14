@@ -18,6 +18,7 @@ class Landing extends React.Component {
       <div className="bg">
         <div className="diag"></div>
         <img src="assets/lunchtrainlogotr.png" className="logo"/>
+        <img src="assets/lunchtrainlogotext.png" className="logosm"/>
         <div className="container">
           <div className="row button-row">
            <Link to="trains" onClick={this.componentWillUnmount}>
