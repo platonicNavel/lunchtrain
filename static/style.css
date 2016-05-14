@@ -45,7 +45,25 @@ body {
   position: relative;
   z-index: 2;
   float: left;
-  height: 2.5rem;
+  height: 2rem;
   margin-left: 1rem;
   margin-top: 1rem;
+}
+
+.diagTop {
+  position: relative;
+  background-color: orange;
+  height: 20rem;
+  width: 50vw;
+  z-index: 3;
+  margin-left: 18vw;
+  margin-top: 5rem;
+}
+
+.topHeader>h3 {
+  position: relative;
+  color: #F9F9EF;
+  font-size: 45px;
+  font-weight: 300;
+  top: 3rem;
 }

@@ -20,18 +20,17 @@ class Landing extends React.Component {
         <img src="assets/lunchtrainlogotr.png" className="logo"/>
         <img src="assets/lunchtrainlogotext.png" className="logosm"/>
         <div className="container">
-          <div className="row button-row">
-           <Link to="trains" onClick={this.componentWillUnmount}>
-              <div className=" btn btn-info">
+          <div className="diagTop">
+            <div className="topHeader">
+              <h3>Never miss out on another team lunch!</h3>
+            </div>
+            <Link to="trains" onClick={this.componentWillUnmount}>
               <div className="dummy">Board a Train</div>
-                <div className="destinations-text">Join your friends on fun outings</div>
-              </div>
             </Link>
+          </div>
+          <div className="diagBottom">
             <Link to="destinations" onClick={this.componentWillUnmount}>
-              <div className=" btn btn-info">
                 <div className="dummy">Schedule a Train</div>
-                <div className="trains-test">Organize trips to new places or old favorites</div>
-              </div>
             </Link>
           </div>
         </div>
