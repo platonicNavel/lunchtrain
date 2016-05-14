@@ -1,7 +1,7 @@
 /* Shared */
 
 html {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -20,13 +20,15 @@ a {
   position: absolute;
   background-color: #A7D2CB;
   height: 100vw;
-  width: 100vw;
+  width: 100rem;
   transform: rotate(45deg);
   z-index: 0;
 }
 
 .loginlogos {
   width: 100vw;
+  height: 15rem;
+  margin-top: 1rem;
 }
 
 .trainiconlogin {
@@ -38,6 +40,26 @@ a {
   position: relative;
   float: right;
   height: 15rem;
+}
+
+.loginheader {
+  position: relative;
+  width: 50rem;
+  margin: auto;
+  top: 7rem;
+}
+.traintexticonlogin {
+  position: relative;
+  left: 50%;
+  top: -50%;
+  transform: translate(-50%, 0%);
+}
+.loginheader>h1 {
+  text-align: center;
+  color: #F9F9EF;
+  font-size: 25px;
+  font-weight: 100;
+  line-height: 1.4;
 }
 
 /* Splash */
@@ -200,7 +222,7 @@ a {
   font-weight: 100;
   text-align: center;
   margin: auto;
-  width: 8rem;
+  width: 9rem;
   padding: 10px 30px;
 }
 

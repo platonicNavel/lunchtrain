@@ -14,8 +14,9 @@ const Login = () => {
           </div>
         </div>
         <div className="row mid">
-          <div className="loginp">
-            Organizing social activities with your team just got easier!  LunchTrain lets you organize group outings and find new places to hang out. All aboard!
+          <div className="loginheader">
+            <img className="traintexticonlogin" src="assets/lunchtrainlogotext.png" />
+            <h1>Organizing social activities with your team has never been easier!</h1>
           </div>
         </div>
         <div className="row connectButton">
