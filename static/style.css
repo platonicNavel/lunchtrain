@@ -31,3 +31,12 @@ body {
   position: absolute;
   z-index: 1;
 }
+
+.logo {
+  position: relative;
+  z-index: 2;
+  float: right;
+  height: 30rem;
+  margin-right: 5rem;
+  margin-top: 3rem;
+}
