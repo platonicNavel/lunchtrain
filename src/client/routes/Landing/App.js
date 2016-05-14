@@ -30,8 +30,12 @@ class Landing extends React.Component {
             </Link>
           </div>
           <div className="diagBottom">
+            <div className="bottomHeader">
+              <h3>Be the conductor.</h3>
+              <p>Not in the mood for the current choices? Maybe you have an early post-meal meeting? Organize trips to new places or old favorites on your own time and see who hops on.</p>
+            </div>
             <Link to="destinations" onClick={this.componentWillUnmount}>
-                <div className="destButton">Schedule a Train</div>
+              <div className="destButton">Schedule a Train</div>
             </Link>
           </div>
         </div>

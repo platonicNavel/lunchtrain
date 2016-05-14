@@ -59,7 +59,7 @@ a {
   width: 50vw;
   z-index: 3;
   margin-left: 18vw;
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
 
 .topHeader>h3 {
@@ -87,13 +87,54 @@ a {
   font-size: 18px;
   font-weight: 100;
   text-align: center;
-  padding: 0;
   margin: auto;
   width: 7rem;
   padding: 10px 30px;
-  transform: translate(0, 7rem);
+  transform: translate(0, 6.5rem);
 }
 .trainsButton:hover {
   color: #A7D2CB;
   background-color: #F9F9EF;
+}
+
+/**/
+
+.diagBottom {
+  position: relative;
+  height: 20rem;
+  width: 50vw;
+  z-index: 3;
+  margin-left: 18vw;
+  margin-top: 20rem;
+}
+
+.bottomHeader>h3 {
+  position: relative;
+  color: #383737;
+  font-size: 45px;
+  font-weight: 300;
+  top: 2rem;
+}
+
+.bottomHeader>p {
+  position: relative;
+  color: #383737;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  top: 1rem;
+}
+
+.destButton {
+  position: relative;
+  color: #383737;
+  text-decoration: none;
+  border: 2px solid #383737;
+  font-size: 18px;
+  font-weight: 100;
+  text-align: center;
+  margin: auto;
+  width: 8rem;
+  padding: 10px 30px;
+  transform: translate(0, -17rem);
 }
