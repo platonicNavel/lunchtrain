@@ -10,7 +10,7 @@ class Landing extends React.Component {
   }
 
   componentWillUnmount() {
-    ReactDOM.unmountComponentAtNode(document.getElementById('bossMode'));
+    ReactDOM.unmountComponentAtNode(document.getElementById('appWrapper'));
   }
 
   render() {

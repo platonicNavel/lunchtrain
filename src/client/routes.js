@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, Link, browserHistory } from 'react-router';
 
-import AppBar from 'material-ui/lib/app-bar';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import Login from './routes/Login/App.js';
@@ -21,11 +20,7 @@ class Root extends React.Component {
   render() {
     return(
       <div>
-        <AppBar
-          title="LunchTrain"
-          iconClassNameRight="muidocs-icon-navigation-expand-more"
-        />
-        <div id="bossMode">
+        <div id="appWrapper">
           {this.props.children || <Landing />}
         </div>
       </div>
