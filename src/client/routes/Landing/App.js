@@ -23,14 +23,15 @@ class Landing extends React.Component {
           <div className="diagTop">
             <div className="topHeader">
               <h3>Never miss out on another team lunch!</h3>
+              <p>See if a coworker extended an open lunch invitation. If they have, LunchTrain will tell you where they're headed, what time they're leaving, and what time they expect to be back, so hop aboard! Worried about remembering? We’ve got you covered with automated Slack reminders!</p>
             </div>
             <Link to="trains" onClick={this.componentWillUnmount}>
-              <div className="dummy">Board a Train</div>
+              <div className="trainsButton">Board a Train</div>
             </Link>
           </div>
           <div className="diagBottom">
             <Link to="destinations" onClick={this.componentWillUnmount}>
-                <div className="dummy">Schedule a Train</div>
+                <div className="destButton">Schedule a Train</div>
             </Link>
           </div>
         </div>
