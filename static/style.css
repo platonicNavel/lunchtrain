@@ -12,12 +12,20 @@ a {
   text-decoration: none !important;
 }
 
-.bg {
-/*  position: absolute;
-  background: url(assets/tracks.png) no-repeat;
-  background-position: center left;
-  height: 100vh;
-  width: 100vw;*/
+.bg:before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  z-index: -1;
+  background: url(assets/tracksm.png) 0 0 space round;
+  -webkit-transform: rotate(-30deg);
+  -moz-transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg);
+  -o-transform: rotate(-30deg);
+  transform: rotate(-30deg);
 }
 
 .diag {
@@ -28,6 +36,31 @@ a {
   top: -15rem;
   left: -5rem;
   transform: rotate(10deg);
+  z-index: 1
+}
+
+.track:before, .trackH:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: url(assets/tracksmgrey.png) 0 0 round;
+}
+.track {
+  position: absolute;
+  height: 50vh;
+  width: 17.5%;
+  top: 50vh;
+  left: 50vw;
+}
+.trackH {
+  position: absolute;
+  height: 106vw;
+  width: 17.5%;
+  top: 10vh;
+  left: 65vh;
+  transform: rotate(90deg);
 }
 
 .container {
@@ -99,13 +132,14 @@ a {
 
 /**/
 
+
 .diagBottom {
   position: relative;
   height: 20rem;
   width: 50vw;
   z-index: 3;
   margin-left: 18vw;
-  margin-top: 20rem;
+  margin-top: 15rem;
 }
 
 .bottomHeader>h3 {
@@ -136,5 +170,10 @@ a {
   margin: auto;
   width: 8rem;
   padding: 10px 30px;
-  transform: translate(0, -17rem);
+}
+
+.destButton:hover {
+  color: #F9F9EF;
+  background-color: #A7D2CB;
+  border: 2px solid transparent;
 }

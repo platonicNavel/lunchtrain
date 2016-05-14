@@ -17,6 +17,8 @@ class Landing extends React.Component {
     return (
       <div className="bg">
         <div className="diag"></div>
+        <div className="track"></div>
+        <div className="trackH"></div>
         <img src="assets/lunchtrainlogotr.png" className="logo"/>
         <img src="assets/lunchtrainlogotext.png" className="logosm"/>
         <div className="container">
@@ -31,12 +33,12 @@ class Landing extends React.Component {
           </div>
           <div className="diagBottom">
             <div className="bottomHeader">
+              <Link to="destinations" onClick={this.componentWillUnmount}>
+                <div className="destButton">Schedule a Train</div>
+              </Link>
               <h3>Be the conductor.</h3>
               <p>Not in the mood for the current choices? Maybe you have an early post-meal meeting? Organize trips to new places or old favorites on your own time and see who hops on.</p>
             </div>
-            <Link to="destinations" onClick={this.componentWillUnmount}>
-              <div className="destButton">Schedule a Train</div>
-            </Link>
           </div>
         </div>
       </div>
