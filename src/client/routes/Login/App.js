@@ -4,10 +4,13 @@ const Login = () => {
   return (
     <div className="container">
       <div className="loginWrapper">
+        <div className="diamond"></div>
         <div className="row top">
           <div>
-            <img className="slack-icon" src="assets/slack_icon.png" />
-            <span className="login-text">LunchTrain + Slack</span>
+            <div className="loginlogos">
+              <img className="slackiconlogin" src="assets/slack_icon.png" />
+              <img className="trainiconlogin" src="assets/lunchtrainlogotr.png" />
+            </div>
           </div>
         </div>
         <div className="row mid">

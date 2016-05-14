@@ -1,3 +1,5 @@
+/* Shared */
+
 html {
   font-family: 'PT Sans', sans-serif;
 }
@@ -11,6 +13,34 @@ body {
 a {
   text-decoration: none !important;
 }
+
+/* Login */
+
+.diamond {
+  position: absolute;
+  background-color: #A7D2CB;
+  height: 100vw;
+  width: 100vw;
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.loginlogos {
+  width: 100vw;
+}
+
+.trainiconlogin {
+  position: relative;
+  float: left;
+  height: 15rem;
+}
+.slackiconlogin {
+  position: relative;
+  float: right;
+  height: 15rem;
+}
+
+/* Splash */
 
 .bg:before {
   content: "";
@@ -86,6 +116,8 @@ a {
   margin-top: 1rem;
 }
 
+  /*top*/
+
 .diagTop {
   position: relative;
   height: 20rem;
@@ -130,7 +162,7 @@ a {
   background-color: #F9F9EF;
 }
 
-/**/
+  /*bottom*/
 
 
 .diagBottom {
@@ -177,3 +209,5 @@ a {
   background-color: #A7D2CB;
   border: 2px solid transparent;
 }
+
+
