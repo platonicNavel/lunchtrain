@@ -52,14 +52,14 @@ a {
   height: 50vh;
   width: 17.5%;
   top: 50vh;
-  left: 50vw;
+  left: 80vw;
 }
 .trackH {
   position: absolute;
-  height: 106vw;
+  height: 125rem;
   width: 17.5%;
-  top: 10vh;
-  left: 65vh;
+  top: 1rem;
+  left: 50rem;
   transform: rotate(90deg);
 }
 

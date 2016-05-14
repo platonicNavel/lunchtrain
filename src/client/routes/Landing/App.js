@@ -17,7 +17,7 @@ class Landing extends React.Component {
     return (
       <div className="bg">
         <div className="diag"></div>
-        <div className="track"></div>
+        {/*<div className="track"></div>*/}
         <div className="trackH"></div>
         <img src="assets/lunchtrainlogotr.png" className="logo"/>
         <img src="assets/lunchtrainlogotext.png" className="logosm"/>
