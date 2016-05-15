@@ -470,6 +470,7 @@ a {
 /********MEDIA RESPONSIVE*********/
 
 @media (max-width: 1400px) {
+  /*Login*/
 
   .trainiconlogin {
     height: 15vw;
@@ -478,9 +479,20 @@ a {
     height: 15vw;
   }
 
+  /*Landing*/
+
+  .diagTop {
+    top: -3rem;
+  }
+  .logo {
+    margin-right: initial;
+  }
+
 }
 
 @media (max-width: 900px) {
+
+  /*Login*/
 
   .diamond {
     position: absolute;
@@ -510,6 +522,19 @@ a {
   .loginbutton {
     position: relative;
     left: 50%;
+  }
+
+  /*Landing*/
+
+  .logo {
+    height: 10rem;
+    top: 10rem;
+  }
+  .topHeader>p {
+    width: 60vw;
+  }
+  .diag {
+    top: -9rem;
   }
 
 }
