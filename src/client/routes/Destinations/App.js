@@ -57,7 +57,16 @@ class Destinations extends Component {
 
     componentDidMount() {
       this.navi();
-    };
+      document.body.style.backgroundColor = "#A7D2CB";
+      document.body.style.overflow = "initial";
+      document.body.style.overflowX = "hidden";
+    }
+
+    componentWillUnmount() {
+      document.body.style.backgroundColor = "#F9F9EF";
+      document.body.style.overflow = "hidden";
+      document.body.style.overflowX = "initial";
+    }
 
     onClicks() {
       this.locatGetPlace();
@@ -174,7 +183,6 @@ class Destinations extends Component {
        google.maps.event.addDomListener(window, 'load', locatGetPlace);
       }
     }
-
 
     render() {
       if( this.state.lat === null || this.state.lng === null) {

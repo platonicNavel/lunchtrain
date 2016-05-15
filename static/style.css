@@ -8,6 +8,7 @@ body {
   font-size: 13px;
   background-color: #F9F9EF;
   margin: 0;
+  overflow: hidden;
 }
 
 a {
@@ -267,4 +268,201 @@ a {
   border: 2px solid transparent;
 }
 
+/*Current Trains*/
 
+.trainsView {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+  /*---TrainsList---*/
+
+.trainsHeader {
+  position: absolute;
+  top: 5rem;
+  width: 100vw;
+}
+.trainsHeader>img {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.trainsList {
+  position: relative;
+  padding-top: 10%;
+  margin: 10%;
+  margin-right: 20%;
+}
+
+  /*---TrainsListEntry---*/
+.trainContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.trainEntry {
+  position: relative;
+  height: 15.8em;
+  background-color: #A7D2CB;
+  margin: 0.1em auto;
+  z-index: 2;
+  border-radius: 10px;
+}
+.trainsList:first-child {
+  margin-top: 50px;
+}
+
+.trainIconTimeWrapper {
+  position: absolute;
+  top: 30%;
+  left: 40px;
+  height: 175px;
+  width: 25%;
+  background-color: grey;
+  transform: translate(0%,-25%);
+}
+.trainDetailsWrapper {
+  position: absolute;
+  top: 30%;
+  left: 33.33333%;
+  height: 175px;
+  width: 60%;
+  background-color: darkgrey;
+  transform: translate(0%,-25%);
+}
+
+.trainIcon {
+  position: relative;
+  top: 40%;
+  left: 50%;
+  height: 100px;
+  width: 100px;
+  background-color: #F9F9EF;
+  transform: translate(-50%,-50%);
+}
+
+.timeWrapper {
+  position: relative;
+  text-align: center;
+  top: 30%;
+  left: 50%;
+  font-size: 20px;
+  transform: translate(-50%,-50%);
+}
+
+.trainDest {
+  position: relative;
+  text-align: center;
+}
+
+.trainRatingsWrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.likes, .price {
+  position: relative;
+  height: 25%;
+  font-size: 20px;
+}
+.likes div, .price div {
+  position: relative;
+  top: 15%;
+}
+.likes {
+  background-color: lightblue;
+  text-align: center;
+  float: left;
+  width: 50%;
+  line-height: 150%;
+}
+.price {
+  /*background-color: rgba(0,101,114,1);*/
+  text-align: center;
+  float: right;
+  width: 50%;
+  line-height: 150%;
+}
+
+.passengersWrapper {
+  position: relative;
+  top: 70%;
+  left: 33.33333%;
+  width: 60%;
+  height: 25%;
+  margin: 10px 0px;
+  background-color: grey;
+  transform: translate(0%,-25%);
+}
+.conductor, .passenger {
+  position: relative;
+  background-color: #F9F9EF;
+  float: left;
+  margin-right: 5px;
+  width: 50px;
+  height: 100%;
+}
+.slackPic {
+  position: relative;
+  background-color: black;
+  height: 100%;
+  color: #F9F9EF;
+}
+
+.joinWrapper {
+  border: 1px solid black;
+  width: 50px;
+  height: 95%;
+  float: right;
+  background-color: #808080;
+  cursor: pointer !important;
+}
+.joinWrapper:hover {
+  background-color: #0059f2;
+}
+.joinWrapper:active>.joinArrow {
+  color: #F9F9EF !important;
+}
+.joinArrow {
+  position: relative;
+  margin-top: -20%;
+  text-align: center;
+  font-size: 60px !important;
+}
+
+  /*---TrainsListEntryDropdown---*/
+
+.details.open .trainEntryDropdownWrapper {
+  height: 55em;
+  background-color: #F9F9EF;
+}
+
+.trainEntryDropdownWrapper {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: all .2s ease-in;
+  background-color: #F9F9EF;
+  margin-bottom: 20px;
+  margin: 0px 10px;
+  top: -23px;
+  z-index: 1;
+}
+
+.gmap {
+  height: 100%;
+}
+
+.gmapDir {
+  position: relative;
+  top: 25px;
+}
+
+.trainIcon {
+  background-image: url(./assets/train.png);
+  background-size: 100%;
+  background-position: 0px 5px
+}

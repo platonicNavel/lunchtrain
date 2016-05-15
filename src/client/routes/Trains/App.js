@@ -125,11 +125,21 @@ class Trains extends React.Component {
   componentDidMount() {
     this.getTeamTrains();
     this.getCurrentLocation();
+    document.body.style.overflow = "initial";
+    document.body.style.overflowX = "hidden";
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = "hidden";
+    document.body.style.overflowX = "initial";
   }
 
   render() {
     return (
-      <div>
+      <div className="bg">
+        <div className="trainsHeader">
+          <img src="assets/currenttrains.png" />
+        </div>
         <div className="trainsView container">
           <TrainsList trains={ this.state.trains } handleAccordionMap={ this.handleAccordionMap } joinTrain={ this.joinTrain.bind(this) } renderMap={ this.renderMap.bind(this) } getCurrentLocation={ this.getCurrentLocation.bind(this) } maps={ this.state.maps } currentLoc={ { lat: this.state.currLat, lng: this.state.currLon } }></TrainsList>
         </div>
