@@ -62,7 +62,42 @@ a {
   line-height: 1.4;
 }
 
-/* Splash */
+.slackbuttoncontainer {
+  position: relative;
+  z-index: 5;
+  top: 8rem;
+}
+.loginbutton {
+  position: absolute;
+  display: inline-block;
+  border: 2px solid #F9F9EF;
+  border-radius: 5rem;
+  padding: 0 35px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+.loginbutton>p {
+  position: relative;
+  display: inline-block;
+  float: right;
+  color: #F9F9EF;
+  font-size: 20px;
+  font-weight: 300;
+}
+.loginbutton:hover {
+  background-color: #F9F9EF;
+  border: 2px solid transparent;
+}
+.loginbutton:hover>p {
+  color: #A7D2CB;
+}
+.slackiconbutton {
+  position: relative;
+  height: 2rem;
+  top: 1rem;
+}
+
+/* Landing */
 
 .bg:before {
   content: "";

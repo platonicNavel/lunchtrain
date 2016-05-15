@@ -19,10 +19,13 @@ const Login = () => {
             <h1>Organizing social activities with your team has never been easier!</h1>
           </div>
         </div>
-        <div className="row connectButton">
-          <a className=" btn btn-primary loginButton" href="/auth/slack">
-            Connect with Slack
-          </a>
+        <div>
+          <div className="slackbuttoncontainer">
+            <a className="loginbutton" href="/auth/slack">
+              <p>&nbsp;&nbsp;Sign in with Slack</p>
+              <img className="slackiconbutton" src="assets/slack_icon.png" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
