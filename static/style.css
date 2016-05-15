@@ -21,7 +21,7 @@ a {
   position: absolute;
   background-color: #A7D2CB;
   height: 100vw;
-  width: 100rem;
+  width: 100vw;
   transform: rotate(45deg);
   z-index: 0;
 }
@@ -465,4 +465,51 @@ a {
   background-image: url(./assets/train.png);
   background-size: 100%;
   background-position: 0px 5px
+}
+
+/********MEDIA RESPONSIVE*********/
+
+@media (max-width: 1400px) {
+
+  .trainiconlogin {
+    height: 15vw;
+  }
+  .slackiconlogin {
+    height: 15vw;
+  }
+
+}
+
+@media (max-width: 900px) {
+
+  .diamond {
+    position: absolute;
+    transform: initial;
+    height: 100vh;
+    top: 15rem;
+  }
+  .trainiconlogin {
+    margin-left: 5rem;
+    height: 10rem;
+  }
+  .loginlogos:before {
+    content: '+';
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 3rem;
+  }
+  .slackiconlogin {
+    margin-right: 5rem;
+    height: 10rem;
+  }
+  .loginheader {
+    width: initial;
+  }
+  .loginbutton {
+    position: relative;
+    left: 50%;
+  }
+
 }
