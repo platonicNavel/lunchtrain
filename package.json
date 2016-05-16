@@ -56,7 +56,6 @@
     "express-session": "^1.13.0",
     "jquery": "^2.2.1",
     "lodash": "^4.5.1",
-    "material-ui": "^0.15.0-alpha.1",
     "nodemon": "^1.9.1",
     "passport": "^0.3.2",
     "passport-slack": "0.0.4",
