@@ -6,3 +6,5 @@ sampleTrain.json
 */utils/geocodeAPI.jstemp.html
 src/client/lib/*
 build/
+.DS_Store
+src/server/config/config.js
