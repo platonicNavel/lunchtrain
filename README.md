@@ -58,6 +58,19 @@ $ npm run compile
 ### Configuring Authentication
 
 - You will need to visit [Slack's API](https://api.slack.com/) to get your own `CLIENT_ID` and `CLIENT_SECRET`
+- The example config file can be found in [`/src/server/config/config.example.js`](https://github.com/platonicNavel/lunchtrain/tree/master/src/server/config)
+
+1. Duplicate `config.example.js` and rename it to `config.js`
+2. Replace `[INSERT CLIENT_ID]` and `[INSERT CLIENT_SECRET]` with your own Client ID and Client Secret
+3. Enable or disable `devMode` (explanation below)
+
+#### devMode
+
+LunchTrain relies on Slack for sign-in and authentication. Therefore, when the server restarts, you may need to re-authenticate. We have included a handy devMode variable to make this process less cumbersome.
+
+`devMode = true` - Hard-codes a sample user on a sample team and will always return `true` for `authenticated`. On the front-end, this allows for bypassing the login screen all together. However, it is still possible to do work on the login screen by navigating to `/login`. DO NOT enable devMode if running LunchTrain in production.
+
+`devMode = false` - Use this in production, as it checks for authentication when mounting new components. The user will stay logged in until the server restarts.
 
 ### Starting the Server
 
