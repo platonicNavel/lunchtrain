@@ -1,7 +1,6 @@
 import $ from 'jquery';
 
 const createTrain = (d, d2, place_id, name, lat, lng, visits) => {
-  console.log('LET\'S GOOOOOOOOOOOOOO', d, d2, place_id, name, lat, lng, visits);
   $.ajax({
     url: '/destinations',
     type: 'POST',
