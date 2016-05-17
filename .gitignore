@@ -8,3 +8,4 @@ src/client/lib/*
 build/
 .DS_Store
 src/server/config/config.js
+*/*.orig.*
